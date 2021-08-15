@@ -42,12 +42,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/home","/users").authenticated()
+                .antMatchers("/settings","/users").authenticated()
                 .antMatchers("/**").permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/")
-                .defaultSuccessUrl("/home")
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
                 .logout().deleteCookies("JSESSIONID")

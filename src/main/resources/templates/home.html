@@ -1,11 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>home</title>
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:https="http://www.w3.org/1999/xhtml">
+
 </head>
 <body>
-<h1>Hello Collega's</h1>
+<div class="container-fluid">
+<div class="row">
 
+    <div th:replace="fragments/head :: head (title)"></div>
+
+    <div th:replace="fragments/menu :: menu"></div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div th:replace="fragments/feed :: feed (title)"></div>
+    </div>
+    </div>
+</div>
+</div>
 </body>
+
 </html>

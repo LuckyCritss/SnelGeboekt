@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:fragment = "menu">
+  <meta charset="UTF-8">
+  <title>Navigatiebalk</title>
+</head>
+<body>
+<div class="col-sm-auto bg-light sticky-top" th:fragment="menu">
+  <div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
+    <a href="/" class="d-block p-3 link-dark text-decoration-none">
+      <i class="bi-chat-text fs-1"></i>
+    </a>
+
+    <form class="card p-3 bg-light" action="#"  method="post">
+    <fieldset>
+      <p style="color:gray"  >
+        <input class="btn btn-primary" type="submit" value="Home">
+        <input class="btn btn-primary" type="submit" value="Instellen boekingsmogelijkheden">
+        <input class="btn btn-primary" type="submit" value="Tijdslot">
+        <input class="btn btn-primary" type="submit" value="Kalender">
+        <input class="btn btn-primary" type="submit" value="Bewaar">
+        <input class="btn btn-primary" type="submit" value="Uitloggen">
+      </p>
+  </fieldset>
+    </form>
+
+
+  </div>
+</div>
+</body>
+</html>

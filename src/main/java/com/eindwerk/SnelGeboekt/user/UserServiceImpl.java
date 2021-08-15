@@ -18,6 +18,16 @@ public class UserServiceImpl implements  UserService{
     }
 
     @Override
+    public User getUserByHandle(String handle) {
+        return null;
+    }
+
+    @Override
+    public User getUserComplete(String handle) {
+        return null;
+    }
+
+    @Override
     public User findUser(String needle) {
         if (userRepository.getUserByEmail(needle) != null) {
             return userRepository.getUserByEmail(needle);

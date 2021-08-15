@@ -1,29 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:text-align="http://www.w3.org/1999/xhtml">
 <head th:fragment = "head (title)">
   <meta charset="UTF-8">
-
-<style>
-  .header {
-    text-align: center;
-    color: white;
-    padding: 45px;
-    background: rgb(240, 9, 9);
-  }
-</style>
+  <title>header</title>
+  <style>
+    .header {
+      text-align: center;
+      color: white;
+      padding: 45px;
+      background: rgb(240, 9, 9);
+    }
+  </style>
 </head>
 
 <body class="text-center">
 <div class="head" th:fragment="head">
 
-      <div class ="header">
-        <h1><p>Snel Geboekt</style></p></h1>  <p id="demo"></p>
-          <input class="btn btn-primary" type="submit" value="Login">
-          <input class="btn btn-primary" type="submit" value="Registreer">
-      </div>
+  <div class ="header">
+    <h1>
+      <a href="/" style="text-decoration: none; color:#FFFFFF;">SnelGeboekt</a>
+    </h1>
+    <div style="text-align:right;">
+      <form action="/login">
+        <button type="submit">Login/Registreer</button>
+      </form>
     </div>
-  </div>
-  </div>
   </div>
 </div>
 </body>

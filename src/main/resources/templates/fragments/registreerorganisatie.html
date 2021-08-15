@@ -23,7 +23,7 @@
             <label>Email address</label>
         </div>
 
-
+        <!--
         <div class="row g-3">
             <div class="col alert alert-danger" role="alert" th:if="${#fields.hasErrors('naam')}" th:errors="*{naam}">
                 <input type="text" class="form-control" id="naam" placeholder="Firstname" th:field="*{naam}">
@@ -46,6 +46,17 @@
             <label for="lastName">Last name</label>
         </div>
 
+        <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('passWord')}" th:errors="*{passWord}"></div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" th:field="*{passWord}" >
+            <label>Password</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword2" placeholder="Password" th:field="*{checkPassWord}">
+            <label>Retype Password</label>
+        </div>
+
         <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('company')}" th:errors="*{company}"></div>
         <div class="form-floating">
             <input type="text" class="form-control" id="company" placeholder="Lastname" th:field="*{company}">
@@ -54,7 +65,7 @@
 
         <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('yourPageName')}" th:errors="*{yourPageName}"></div>
         <div class="form-floating">
-            <input type="yourPageName" class="form-control" id="yourPageName" placeholder="YourPageName" th:field="*{passWord}" >
+            <input type="yourPageName" class="form-control" id="yourPageName" placeholder="YourPageName" th:field="*{yourPageName}" >
             <label>YourPageName</label>
         </div>
 

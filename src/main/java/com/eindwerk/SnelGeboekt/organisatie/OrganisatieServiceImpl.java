@@ -9,12 +9,12 @@ public class OrganisatieServiceImpl implements OrganisatieService{
     private OrganisatieRepository organisatieRepository;
 
     @Override
-    public Organisatie getOrganisatieByHandle(String firstName) {
+    public Organisatie getOrganisatieByHandle(String voorNaam) {
         return null;
     }
 
     @Override
-    public Organisatie getOrganisatieComplete(String firstName) {
+    public Organisatie getOrganisatieComplete(String voorNaam) {
         return null;
     }
 

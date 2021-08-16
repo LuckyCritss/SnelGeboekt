@@ -13,11 +13,11 @@ public interface OrganisatieRepository extends JpaRepository<Organisatie, Intege
     @Query("SELECT o from Organisatie o Where o.email = :email")
     public Organisatie getOrganisatieByEmail(@Param("email") String email);
 
-    @Query("SELECT o from Organisatie o Where o.firstName = :firstName")
-    public Organisatie getOrganisatieByFirstName(@Param("firstName") String firstName);
+    @Query("SELECT o from Organisatie o Where o.voorNaam = :voorNaam")
+    public Organisatie getOrganisatieByVoorNaam(@Param("voorNaam") String voorNaam);
 
-    @Query("SELECT o from Organisatie o Where o.lastName = :lastName")
-    public Organisatie getOrganisatieByLastName(@Param("lastName") String lastName);
+    @Query("SELECT o from Organisatie o Where o.achterNaam = :achterNaam")
+    public Organisatie getOrganisatieByAchterNaam(@Param("achterNaam") String achterNaam);
 
     @Override
     @Query("SELECT o from Organisatie  o")

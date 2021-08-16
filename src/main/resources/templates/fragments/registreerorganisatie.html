@@ -14,6 +14,14 @@
     <form action="#" th:action="@{/settings}" th:object="${organisatie}" method="post">
         <h1 class="h3 mb-3 fw-normal">Registreer</h1>
 
+        <style>
+            .form-signin {
+                width: 100%;
+                max-width: 700px;
+                padding: 20px;
+                margin: auto;
+            }
+        </style>
 
         <input type="hidden"  th:field="*{id}">
 

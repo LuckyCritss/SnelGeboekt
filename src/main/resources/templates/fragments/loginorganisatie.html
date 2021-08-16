@@ -10,11 +10,20 @@
 <body  class="text-center">
 <div class="login"  th:fragment="login">
 
+
 <main class="form-signin">
     <div style="text-align:center;">
     <form th:action="@{/settings}" method="post">
-        <h1 class="h3 mb-3 fw-normal">Log hier in</h1>
 
+        <h1 class="h3 mb-3 fw-normal">Log hier in</h1>
+        <style>
+            .form-signin {
+                width: 100%;
+                max-width: 700px;
+                padding: 20px;
+                margin: auto;
+            }
+        </style>
 
 
         <div class="mb-1 alert alert-danger" role="alert" th:if="${param.error}">

@@ -11,7 +11,7 @@ public class LoginController {
     @GetMapping("/login")
     public String rootHandler(Principal principal) {
         if (principal != null) {
-            return ("redirect:/home");
+            return ("redirect:/settings");
         }
         return ("login");
     }

@@ -1,20 +1,30 @@
 package com.eindwerk.SnelGeboekt.organisatie;
 
-import com.eindwerk.SnelGeboekt.user.UserService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class OrganisatieServiceImpl implements OrganisatieService{
 
     private OrganisatieRepository organisatieRepository;
+    private OrganisatieService organisatieService;
+
+    public void setOrganisatieRepository(OrganisatieRepository organisatieRepository) {
+        this.organisatieRepository = organisatieRepository;
+    }
+
+    public void setOrganisatieService(OrganisatieService organisatieService) {
+        this.organisatieService = organisatieService;
+    }
 
     @Override
-    public Organisatie getOrganisatieByHandle(String voorNaam) {
+    public Organisatie getOrganisatieByEmail(String email) {
         return null;
     }
 
     @Override
-    public Organisatie getOrganisatieComplete(String voorNaam) {
+    public Organisatie getOrganisatieBygebruikersNaam(String gebruikersNaam) {
         return null;
     }
 
@@ -29,7 +39,7 @@ public class OrganisatieServiceImpl implements OrganisatieService{
     }
 
     @Override
-    public void save(Organisatie organisatie) throws UserService.PasswordException, UserService.PasswordMisMatchException {
+    public void save(Organisatie organisatie) throws PasswordException, PasswordMisMatchException{
 
     }
 }

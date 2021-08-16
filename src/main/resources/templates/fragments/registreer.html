@@ -11,7 +11,7 @@
 <div class="registreer" th:fragment="registreer">
 
 <main class="form-signin">
-    <form action="#" th:action="@{/settings}" th:object="${organisatie}" method="post">
+    <form action="#" th:action="@{/registreer}" th:object="${organisatie}" method="post">
         <h1 class="h3 mb-3 fw-normal">Registreer</h1>
 
         <style>
@@ -31,30 +31,13 @@
             <label>Emailadres</label>
         </div>
 
-        <!--
-        <div class="row g-3">
-            <div class="col alert alert-danger" role="alert" th:if="${#fields.hasErrors('naam')}" th:errors="*{naam}">
-                <input type="text" class="form-control" id="naam" placeholder="Firstname" th:field="*{naam}">
-            </div>
-            <div class="col alert alert-danger" role="alert" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
-                <input type="text" class="form-control" id="lastName" placeholder="Lastname" th:field="*{lastName}">
-            </div>
-        </div>
-        -->
-
-        <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('voorNaam')}" th:errors="*{voorNaam}"></div>
+        <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('gebruikersNaam')}" th:errors="*{gebruikersNaam}"></div>
         <div class="form-floating">
-            <input type="text" class="form-control" id="voorNaam" placeholder="Voornaam" th:field="*{voorNaam}">
-            <label for="voorNaam">Voornaam</label>
+            <input type="text" class="form-control" id="gebruikersNaam" placeholder="gebruikersNaam" th:field="*{gebruikersNaam}">
+            <label for="gebruikersNaam">gebruikersNaam</label>
         </div>
 
-        <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('achterNaam')}" th:errors="*{achterNaam}"></div>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="achterNaam" placeholder="Achternaam" th:field="*{achterNaam}">
-            <label for="achterNaam">Achternaam</label>
-        </div>
-
-        <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('passWord')}" th:errors="*{wachtWoord}"></div>
+        <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('wachtWoord')}" th:errors="*{wachtWoord}"></div>
         <div class="form-floating">
             <input type="password" class="form-control" id="floatingPassword" placeholder="Wachtwoord" th:field="*{wachtWoord}" >
             <label>Wachtwoord</label>
@@ -77,17 +60,9 @@
             <label>Paginanaam</label>
         </div>
 
-        <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('land')}" th:errors="*{land}"></div>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Kies een land</option>
-            <option value="1">Belgium</option>
-            <option value="2">France</option>
-            <option value="3">Spain</option>
-        </select>
-
-        <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('zipCode')}" th:errors="*{postCode}"></div>
+        <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('postCode')}" th:errors="*{postCode}"></div>
         <div class="form-floating">
-            <input type="postCode" class="form-control" id="postCode" placeholder="Postcode" th:field="*{postCode}" >
+            <input type="postCode" class="form-control" id="postCode" placeholder="postCode" th:field="*{postCode}" >
             <label>Postcode</label>
         </div>
 

@@ -1,11 +1,9 @@
 package com.eindwerk.SnelGeboekt.organisatie;
 
-
-import com.eindwerk.SnelGeboekt.user.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
-
 import java.util.List;
 
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public interface OrganisatieService {
 
     class PasswordException extends Exception {
@@ -21,14 +19,14 @@ public interface OrganisatieService {
     }
 
     @PreAuthorize("isAuthenticated()")
-    Organisatie getOrganisatieByHandle(String voorNaam);
+    Organisatie getOrganisatieByEmail(String email);
 
     @PreAuthorize("isAuthenticated()")
-    Organisatie getOrganisatieComplete(String achterNaam);
+    Organisatie getOrganisatieBygebruikersNaam(String gebruikersNaam);
 
     Organisatie findOrganisatie(String needle);
 
     List<Organisatie> getAll();
 
-    void save(Organisatie organisatie) throws UserService.PasswordException, UserService.PasswordMisMatchException;
+    void save(Organisatie organisatie) throws PasswordException, PasswordMisMatchException;
 }

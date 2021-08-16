@@ -10,9 +10,11 @@ public class SettingsController {
 
     @GetMapping("/settings")
     public String rootHandler(Principal principal) {
+        /*
         if (principal == null) {
             return ("redirect:/login");
         }
+         */
         return ("settings");
     }
 }

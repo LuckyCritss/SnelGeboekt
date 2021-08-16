@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 @Entity
 @Getter
 @Setter
-@Table(name = "Gebruikers")
+@Table(name = "Users")
 public class User {
 
     @Id

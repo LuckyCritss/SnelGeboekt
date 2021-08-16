@@ -21,10 +21,10 @@ public interface OrganisatieService {
     }
 
     @PreAuthorize("isAuthenticated()")
-    Organisatie getOrganisatieByHandle(String firstName);
+    Organisatie getOrganisatieByHandle(String voorNaam);
 
     @PreAuthorize("isAuthenticated()")
-    Organisatie getOrganisatieComplete(String firstName);
+    Organisatie getOrganisatieComplete(String achterNaam);
 
     Organisatie findOrganisatie(String needle);
 

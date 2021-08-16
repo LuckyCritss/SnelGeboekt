@@ -25,30 +25,30 @@ public class Organisatie {
     private String email;
 
     @NotBlank(message = "{org.blank}")
-    @Size(min = 2, message = "{org.firstName}")
-    private String firstName;
+    @Size(min = 2, message = "{org.voorNaam}")
+    private String voorNaam;
 
     @NotBlank(message = "{org.blank}")
-    @Size(min = 2, message = "{org.lastName}")
-    private String lastName;
+    @Size(min = 2, message = "{org.achterNaam}")
+    private String achterNaam;
 
-    @Size(min = 5, message = "{org.passWord}")
+    @Size(min = 5, message = "{org.wachtwoord}")
     @Column(name = "password")
-    private String password;
+    private String wachtWoord;
 
     @Transient
-    private String checkPassWord;
+    private String checkWachtWoord;
 
     @NotBlank(message = "{org.blank}")
-    @Size(min = 2, message = "{org.companyName}")
-    private String company;
+    @Size(min = 2, message = "{org.bedrijfsNaam}")
+    private String bedrijfsNaam;
 
     @NotBlank(message = "{org.blank}")
     @Pattern(regexp = "^(?!-)[A-Za-z0-9-]+([\\-\\.]{1}[a-z0-9]+)*\\.[A-Za-z]{2,6}$", message = "{org.yourPageName}")
-    private String yourPageName;
+    private String paginaNaam;
 
     @NotBlank(message = "{org.blank}")
-    private int zipCode;
+    private int postCode;
 
     @NotBlank(message = "{org.blank}")
     @Pattern(regexp = "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})(?:;[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,}))*$", message = "{org.email}")

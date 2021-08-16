@@ -1,5 +1,6 @@
 package com.eindwerk.SnelGeboekt.Controllers;
 
+import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.user.User;
 import com.eindwerk.SnelGeboekt.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,10 @@ public class RegistreerController {
     @GetMapping("/registreer")
     public String rootHandler(Principal principal, Model model) {
         if (principal != null) {
-            return ("redirect:/home");
+            return ("redirect:/settings");
         }
-        User user = new User();
-        model.addAttribute("user", user);
+        Organisatie organisatie = new Organisatie();
+        model.addAttribute("organisatie", organisatie);
         return ("registreer");
     }
 }

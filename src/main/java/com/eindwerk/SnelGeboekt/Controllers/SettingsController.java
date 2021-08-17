@@ -1,0 +1,20 @@
+package com.eindwerk.SnelGeboekt.Controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.security.Principal;
+
+@Controller
+public class SettingsController {
+
+    @GetMapping("/settings")
+    public String rootHandler(Principal principal) {
+        /*
+        if (principal == null) {
+            return ("redirect:/login");
+        }
+         */
+        return ("settings");
+    }
+}

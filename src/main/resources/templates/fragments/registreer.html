@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment = "registreer (title)">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registreer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="/css/static.css" rel="stylesheet">
+</head>
+<body class="text-center">
+<div class="registreer" th:fragment="registreer">
+
+<main class="form-signin">
+    <form action="#" th:action="@{/registreer}" th:object="${organisatie}" method="post">
+        <h1 class="h3 mb-3 fw-normal">Registreer</h1>
+
+        <style>
+            .form-signin {
+                width: 100%;
+                max-width: 700px;
+                padding: 20px;
+                margin: auto;
+            }
+        </style>
+
+        <input type="hidden"  th:field="*{id}">
+
+        <div class="mb-1 alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" th:field="*{email}" >
+            <label>Emailadres</label>
+        </div>
+
+        <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('gebruikersNaam')}" th:errors="*{gebruikersNaam}"></div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="gebruikersNaam" placeholder="gebruikersNaam" th:field="*{gebruikersNaam}">
+            <label for="gebruikersNaam">gebruikersNaam</label>
+        </div>
+
+        <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('wachtWoord')}" th:errors="*{wachtWoord}"></div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Wachtwoord" th:field="*{wachtWoord}" >
+            <label>Wachtwoord</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword2" placeholder="Wachtwoord" th:field="*{checkWachtWoord}">
+            <label>Herhaal Wachtwoord</label>
+        </div>
+
+        <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('bedrijfsNaam')}" th:errors="*{bedrijfsNaam}"></div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="bedrijfsNaam" placeholder="Bedrijfsnaam" th:field="*{bedrijfsNaam}">
+            <label for="bedrijfsNaam">Bedrijfsnaam</label>
+        </div>
+
+        <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('paginaNaam')}" th:errors="*{pagineNaam}"></div>
+        <div class="form-floating">
+            <input type="paginaNaam" class="form-control" id="paginaNaam" placeholder="Paginanaam" th:field="*{paginaNaam}" >
+            <label>Paginanaam</label>
+        </div>
+
+        <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('postCode')}" th:errors="*{postCode}"></div>
+        <div class="form-floating">
+            <input type="postCode" class="form-control" id="postCode" placeholder="postCode" th:field="*{postCode}" >
+            <label>Postcode</label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" th:ref="@{/betalen}">Abonneer met Paypal</button>
+
+
+        <div class="mb-1 alert alert-danger" role="alert" th:if="${#fields.hasErrors('payPalEmail')}" th:errors="*{payPalEmail}"></div>
+        <div class="form-floating">
+            <input type="payPalEmail" class="form-control" id="payPalEmail" placeholder="name@example.com" th:field="*{payPalEmail}" >
+            <label>PayPal Email</label>
+        </div>
+
+
+
+        <button class="w-100 btn btn-lg btn-success" type="submit">Account Aanmaken</button>
+
+    </form>
+</main>
+
+
+</div>
+</body>
+</html>

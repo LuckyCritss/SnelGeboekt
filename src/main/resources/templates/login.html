@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:https="http://www.w3.org/1999/xhtml">
+<head>
+  <title>home</title>
+</head>
+
+<body>
+<div class="container-fluid">
+  <div class="row">
+
+    <div th:replace="fragments/head :: head (title)"></div>
+
+    <div th:replace="fragments/login :: login (title)"></div>
+
+    <div th:replace="fragments/feed :: feed (title)"></div>
+  </div>
+</div>
+</body>
+
+</html>

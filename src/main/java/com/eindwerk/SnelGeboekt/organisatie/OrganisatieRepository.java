@@ -10,9 +10,6 @@ public interface OrganisatieRepository extends JpaRepository<Organisatie, Intege
     @Query("SELECT o from Organisatie o Where o.email = :email")
     public Organisatie getOrganisatieByEmail(@Param("email") String email);
 
-    @Query("SELECT o from Organisatie o Where o.gebruikersNaam = :gebruikersNaam")
-    public Organisatie getOrganisatieBygebruikersNaam(@Param("gebruikersNaam") String gebruikersNaam);
-
     @Override
     @Query("SELECT o from Organisatie  o")
     public List<Organisatie> findAll();

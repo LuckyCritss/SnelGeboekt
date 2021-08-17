@@ -12,9 +12,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("SELECT u from User u Where u.email = :email")
     public User getUserByEmail(@Param("email") String email);
 
-    @Query("SELECT u from User u Where u.gebruikersNaam = :gebruikersNaam")
-    public User getUserByUserName(@Param("gebruikersNaam") String gebruikersNaam);
-
     @Override
     @Query("SELECT u from User u")
     public List<User> findAll();

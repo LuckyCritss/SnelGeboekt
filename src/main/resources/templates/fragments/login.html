@@ -13,7 +13,7 @@
 
 <main class="form-signin">
     <div style="text-align:center;">
-    <form th:action="@{/settings}" method="post">
+    <form th:action="@{/login}" method="post">
 
         <h1 class="h3 mb-3 fw-normal">Log hier in</h1>
         <style>
@@ -29,18 +29,27 @@
         <div class="mb-1 alert alert-danger" role="alert" th:if="${param.error}">
             Sorry, kan niet inloggen met deze gegevens!
         </div>
+
         <div class="form-floating" style="text-align:center;">
-            <input type="text" class="form-control" id="floatingInput" name ="username" placeholder="name@example.com">
+            <input type="text" class="form-control" id="floatingInput" name ="Email" placeholder="name@example.com">
             <label for="floatingInput">Email</label>
         </div>
+
         <div class="form-floating mb-3" style="text-align:center;">
             <input type="password" class="form-control" id="floatingPassword" name ="password" placeholder="Password">
             <label for="floatingPassword">Wachtwoord</label>
         </div>
 
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+
         <button class="w-100 btn btn-lg btn-primary" type="submit" style="text-decoration: none; color:#FFFFFF; background: #F00909;">Log in</button>
-        <p class="mt-3 text-muted">Heeft u nog geen account?<br>
-            <a th:href="@{/registreer}" href="#">Maak een nieuw account aan</a></p>
+        <p class="mt-3 text-muted">Heeft u nog geen account?
+            <a th:href="@{/registreer}" href="#">Maak een nieuw account aan</a>
+        </p>
 
     </form>
     </div>

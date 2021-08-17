@@ -21,9 +21,6 @@ public interface OrganisatieService {
     @PreAuthorize("isAuthenticated()")
     Organisatie getOrganisatieByEmail(String email);
 
-    @PreAuthorize("isAuthenticated()")
-    Organisatie getOrganisatieBygebruikersNaam(String gebruikersNaam);
-
     Organisatie findOrganisatie(String needle);
 
     List<Organisatie> getAll();

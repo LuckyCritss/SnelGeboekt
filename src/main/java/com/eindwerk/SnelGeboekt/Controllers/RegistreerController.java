@@ -2,8 +2,6 @@ package com.eindwerk.SnelGeboekt.Controllers;
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
-import com.eindwerk.SnelGeboekt.user.User;
-import com.eindwerk.SnelGeboekt.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
@@ -37,7 +34,7 @@ public class RegistreerController {
     }
 
     @Autowired
-    public void setOrganisatieService(OrganisatieService organisatieService) {
+    public void setUserService(OrganisatieService organisatieService) {
         this.organisatieService = organisatieService;
     }
 
@@ -59,22 +56,22 @@ public class RegistreerController {
         try {
             organisatieService.save(organisatie);
         } catch (OrganisatieService.PasswordException e) {
-            bindingResult.rejectValue("wachtWoord","organisatie.wachtWoord",e.getMessage());
+            bindingResult.rejectValue("wachtWoord","user.wachtWoord",e.getMessage());
             return "registreer";
         } catch (OrganisatieService.PasswordMisMatchException e) {
             bindingResult.rejectValue("wachtWoord","password-mismatch",e.getMessage());
             return "registreer";
         } catch (DataIntegrityViolationException e) {
             if (e.getMessage().contains("email_unique")) {
-                bindingResult.rejectValue("email","organisatie.email-unique",e.getMessage());
+                bindingResult.rejectValue("email","user.email-unique",e.getMessage());
             }
-            if (e.getMessage().contains("handle_unique")) {
-                bindingResult.rejectValue("gebruikersNaam","organisatie.gebruikersNaam-unique",e.getMessage());
+            if (e.getMessage().contains("gebruikersNaam_unique")) {
+                bindingResult.rejectValue("gebruikersNaam","user.gebruikersNaam-unique",e.getMessage());
             }
             return "registreer";
         }
-        authWithAuthManager(request, organisatie.getGebruikersNaam(),organisatie.getCheckWachtWoord());
-        return "redirect:/home";
+        authWithAuthManager(request, organisatie.getEmail(),organisatie.getWachtWoord());
+        return "redirect:/settings";
     }
 
     @InitBinder

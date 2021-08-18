@@ -28,13 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select handle,password,enabled from users where handle=?")
-                .authoritiesByUsernameQuery("select handle,role from users where handle = ?")
-                .and()
-                .jdbcAuthentication()
-                .dataSource(dataSource)
-                .usersByUsernameQuery("select handle,password,enabled from users where email=?")
-                .authoritiesByUsernameQuery("select handle,role from users where handle = ?");
+                .usersByUsernameQuery("select email,password from organisaties where email=?")
+                .authoritiesByUsernameQuery("select email,role from organisaties where email = ?");
 
     }
 
@@ -42,9 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/settings","/users", "/home").authenticated()
-                .antMatchers("/**").permitAll()
-                .antMatchers("/settings").permitAll()
+                .antMatchers("/settings").authenticated()
+                .antMatchers("/**", "/login", "/registreer" ).permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -55,7 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .rememberMe().key("uniqueAndSecret");
-
     }
 
     @Bean
@@ -68,6 +61,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
 
 }

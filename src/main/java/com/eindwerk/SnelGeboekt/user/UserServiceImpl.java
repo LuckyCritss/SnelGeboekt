@@ -18,12 +18,7 @@ public class UserServiceImpl implements  UserService{
     }
 
     @Override
-    public User getUserByHandle(String handle) {
-        return null;
-    }
-
-    @Override
-    public User getUserComplete(String handle) {
+    public User getUserByEmail(String email) {
         return null;
     }
 
@@ -31,10 +26,6 @@ public class UserServiceImpl implements  UserService{
     public User findUser(String needle) {
         if (userRepository.getUserByEmail(needle) != null) {
             return userRepository.getUserByEmail(needle);
-
-        } else if (userRepository.getUserByUserName(needle) != null) {
-            return userRepository.getUserByUserName(needle);
-
         } else {
             return null;
         }

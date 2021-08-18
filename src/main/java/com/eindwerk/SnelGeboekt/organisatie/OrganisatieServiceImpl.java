@@ -1,5 +1,7 @@
 package com.eindwerk.SnelGeboekt.organisatie;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,23 +10,14 @@ import java.util.List;
 public class OrganisatieServiceImpl implements OrganisatieService{
 
     private OrganisatieRepository organisatieRepository;
-    private OrganisatieService organisatieService;
 
+    @Autowired
     public void setOrganisatieRepository(OrganisatieRepository organisatieRepository) {
         this.organisatieRepository = organisatieRepository;
     }
 
-    public void setOrganisatieService(OrganisatieService organisatieService) {
-        this.organisatieService = organisatieService;
-    }
-
     @Override
     public Organisatie getOrganisatieByEmail(String email) {
-        return null;
-    }
-
-    @Override
-    public Organisatie getOrganisatieBygebruikersNaam(String gebruikersNaam) {
         return null;
     }
 
@@ -39,7 +32,22 @@ public class OrganisatieServiceImpl implements OrganisatieService{
     }
 
     @Override
-    public void save(Organisatie organisatie) throws PasswordException, PasswordMisMatchException{
+    public void save(Organisatie organisatie) throws PasswordException, PasswordMisMatchException {
+        if (organisatie.getWachtWoord() != null && organisatie.getWachtWoord().length() < 5) {
+            throw new PasswordException("password malformed");
+        }
+        if (organisatie.getWachtWoord() == null && organisatie.getId() == 0) {
+            throw new PasswordException("password malformed");
+        }
+        if (organisatie.getWachtWoord().length() > 4 && !organisatie.getWachtWoord().equals(organisatie.getCheckWachtWoord()) ) {
+            throw new PasswordMisMatchException("password mismatch");
+        }
 
+        if (organisatie.getWachtWoord() == null && organisatie.getId() > 0) {
+            organisatie.setWachtWoord(organisatieRepository.findById(organisatie.getId()).get().getWachtWoord());
+        } else {
+            organisatie.setWachtWoord(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(organisatie.getWachtWoord()));
+        }
+        organisatieRepository.save(organisatie);
     }
 }

@@ -20,10 +20,8 @@ public interface UserService {
     }
 
     @PreAuthorize("isAuthenticated()")
-    User getUserByHandle(String handle);
+    User getUserByEmail(String email);
 
-    @PreAuthorize("isAuthenticated()")
-    User getUserComplete(String handle);
 
     User findUser(String needle);
 

@@ -23,14 +23,17 @@ public class LoginController {
 }
 
     @GetMapping("/login")
-    public String rootHandler(Principal principal) {
+    public String rootHandler(Principal principal ,HttpServletRequest request) {
+        if (principal == null ) {
+            //authWithAuthManager(request, "admin", "admin");
+        }
         if (principal != null) {
-            return ("redirect:/settings");
+            return ("redirect:/instellingen");
         }
         return ("login");
     }
-    public void authWithAuthManager(HttpServletRequest request, String username, String password) {
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
+    public void authWithAuthManager(HttpServletRequest request, String email, String password) {
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password);
         authToken.setDetails(new WebAuthenticationDetails(request));
         Authentication authentication = authenticationManager.authenticate(authToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);

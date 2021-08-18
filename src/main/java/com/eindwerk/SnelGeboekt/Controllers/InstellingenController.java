@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.security.Principal;
 
 @Controller
-public class SettingsController {
+public class InstellingenController {
 
-    @GetMapping("/settings")
+    @GetMapping("/instellingen")
     public String rootHandler(Principal principal) {
 
-        return ("settings");
+        return ("instellingen");
     }
 }

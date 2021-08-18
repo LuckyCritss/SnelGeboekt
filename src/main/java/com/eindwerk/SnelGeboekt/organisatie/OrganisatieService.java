@@ -26,4 +26,5 @@ public interface OrganisatieService {
     List<Organisatie> getAll();
 
     void save(Organisatie organisatie) throws PasswordException, PasswordMisMatchException;
+
 }

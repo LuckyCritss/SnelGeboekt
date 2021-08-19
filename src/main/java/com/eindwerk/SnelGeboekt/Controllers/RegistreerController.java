@@ -41,7 +41,7 @@ public class RegistreerController {
     @GetMapping("/registreer")
     public String rootHandler(Principal principal, Model model) {
         if (principal != null) {
-            return ("redirect:/settings");
+            return ("redirect:/instellingen");
         }
         Organisatie organisatie = new Organisatie();
         model.addAttribute("organisatie", organisatie);
@@ -71,15 +71,15 @@ public class RegistreerController {
             return "registreer";
         }
         authWithAuthManager(request, organisatie.getEmail(),organisatie.getWachtWoord());
-        return "redirect:/settings";
+        return "redirect:/instellingen";
     }
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
-    public void authWithAuthManager(HttpServletRequest request, String username, String password) {
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
+    public void authWithAuthManager(HttpServletRequest request, String email, String password) {
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password);
         authToken.setDetails(new WebAuthenticationDetails(request));
         Authentication authentication = authenticationManager.authenticate(authToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);

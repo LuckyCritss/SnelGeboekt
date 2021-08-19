@@ -26,11 +26,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
+                .inMemoryAuthentication()
+                .withUser("Admin")
+                .password("{noop}admin")
+                .roles("ADMIN");
+        auth
                 .jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select email,password from organisaties where email=?")
-                .authoritiesByUsernameQuery("select email,role from organisaties where email = ?");
-
+                .usersByUsernameQuery("select email,password from organisations where email=?")
+                .authoritiesByUsernameQuery("select email,role from organisations where email=?");
     }
 
     @Override
@@ -38,17 +42,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/settings").authenticated()
-                .antMatchers("/**", "/login", "/registreer" ).permitAll()
+                .antMatchers("/**", "/login", "/registreer" , "/snel.jpg", "/reclame").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
-                .logout().deleteCookies("JSESSIONID")
-
+                .logout()
+                .deleteCookies("JSESSIONID")
                 .and()
-                .rememberMe().key("uniqueAndSecret");
+                .rememberMe()
+                .key("uniqueAndSecret");
     }
 
     @Bean
@@ -61,5 +66,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
 }

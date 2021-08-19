@@ -8,11 +8,11 @@ import java.util.List;
 public interface OrganisatieRepository extends JpaRepository<Organisatie, Integer> {
 
     @Query("SELECT o from Organisatie o Where o.email = :email")
-    public Organisatie getOrganisatieByEmail(@Param("email") String email);
+    Organisatie getOrganisatieByEmail(@Param("email") String email);
 
     @Override
     @Query("SELECT o from Organisatie  o")
-    public List<Organisatie> findAll();
+    List<Organisatie> findAll();
 
-    public Organisatie getOrganisatieById(Integer integer);
+    Organisatie getOrganisatieById(Integer integer);
 }

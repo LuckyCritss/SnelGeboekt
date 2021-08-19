@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Getter
 @Setter
-@Table(name="organisaties")
+@Table(name="organisations")
 public class Organisatie {
 
     @Id

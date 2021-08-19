@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/settings").authenticated()
-                .antMatchers("/**", "/login", "/registreer" , "/snel.jpg", "/reclame").permitAll()
+                .antMatchers("/**", "/login", "/registreer" , "/instellingen").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")

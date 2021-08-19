@@ -14,13 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Controller
 public class RegistreerController {
@@ -46,6 +47,16 @@ public class RegistreerController {
         Organisatie organisatie = new Organisatie();
         model.addAttribute("organisatie", organisatie);
         return ("registreer");
+    }
+
+    @GetMapping("/registreer/{id}")
+    public String edit(@PathVariable int id, Model model) {
+        Organisatie organisatie = organisatieService.getById(id);
+        if (organisatie == null) {
+            throw new ResponseStatusException(NOT_FOUND, "Unable to find resource");
+        }
+        model.addAttribute("organisatie", organisatie);
+        return "fragments/registreer";
     }
 
     @PostMapping("/registreer")

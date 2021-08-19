@@ -37,5 +37,4 @@ public class MvcConfig implements WebMvcConfigurer {
     bean.setValidationMessageSource(messageSource());
     return bean;
   }
-
 }

@@ -6,6 +6,7 @@ import java.util.List;
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 public interface OrganisatieService {
 
+
     class PasswordException extends Exception {
         public PasswordException(String message) {
             super(message);
@@ -26,5 +27,10 @@ public interface OrganisatieService {
     List<Organisatie> getAll();
 
     void save(Organisatie organisatie) throws PasswordException, PasswordMisMatchException;
+
+    // keuzemogelijkheden
+    public  Organisatie getNewOrganisatie();
+
+    public Organisatie getById(int id);
 
 }

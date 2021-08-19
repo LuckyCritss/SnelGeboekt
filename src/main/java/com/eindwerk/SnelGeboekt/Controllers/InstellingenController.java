@@ -25,6 +25,12 @@ public class InstellingenController {
         this.organisatieService = organisatieService;
     }
 
+    @GetMapping
+    public String list(Model model) {
+        model.addAttribute("organisaties", organisatieService.getAll());
+        return "fragments/lijstkeuzemogelijk";
+    }
+
     @GetMapping("/instellingen")
     public String rootHandler(Model model) {
         model.addAttribute ("organisaties", organisatieService.getAll());

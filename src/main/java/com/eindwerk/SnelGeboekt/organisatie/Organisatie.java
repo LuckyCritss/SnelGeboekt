@@ -53,24 +53,7 @@ public class Organisatie {
     @Column(name = "street")
     private String straat;
 
-    // voor de keuzemogelijkheden
-
-
-//    @Id
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = {
-//            @JoinColumn(name = "idOptie", referencedColumnName = "id")})
- //   private Organisatie idOptie;
-     //   @Id
-    //    private String tijdsindeling;
-    //    @Id
-    //    private String kalender;
-
-
-
-
-
-    @Size(min = 2, message = "{organisatie.optie}")
-    private String optie;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "organisatie")
+    private Optie optie;
 
 }

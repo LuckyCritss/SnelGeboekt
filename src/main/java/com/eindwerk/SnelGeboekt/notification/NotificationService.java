@@ -1,10 +1,10 @@
 package com.eindwerk.SnelGeboekt.notification;
 
 
-import com.eindwerk.SnelGeboekt.user.User;
+import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 
 public interface NotificationService {
 
-    void sendNotification(User user);
+    void sendNotification(Organisatie organisatie);
 
 }

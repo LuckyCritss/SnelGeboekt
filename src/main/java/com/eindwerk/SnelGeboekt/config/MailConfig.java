@@ -16,7 +16,7 @@ public class MailConfig {
         mailSender.setHost("smtp.elasticemail.com");
         mailSender.setPort(2525);
 
-        mailSender.setUsername("noreply@SnelGeboekt.be");
+        mailSender.setUsername("info@javafanatics.com");
         //mailSender.setPassword("3g@NCfPg9pYgB3s");
         mailSender.setPassword("B62C1E07EB2053E73EEB9D80329731CA1CC1");
 
@@ -28,15 +28,14 @@ public class MailConfig {
 
         return mailSender;
     }
-/*
+
     @Bean
     public SimpleMailMessage templateSimpleMessage() {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setSubject("User %s just created a new Jibber");
-        message.setText(
-                "User %s just created a new Jibber in your JIbberJabber feed:\n");
+        message.setSubject("Account registration successfully!");
+        message.setText("this is an automatic mail to Verify tou that you successfully created your account on www.snelgeboekt.be");
         return message;
     }
- */
+
 
 }

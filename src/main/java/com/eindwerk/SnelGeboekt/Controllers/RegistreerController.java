@@ -1,5 +1,6 @@
 package com.eindwerk.SnelGeboekt.Controllers;
 
+import com.eindwerk.SnelGeboekt.notification.NotificationService;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class RegistreerController {
 
     private OrganisatieService organisatieService;
     private AuthenticationManager authenticationManager;
+    private NotificationService notificationService;
 
     @Autowired
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {
@@ -35,8 +37,13 @@ public class RegistreerController {
     }
 
     @Autowired
-    public void setUserService(OrganisatieService organisatieService) {
+    public void setOrganisatieService(OrganisatieService organisatieService) {
         this.organisatieService = organisatieService;
+    }
+
+    @Autowired
+    public void setNotificationService(NotificationService notificationService) {
+        this.notificationService = notificationService;
     }
 
     @GetMapping("/registreer")
@@ -47,16 +54,6 @@ public class RegistreerController {
         Organisatie organisatie = new Organisatie();
         model.addAttribute("organisatie", organisatie);
         return ("registreer");
-    }
-
-    @GetMapping("/registreer/{id}")
-    public String edit(@PathVariable int id, Model model) {
-        Organisatie organisatie = organisatieService.getById(id);
-        if (organisatie == null) {
-            throw new ResponseStatusException(NOT_FOUND, "Unable to find resource");
-        }
-        model.addAttribute("organisatie", organisatie);
-        return "fragments/registreer";
     }
 
     @PostMapping("/registreer")
@@ -76,13 +73,21 @@ public class RegistreerController {
             if (e.getMessage().contains("email_unique")) {
                 bindingResult.rejectValue("email","user.email-unique",e.getMessage());
             }
-            if (e.getMessage().contains("gebruikersNaam_unique")) {
-                bindingResult.rejectValue("gebruikersNaam","user.gebruikersNaam-unique",e.getMessage());
-            }
             return "registreer";
         }
+        notificationService.sendNotification(organisatie);
         authWithAuthManager(request, organisatie.getEmail(),organisatie.getWachtWoord());
         return "redirect:/instellingen";
+    }
+
+    @GetMapping("/registreer/{id}")
+    public String edit(@PathVariable int id, Model model) {
+        Organisatie organisatie = organisatieService.getById(id);
+        if (organisatie == null) {
+            throw new ResponseStatusException(NOT_FOUND, "Unable to find resource");
+        }
+        model.addAttribute("organisatie", organisatie);
+        return "fragments/registreer";
     }
 
     @InitBinder

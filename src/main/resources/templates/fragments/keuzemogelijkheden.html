@@ -18,7 +18,7 @@
             <div>
                 <h4>Geef hier u keuzemogelijkheden in:</h4>
             </div>
-            <form class="card p-3 bg-light" action="#" th:action="@{/fragments/keuzemogelijkheden.html}" th:object="${organisatie}" method="post">
+            <form class="card p-3 bg-light" action="#" th:action="@{/fragments/keuzemogelijkheden}" th:object="${organisatie}" method="post">
                 <fieldset>
                     <div class="form-group">
                         <input type="hidden"  th:field="*{id}">

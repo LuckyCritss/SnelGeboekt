@@ -18,7 +18,7 @@
             <div>
                 <h4>Geef hier u keuzemogelijkheden in:</h4>
             </div>
-            <form class="card p-3 bg-light" action="#" th:action="@{/fragments/keuzemogelijkheden.html}" th:object="${organisatie}" method="post">
+            <form class="card p-3 bg-light" action="#" th:action="@{/fragments/keuzemogelijkheden}" th:object="${organisatie}" method="post">
                 <fieldset>
                     <div class="form-group">
                         <input type="hidden"  th:field="*{id}">
@@ -33,8 +33,9 @@
                     </div>
 
                     <p>
-                        <a th:href="@{/organisatie}" class="btn btn-secondary ">Cancel</a>
-                        <input class="btn btn-danger" type="submit" value="Save">
+                        <a class="btn btn-danger"   th:href="@{/optie/add}">Toevoegen</a>
+                        <a th:href="@{/organisatie}" class="btn btn-secondary ">Annuleren</a>
+                        <input class="btn btn-danger" type="submit" value="Bewaren">
                     </p>
                 </fieldset>
             </form>

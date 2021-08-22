@@ -50,4 +50,14 @@ public class OrganisatieServiceImpl implements OrganisatieService{
         }
         organisatieRepository.save(organisatie);
     }
+
+    @Override
+    public Organisatie getNewOrganisatie(){
+        return new Organisatie();
+    }
+
+
+    public Organisatie getById(int id){
+        return organisatieRepository.getById(id);
+    }
 }

@@ -33,20 +33,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select email,password from organisations where email=?")
-                .authoritiesByUsernameQuery("select email,role from organisations where email=?");
+                .usersByUsernameQuery("select email,password,(true) as enabled from organisations where email=?")
+                .authoritiesByUsernameQuery("select email,('admin') as role from organisations where email=?");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/settings").authenticated()
-                .antMatchers("/**", "/login", "/registreer" , "/snel.jpg", "/reclame").permitAll()
+                .antMatchers("/instellingen").authenticated()
+                .antMatchers("/**", "/login", "/registreer" ).permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/instellingen")
                 .permitAll()
                 .and()
                 .logout()

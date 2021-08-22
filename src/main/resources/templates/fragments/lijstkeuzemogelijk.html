@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <title>Lijst keuzemogelijkheden</title>
+</head>
+<body>
+<div class="container">
+  <div class="pb-2 mt-4 mb-4 border-bottom">
+    <h2>Keuzemogelijkheden</h2>
+  </div>
+
+  <div class="row" th:if="${!organisatie.empty}">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">optie</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="organisatie : ${organisaties}">
+        <td th:text="${organisatieStat.count}"></td>
+        <td th:text="${organisatie.optie}"></td>
+
+        <td>
+          <a class="btn btn-primary btn-sm" th:href="@{/organisatie/keuzemogelijkheden/} + ${organisatie.id}">Edit</a>
+          <a class="btn btn-danger btn-sm" th:href="@{/organisatie/delete/} + ${organisatie.id}">Delete</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="alert alert-primary" role="alert"  th:if="${organiaties.empty}">
+    No Users
+  </div>
+
+  <a class="btn btn-primary" th:href="@{/}">&#8592;&nbsp;Home</a>
+  <a class="btn btn-primary" th:href="@{/organisatie/add}">&#43;</a>
+
+</div>
+</body>
+</html>

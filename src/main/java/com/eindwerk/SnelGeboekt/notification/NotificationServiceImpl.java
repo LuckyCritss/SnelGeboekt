@@ -19,7 +19,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void sendNotification(Organisatie organisatie) {
 
-            sendSimpleMessage(organisatie.getEmail(), "Account registration successfully!","this is an automatic mail to Verify tou that you successfully created your account on www.snelgeboekt.be");
+            sendSimpleMessage(organisatie.getEmail(), "Account registration successfully!","this is an automatic mail to Verify that you successfully created your account on www.SnelGeboekt.be");
     }
 
     private void sendSimpleMessage(String to, String subject, String text) {

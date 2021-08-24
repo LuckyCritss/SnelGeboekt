@@ -18,12 +18,12 @@ public class OrganisatieServiceImpl implements OrganisatieService{
 
     @Override
     public Organisatie getOrganisatieByEmail(String email) {
-        return null;
+        return organisatieRepository.getOrganisatieByEmail(email);
     }
 
     @Override
-    public Organisatie findOrganisatie(String needle) {
-        return null;
+    public Organisatie getOrganisatieById(Integer id) {
+        return organisatieRepository.getOrganisatieById(id);
     }
 
     @Override

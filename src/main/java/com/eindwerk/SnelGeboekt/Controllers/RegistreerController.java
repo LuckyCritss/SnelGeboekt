@@ -80,16 +80,6 @@ public class RegistreerController {
         return "redirect:/instellingen";
     }
 
-    @GetMapping("/registreer/{id}")
-    public String edit(@PathVariable int id, Model model) {
-        Organisatie organisatie = organisatieService.getById(id);
-        if (organisatie == null) {
-            throw new ResponseStatusException(NOT_FOUND, "Unable to find resource");
-        }
-        model.addAttribute("organisatie", organisatie);
-        return "fragments/registreer";
-    }
-
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));

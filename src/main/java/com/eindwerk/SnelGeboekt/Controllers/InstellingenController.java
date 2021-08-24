@@ -75,7 +75,7 @@ public class InstellingenController {
         }
         Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
         model.addAttribute("organisatie", organisatie);
-        return ("fragments/keuzemogelijkheden");
+        return ("keuzemogelijkheden");
     }
 
     @GetMapping("/instellingen/agenda")
@@ -85,7 +85,7 @@ public class InstellingenController {
         }
         Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
         model.addAttribute("organisatie", organisatie);
-        return ("fragments/kalender");
+        return ("kalender");
     }
 
     @GetMapping("/instellingen/tijdslot")
@@ -95,7 +95,7 @@ public class InstellingenController {
         }
         Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
         model.addAttribute("organisatie", organisatie);
-        return ("fragments/tijdslot");
+        return ("tijdslot");
     }
 
     @InitBinder

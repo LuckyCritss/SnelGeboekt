@@ -5,6 +5,8 @@ import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 
 public interface NotificationService {
 
-    void sendNotification(Organisatie organisatie);
+    void sendAccountRegistration(Organisatie organisatie);
+
+    void sendAccountUpdate(Organisatie organisatie);
 
 }

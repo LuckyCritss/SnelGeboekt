@@ -75,19 +75,9 @@ public class RegistreerController {
             }
             return "registreer";
         }
-        notificationService.sendNotification(organisatie);
+        notificationService.sendAccountRegistration(organisatie);
         authWithAuthManager(request, organisatie.getEmail(),organisatie.getWachtWoord());
         return "redirect:/instellingen";
-    }
-
-    @GetMapping("/registreer/{id}")
-    public String edit(@PathVariable int id, Model model) {
-        Organisatie organisatie = organisatieService.getById(id);
-        if (organisatie == null) {
-            throw new ResponseStatusException(NOT_FOUND, "Unable to find resource");
-        }
-        model.addAttribute("organisatie", organisatie);
-        return "fragments/registreer";
     }
 
     @InitBinder

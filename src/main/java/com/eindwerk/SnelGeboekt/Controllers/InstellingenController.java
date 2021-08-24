@@ -41,9 +41,6 @@ public class InstellingenController {
             return ("redirect:/login");
         }
         Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
-        System.out.println(organisatie.getId());
-        System.out.println(organisatie.getEmail());
-        System.out.println(organisatie.getBedrijfsNaam());
         model.addAttribute("organisatie", organisatie);
         return ("instellingen");
     }

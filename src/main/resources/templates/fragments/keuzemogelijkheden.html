@@ -20,11 +20,11 @@
             </div>
             <form class="card p-3 bg-light" action="#" th:action="@{/fragments/keuzemogelijkheden}" th:object="${organisatie}" method="post">
                 <fieldset>
+
                     <div class="form-group">
                         <input type="hidden"  th:field="*{id}">
                         <input type="hidden"  th:field="*{optie.id}">
                     </div>
-
 
                     <div class="mb-3">
                         <label>Keuzemogelijkheid</label>
@@ -37,6 +37,7 @@
                         <a th:href="@{/organisatie}" class="btn btn-secondary ">Annuleren</a>
                         <input class="btn btn-danger" type="submit" value="Bewaren">
                     </p>
+
                 </fieldset>
             </form>
         </div>

@@ -68,6 +68,36 @@ public class InstellingenController {
         return "redirect:/instellingen";
     }
 
+    @GetMapping("/instellingen/keuzemogelijkheden")
+    public String keuzemogelijkhedenHandler(Principal principal, Model model) {
+        if (principal == null) {
+            return ("redirect:/login");
+        }
+        Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
+        model.addAttribute("organisatie", organisatie);
+        return ("fragments/keuzemogelijkheden");
+    }
+
+    @GetMapping("/instellingen/agenda")
+    public String agendaHandler(Principal principal, Model model) {
+        if (principal == null) {
+            return ("redirect:/login");
+        }
+        Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
+        model.addAttribute("organisatie", organisatie);
+        return ("fragments/kalender");
+    }
+
+    @GetMapping("/instellingen/tijdslot")
+    public String tijdslotnHandler(Principal principal, Model model) {
+        if (principal == null) {
+            return ("redirect:/login");
+        }
+        Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
+        model.addAttribute("organisatie", organisatie);
+        return ("fragments/tijdslot");
+    }
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));

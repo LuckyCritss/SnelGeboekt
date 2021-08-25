@@ -14,7 +14,7 @@ import javax.validation.Valid;
 
 
 @Controller
-@RequestMapping("/lijstkeuzemogelijkheden")
+@RequestMapping("/keuzemogelijkheden")
 public class OptieController {
 
     private OptieService optieService;

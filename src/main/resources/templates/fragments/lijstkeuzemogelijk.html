@@ -1,18 +1,26 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:color="http://www.w3.org/1999/xhtml">
+<head th:fragment = "lijstkeuzemogelijkheden (title)">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snelgeboekt login</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-  <title>Lijst keuzemogelijkheden</title>
+  <link href="/css/login.css" rel="stylesheet">
 </head>
-<body>
-<div class="container">
-  <div class="pb-2 mt-4 mb-4 border-bottom">
-    <h2>Keuzemogelijkheden</h2>
-  </div>
+<body  class="text-center">
+<div class="lijstkeuzemogelijkheden"  th:fragment="lijstkeuzemogelijkheden">
+  <div class="container">
+    <div class="pb-2 mt-4 mb-4 border-bottom">
 
-  <div class="row" th:if="${!organisatie.empty}">
+
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <div>
+            <h4>Geef hier u keuzemogelijkheden in:</h4>
+          </div>
+          <form class="card p-3 bg-light" action="#" th:action="@{/fragments/lijstkeuzemogelijkheden}" th:object="${organisatie}" method="post">
+
+  <div class="row" >
     <table class="table table-hover">
       <thead>
       <tr>
@@ -27,8 +35,8 @@
         <td th:text="${organisatie.optie}"></td>
 
         <td>
-          <a class="btn btn-primary btn-sm" th:href="@{/organisatie/keuzemogelijkheden/} + ${organisatie.id}">Edit</a>
-          <a class="btn btn-danger btn-sm" th:href="@{/organisatie/delete/} + ${organisatie.id}">Delete</a>
+          <a class="btn btn-primary btn-sm" th:href="@{/keuzemogelijkheden/} + ${organisatie.id}">Edit</a>
+          <a class="btn btn-danger btn-sm" th:href="@{/instellingen/delete/} + ${organisatie.id}">Delete</a>
         </td>
       </tr>
       </tbody>
@@ -36,13 +44,17 @@
   </div>
 
 
-  <div class="alert alert-primary" role="alert"  th:if="${organiaties.empty}">
+  <div class="alert alert-primary" role="alert" >
     No Users
   </div>
 
-  <a class="btn btn-primary" th:href="@{/}">&#8592;&nbsp;Home</a>
-  <a class="btn btn-primary" th:href="@{/organisatie/add}">&#43;</a>
-
+  <a class="btn btn-danger" th:href="@{/}">&#8592;&nbsp;Home</a>
+  <a class="btn btn-danger" th:href="@{/organisatie/add}">&#43;</a>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
 </div>
 </body>
 </html>

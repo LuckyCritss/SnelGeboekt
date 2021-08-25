@@ -16,7 +16,7 @@
       <div class="row">
         <div class="col-md-8 offset-md-2">
           <div>
-            <h4>Geef hier u keuzemogelijkheden in:</h4>
+            <h3>Geef hier u keuzemogelijkheden in:</h3>
           </div>
    <form class="card p-3 bg-light" action="#" th:action="@{/fragments/lijstkeuzemogelijkheden}" th:object="${optie}" method="post">
      <fieldset>
@@ -37,6 +37,7 @@
         <td>
           <a class="btn btn-secondary" th:href=@{/instellingen/keuzemogelijkheden/} + ${instellingen.id} >Edit</a>
           <a class="btn btn-secondary" th:href=@{/instellingen/keuzemogelijkheden/delete/} + ${instellingen.id} >Delete</a>
+          <a class="btn btn-secondary" th:href=@{/instellingen/tijdslot/} + ${instellingen.id} >Tijdslot</a>
         </td>
       </tr>
       </tbody>

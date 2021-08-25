@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:color="http://www.w3.org/1999/xhtml">
+<head th:fragment = "tijdslot (title)">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpeningsUren</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link href="/css/login.css" rel="stylesheet">
+</head>
+<style>
+
+</style>
+
+<body  class="text-center">
+<div class="instellingen"  th:fragment="tijdslot">
+  <div class="container">
+    <div class="pb-2 mt-4 mb-4 border-bottom">
+
+
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+
+          <form class="card p-3 bg-light" action="#" th:action="@{/fragments/tijdslot}" th:object="${tijdsloten}" method="post">
+            <fieldset>
+
+              <div class="openinghourscontent section">
+                <div class="header">
+                  <h2>OpeningsTijden</h2>
+                  <span id="open-status"><small class="openorclosed"></small></span>
+
+                </div>
+                <table class="openingsuren tabel">
+                  <tr id="Maandag" itemprop="openingHours" title="Opent Maandag van 9am tot 6pm">
+                    <td>Maandag</td>
+                    <td><td><div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Gesloten/Geopend</label>
+                  </div></td></td>
+                    <td>
+                      <div class="mob"> <label class="text-grey mr-1">Van</label> <input class="ml-1" type="time" name="from"> </div>
+                    <td>
+                      <div class="mob mb-2"> <label class="text-grey mr-4">Tot</label> <input class="ml-1" type="time" name="to"> </div>
+                      <div class="mt-1 cancel fa fa-times text-danger"></div>
+                  </td>
+                    <td><button type="button" class="btn btn-link">Openingstijden toevoegen</button></td>
+                    </td>
+                  </tr>
+                  <tr id="Dinsdag" itemprop="openingHours" title="Open Dinsdag van 9am tot 6pm">
+                    <td>Dinsdag</td>
+                    <td><td><div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Gesloten/Geopend</label>
+                  </div></td></td>
+                    <td>
+                      <div class="mob"> <label class="text-grey mr-1">Van</label> <input class="ml-1" type="time" name="from"> </div>
+                    <td>
+                      <div class="mob mb-2"> <label class="text-grey mr-4">Tot</label> <input class="ml-1" type="time" name="to"> </div>
+                      <div class="mt-1 cancel fa fa-times text-danger"></div>
+                  </tr>
+                  <tr id="Woensdag" itemprop="openingHours" title="Opent Woensdag van 9am tot 6pm">
+                    <td>Woensdag</td>
+                    <td><td><div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Gesloten/Geopend</label>
+                  </div></td></td>
+                    <td>
+                      <div class="mob"> <label class="text-grey mr-1">Van</label> <input class="ml-1" type="time" name="from"> </div>
+                    <td>
+                      <div class="mob mb-2"> <label class="text-grey mr-4">Tot</label> <input class="ml-1" type="time" name="to"> </div>
+                      <div class="mt-1 cancel fa fa-times text-danger"></div>
+                  </tr>
+                  <tr id="Donderdag" itemprop="openingHours" title="Opent Donderdag van 9am tot 8pm">
+                    <td>Donderdag</td>
+                    <td><td><div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault3">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Gesloten/Geopend</label>
+                  </div></td></td>
+                    <td>
+                      <div class="mob"> <label class="text-grey mr-1">Van</label> <input class="ml-1" type="time" name="from"> </div>
+                    <td>
+                      <div class="mob mb-2"> <label class="text-grey mr-4">Tot</label> <input class="ml-1" type="time" name="to"> </div>
+                      <div class="mt-1 cancel fa fa-times text-danger"></div>
+                  </tr>
+                  <tr id="Vrijdag" itemprop="openingHours" title="Opent Vrijdag van 9am tot 6pm">
+                    <td>Vrijdag</td>
+                    <td><td><div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault4">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Gesloten/Geopend</label>
+                  </div></td></td>
+                    <td>
+                      <div class="mob"> <label class="text-grey mr-1">Van</label> <input class="ml-1" type="time" name="from"> </div>
+                    <td>
+                      <div class="mob mb-2"> <label class="text-grey mr-4">Tot</label> <input class="ml-1" type="time" name="to"> </div>
+                      <div class="mt-1 cancel fa fa-times text-danger"></div>
+                  </tr>
+                  <tr id="Saturday" itemprop="openingHours" title="Opent Zaterdag van 10am tot 6pm">
+                    <td>Zaterdag</td>
+                    <td><td><div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault5">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Gesloten/Geopend</label>
+                  </div></td></td>
+                    <td>
+                      <div class="mob"> <label class="text-grey mr-1">Van</label> <input class="ml-1" type="time" name="from"> </div>
+                    <td>
+                      <div class="mob mb-2"> <label class="text-grey mr-4">Tot</label> <input class="ml-1" type="time" name="to"> </div>
+                      <div class="mt-1 cancel fa fa-times text-danger"></div>
+                  </tr>
+                  <tr id="Zondag" itemprop="openingHours" title="Opent Zondag van 11am tot 4pm">
+                    <td>Zondag</td>
+                    <td><td><div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault6">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Gesloten/Geopend</label>
+                  </div></td></td>
+                    <td>
+                      <div class="mob"> <label class="text-grey mr-1">Van</label> <input class="ml-1" type="time" name="from"> </div>
+                    <td>
+                      <div class="mob mb-2"> <label class="text-grey mr-4">Tot</label> <input class="ml-1" type="time" name="to"> </div>
+                      <div class="mt-1 cancel fa fa-times text-danger"></div>
+                  </tr>
+                </table>
+
+
+              </div>
+
+
+              <a th:href="@{/instellingen}" class="btn btn-secondary ">Annuleren</a>
+              <input class="btn btn-danger" type="submit" value="Bewaren">
+
+
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

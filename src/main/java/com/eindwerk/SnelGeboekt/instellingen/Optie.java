@@ -15,7 +15,6 @@ public class Optie {
 
     // voor de keuzemogelijkheden
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Size(min = 5, message = "{optie.optie}")

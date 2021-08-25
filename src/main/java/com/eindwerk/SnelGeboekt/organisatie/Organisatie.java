@@ -53,7 +53,7 @@ public class Organisatie {
     @Column(name = "street")
     private String straat;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "organisatie")
+    @OneToOne (mappedBy = "organisatie", fetch = FetchType.LAZY)
     private Optie optie;
 
 }

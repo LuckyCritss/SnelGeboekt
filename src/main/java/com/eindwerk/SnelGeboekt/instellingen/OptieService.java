@@ -8,6 +8,7 @@ public interface OptieService {
 
     void saveOrUpdate(Optie optie);
 
+
     Optie getById(int id);
 
     void delete(int id);

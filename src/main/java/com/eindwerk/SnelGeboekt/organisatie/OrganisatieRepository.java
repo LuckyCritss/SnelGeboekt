@@ -16,4 +16,6 @@ public interface OrganisatieRepository extends JpaRepository<Organisatie, Intege
 
     @Query("SELECT o from Organisatie o where o.id = :id")
     Organisatie getOrganisatieById(@Param("id") Integer integer);
+
+    Organisatie findByBedrijfsNaam(String bedrijfsNaam);
 }

@@ -1,4 +1,4 @@
-package com.eindwerk.SnelGeboekt.kalender;
+package com.eindwerk.SnelGeboekt.instellingen.kalender;
 
 import lombok.Getter;
 import lombok.Setter;

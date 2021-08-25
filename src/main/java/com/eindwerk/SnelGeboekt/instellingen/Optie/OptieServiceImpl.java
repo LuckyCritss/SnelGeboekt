@@ -1,15 +1,17 @@
-package com.eindwerk.SnelGeboekt.instellingen;
+package com.eindwerk.SnelGeboekt.instellingen.Optie;
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class OptieServiceImpl implements OptieService {
 
-    OrganisatieRepository organisatieRepository;
-    OptieRepository optieRepository;
+    private OrganisatieRepository organisatieRepository;
+    private OptieRepository optieRepository;
 
     @Autowired
     public void setOrganisatieRepository(OrganisatieRepository organisatieRepository){
@@ -43,6 +45,11 @@ public class OptieServiceImpl implements OptieService {
     @Override
     public Optie getById(int id) {
         return null;
+    }
+
+    @Override
+    public Optie getOptieByOrganisation(Organisatie organisatie) {
+        return optieRepository.getOptieByOrganisatie(organisatie);
     }
 
     @Override

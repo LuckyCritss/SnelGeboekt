@@ -1,5 +1,6 @@
 package com.eindwerk.SnelGeboekt.controllers;
 
+import com.eindwerk.SnelGeboekt.instellingen.Optie.OptieService;
 import com.eindwerk.SnelGeboekt.notification.NotificationService;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
@@ -20,6 +21,7 @@ public class InstellingenController {
 
     private OrganisatieService organisatieService;
     private NotificationService notificationService;
+    private OptieService optieService;
 
     @Autowired
     public void setOrganisatieService(OrganisatieService organisatieService){
@@ -31,11 +33,12 @@ public class InstellingenController {
         this.notificationService = notificationService;
     }
 
+    @Autowired
+    public void setOptieService(OptieService optieService) {
+        this.optieService = optieService;
+    }
     @GetMapping("/instellingen")
     public String rootHandler(Principal principal, Model model) {
-        if (principal == null) {
-            return ("redirect:/login");
-        }
         Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
         model.addAttribute("organisatie", organisatie);
         return ("instellingen");
@@ -64,21 +67,8 @@ public class InstellingenController {
         return "redirect:/instellingen";
     }
 
-    @GetMapping("/instellingen/keuzemogelijkheden")
-    public String keuzemogelijkhedenHandler(Principal principal, Model model) {
-        if (principal == null) {
-            return ("redirect:/login");
-        }
-        Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
-        model.addAttribute("organisatie", organisatie);
-        return ("keuzemogelijkheden");
-    }
-
     @GetMapping("/instellingen/agenda")
     public String agendaHandler(Principal principal, Model model) {
-        if (principal == null) {
-            return ("redirect:/login");
-        }
         Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
         model.addAttribute("organisatie", organisatie);
         return ("kalender");
@@ -86,9 +76,6 @@ public class InstellingenController {
 
     @GetMapping("/instellingen/tijdslot")
     public String tijdslotnHandler(Principal principal, Model model) {
-        if (principal == null) {
-            return ("redirect:/login");
-        }
         Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
         model.addAttribute("organisatie", organisatie);
         return ("tijdslot");

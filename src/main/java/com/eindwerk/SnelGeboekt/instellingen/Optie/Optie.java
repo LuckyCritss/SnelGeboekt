@@ -1,10 +1,11 @@
-package com.eindwerk.SnelGeboekt.instellingen;
+package com.eindwerk.SnelGeboekt.instellingen.Optie;
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -17,7 +18,7 @@ public class Optie {
     @Id
     private int id;
 
-    @Size(min = 5, message = "{optie.optie}")
+    @NotBlank(message = "{org.blank}")
     private String optie;
 
     @OneToOne(cascade = CascadeType.ALL)

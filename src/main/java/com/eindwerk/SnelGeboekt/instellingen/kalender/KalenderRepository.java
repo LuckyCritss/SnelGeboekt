@@ -1,4 +1,4 @@
-package com.eindwerk.SnelGeboekt.kalender;
+package com.eindwerk.SnelGeboekt.instellingen.kalender;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -18,7 +18,7 @@
           <div>
             <h4>Geef hier u keuzemogelijkheden in:</h4>
           </div>
-   <form class="card p-3 bg-light" action="#" th:action="@{/fragments/lijstkeuzemogelijkheden}" th:object="${instellingen}" method="post">
+   <form class="card p-3 bg-light" action="#" th:action="@{/fragments/lijstkeuzemogelijkheden}" th:object="${optie}" method="post">
      <fieldset>
   <div class="row" >
     <table class="table table-hover">
@@ -35,8 +35,8 @@
         <td th:text="${optieStat.count}"></td>
         <td th:text="${optie.optie}"></td>
         <td>
-          <a class="btn btn-secondary" th:href=@{/optie/keuzemogelijkheden/} + ${instellingen.id} >Edit</a>
-          <a class="btn btn-secondary" th:href=@{/optie/delete/} + ${instellingen.id} >Delete</a>
+          <a class="btn btn-secondary" th:href=@{/instellingen/keuzemogelijkheden/} + ${instellingen.id} >Edit</a>
+          <a class="btn btn-secondary" th:href=@{/instellingen/keuzemogelijkheden/delete/} + ${instellingen.id} >Delete</a>
         </td>
       </tr>
       </tbody>
@@ -47,7 +47,7 @@
        </div>
 
   <a class="btn btn-danger" th:href="@{/}">&#8592;&nbsp;Home</a>
-  <a class="btn btn-danger" th:href="@{/keuzemogelijkheden/add}">&#43;</a>
+  <a class="btn btn-danger" th:href="@{/instellingen/keuzemogelijkheden/add}">&#43;</a>
      </fieldset>
           </form>
         </div>

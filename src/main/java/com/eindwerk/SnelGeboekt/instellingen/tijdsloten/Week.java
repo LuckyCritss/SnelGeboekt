@@ -1,4 +1,4 @@
-package com.eindwerk.SnelGeboekt.tijdsloten;
+package com.eindwerk.SnelGeboekt.instellingen.tijdsloten;
 
 import java.util.HashSet;
 import java.util.Set;

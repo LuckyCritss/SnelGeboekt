@@ -1,6 +1,6 @@
 package com.eindwerk.SnelGeboekt.organisatie;
 
-import com.eindwerk.SnelGeboekt.instellingen.Optie;
+import com.eindwerk.SnelGeboekt.instellingen.Optie.Optie;
 import lombok.Getter;
 import lombok.Setter;
 

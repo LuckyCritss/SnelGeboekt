@@ -1,4 +1,4 @@
-package com.eindwerk.SnelGeboekt.Controllers;
+package com.eindwerk.SnelGeboekt.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

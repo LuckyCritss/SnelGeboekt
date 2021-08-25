@@ -1,8 +1,7 @@
-package com.eindwerk.SnelGeboekt.Controllers;
+package com.eindwerk.SnelGeboekt.instellingen;
 
 import com.eindwerk.SnelGeboekt.instellingen.Optie;
 import com.eindwerk.SnelGeboekt.instellingen.OptieService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +32,7 @@ public class OptieController {
     @GetMapping("/add")
     public String add(Model model) {
         model.addAttribute("optie", new Optie());
-        return "Keuzemogelijkheden";
+        return "/fragments/Keuzemogelijkheden";
     }
 
     @PostMapping("/edit")

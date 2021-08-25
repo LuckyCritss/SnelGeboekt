@@ -1,4 +1,4 @@
-package com.eindwerk.SnelGeboekt.Controllers;
+package com.eindwerk.SnelGeboekt.controllers;
 
 import com.eindwerk.SnelGeboekt.notification.NotificationService;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
@@ -11,13 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
-
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Controller
 public class InstellingenController {

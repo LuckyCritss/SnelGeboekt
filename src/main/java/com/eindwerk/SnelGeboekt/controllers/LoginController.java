@@ -1,4 +1,4 @@
-package com.eindwerk.SnelGeboekt.Controllers;
+package com.eindwerk.SnelGeboekt.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

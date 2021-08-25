@@ -18,7 +18,7 @@
           <div>
             <h4>Geef hier u keuzemogelijkheden in:</h4>
           </div>
-          <form class="card p-3 bg-light" action="#" th:action="@{/fragments/lijstkeuzemogelijkheden}" th:object="${organisatie}" method="post">
+   <form class="card p-3 bg-light" action="#" th:action="@{/fragments/lijstkeuzemogelijkheden}" th:object="${instellingen}" method="post">
 
   <div class="row" >
     <table class="table table-hover">
@@ -26,17 +26,17 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">optie</th>
+        <th scope="col">Actions</th>
 
       </tr>
       </thead>
       <tbody>
-      <tr th:each="organisatie : ${organisaties}">
-        <td th:text="${organisatieStat.count}"></td>
-        <td th:text="${organisatie.optie}"></td>
-
+      <tr th:each="optie : ${opties}">
+        <td th:text="${optieStat.count}"></td>
+        <td th:text="${optie.optie}"></td>
         <td>
-          <a class="btn btn-primary btn-sm" th:href="@{/keuzemogelijkheden/} + ${organisatie.id}">Edit</a>
-          <a class="btn btn-danger btn-sm" th:href="@{/instellingen/delete/} + ${organisatie.id}">Delete</a>
+          <a class="btn btn-sm btn-danger" th:href="@{/fragments/keuzemogelijkheden/} + ${id}">Edit</a>
+          <a class="btn btn-sm btn-danger" th:href="@{/keuzemogelijkheden/delete/} + ${id}">Delete</a>
         </td>
       </tr>
       </tbody>
@@ -44,12 +44,12 @@
   </div>
 
 
-  <div class="alert alert-primary" role="alert" >
-    No Users
+  <div class="alert alert-primary" role="alert"  >
+    Voeg minstens 1 optie toe.
   </div>
 
   <a class="btn btn-danger" th:href="@{/}">&#8592;&nbsp;Home</a>
-  <a class="btn btn-danger" th:href="@{/organisatie/add}">&#43;</a>
+  <a class="btn btn-danger" th:href="@{/fragments/keuzemogelijkheden/add}">&#43;</a>
           </form>
         </div>
       </div>

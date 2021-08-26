@@ -42,6 +42,7 @@ public class OptieController {
     @GetMapping("/instellingen/keuzemogelijkheden/add")
     public String add(Model model) {
         model.addAttribute("optie", new Optie());
+        model.addAttribute("duurOptie", new Optie());
         return "addkeuzemogelijkheden";
     }
 

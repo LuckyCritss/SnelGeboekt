@@ -20,6 +20,7 @@ public class Optie {
     @NotBlank(message = "{org.blank}")
     private String optie;
 
+    @NotBlank(message = "{org.blank}")
     private int duurOptie;
 
     @OneToOne(cascade = CascadeType.ALL)

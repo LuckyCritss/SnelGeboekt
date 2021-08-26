@@ -1,6 +1,6 @@
 package com.eindwerk.SnelGeboekt.controllers;
 
-import com.eindwerk.SnelGeboekt.instellingen.Optie.OptieService;
+import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
 import com.eindwerk.SnelGeboekt.notification.NotificationService;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;

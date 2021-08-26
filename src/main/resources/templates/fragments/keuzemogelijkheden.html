@@ -30,6 +30,11 @@
                         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('optie')}" th:errors="*{optie}"></div>
                         <input type="text" class="form-control" th:field="*{optie}">
                     </div>
+                    <div class="mb-3">
+                        <label>Duur Keuzemogelijkheid</label>
+                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('optie')}" th:errors="*{optie}"></div>
+                        <input type="text" class="form-control" th:field="*{optie}">
+                    </div>
 
                     <p>
                         <a th:href="@{/instellingen/keuzemogelijkheden}" class="btn btn-secondary ">Annuleren</a>

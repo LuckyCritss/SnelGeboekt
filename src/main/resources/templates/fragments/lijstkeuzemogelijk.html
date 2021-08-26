@@ -26,7 +26,9 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">optie</th>
+        <th scope="col">Duur optie</th>
         <th scope="col">Actions</th>
+
 
       </tr>
       </thead>
@@ -34,6 +36,7 @@
       <tr th:each="optie : ${opties}">
         <td th:text="${optieStat.count}"></td>
         <td th:text="${optie.optie}"></td>
+        <td th:text="${optie.tijdslot}"></td>
         <td>
           <a class="btn btn-secondary" th:href=@{/instellingen/keuzemogelijkheden/} + ${instellingen.id} >Edit</a>
           <a class="btn btn-secondary" th:href=@{/instellingen/keuzemogelijkheden/delete/} + ${instellingen.id} >Delete</a>

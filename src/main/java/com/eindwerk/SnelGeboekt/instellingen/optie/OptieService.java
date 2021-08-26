@@ -1,4 +1,4 @@
-package com.eindwerk.SnelGeboekt.instellingen.Optie;
+package com.eindwerk.SnelGeboekt.instellingen.optie;
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import org.springframework.security.access.prepost.PreAuthorize;

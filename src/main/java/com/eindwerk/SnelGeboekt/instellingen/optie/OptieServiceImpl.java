@@ -1,4 +1,4 @@
-package com.eindwerk.SnelGeboekt.instellingen.Optie;
+package com.eindwerk.SnelGeboekt.instellingen.optie;
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieRepository;

@@ -1,4 +1,4 @@
-package com.eindwerk.SnelGeboekt.instellingen.Optie;
+package com.eindwerk.SnelGeboekt.instellingen.optie;
 
 
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
@@ -42,6 +42,7 @@ public class OptieController {
     @GetMapping("/instellingen/keuzemogelijkheden/add")
     public String add(Model model) {
         model.addAttribute("optie", new Optie());
+        model.addAttribute("duurOptie", new Optie());
         return "addkeuzemogelijkheden";
     }
 
@@ -70,9 +71,9 @@ public class OptieController {
         return "redirect:/keuzemogelijheden";
     }
 
-    @GetMapping("/instellingen/keuzemogelijkheden/edit/{id}")
-    public String edit(@PathVariable int id, Model model) {
-        Optie optie = optieService.getById(id);
+    @GetMapping("/instellingen/keuzemogelijkheden/edit/{idOptie}")
+    public String edit(@PathVariable int idOptie, Model model) {
+        Optie optie = optieService.getById(idOptie);
         if (optie == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
@@ -80,14 +81,13 @@ public class OptieController {
         return "fragments/keuzemogelijkheden";
     }
 
-    @GetMapping("/instellingen/keuzemogelijkheden/delete/{id}")
-    public String delete(@PathVariable int id){
-        Optie optie = optieService.getById(id);
+    @GetMapping("/instellingen/keuzemogelijkheden/delete/{idOptie}")
+    public String delete(@PathVariable int idOptie){
+        Optie optie = optieService.getById(idOptie);
         if (optie == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
-        optieService.delete(id);
+        optieService.delete(idOptie);
         return "redirect:/keuzemogelijkheden";
     }
-
 }

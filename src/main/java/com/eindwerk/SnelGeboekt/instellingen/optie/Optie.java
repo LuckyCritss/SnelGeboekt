@@ -1,4 +1,4 @@
-package com.eindwerk.SnelGeboekt.instellingen.Optie;
+package com.eindwerk.SnelGeboekt.instellingen.optie;
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import lombok.Getter;
@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Entity
 @Getter
@@ -16,10 +15,13 @@ public class Optie {
 
     // voor de keuzemogelijkheden
     @Id
-    private int id;
+    private int idOptie;
 
     @NotBlank(message = "{org.blank}")
     private String optie;
+
+    @NotBlank(message = "{org.blank}")
+    private int duurOptie;
 
     @OneToOne(cascade = CascadeType.ALL)
     @MapsId

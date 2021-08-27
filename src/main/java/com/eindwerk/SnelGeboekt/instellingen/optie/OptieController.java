@@ -1,6 +1,7 @@
 package com.eindwerk.SnelGeboekt.instellingen.optie;
 
 
+import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -12,7 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -47,11 +51,21 @@ public class OptieController {
     }
 
     @PostMapping("/instellingen/keuzemogelijkheden/add")
-    public String addForm(@Valid @ModelAttribute Optie optie, BindingResult bindingResult) {
+    public String addForm(@Valid @ModelAttribute Optie optie, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
             return "addkeuzemogelijkheden";
         }
         try {
+            Organisatie actieveOrganisatie = organisatieService.getOrganisatieByEmail(principal.getName());
+            List<Optie> opties = actieveOrganisatie.getOpties();
+
+            if (opties == null || opties.size() < 1) {
+                opties = new ArrayList<>();
+                opties.add(optie); // of toch niet...
+                actieveOrganisatie.setOpties(opties);
+                optie.setOrganisatie(actieveOrganisatie);
+            }
+
             optieService.saveOrUpdate(optie);
         }catch (DataIntegrityViolationException e) {
             if (e.getMessage().contains("optie_unique")) {

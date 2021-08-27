@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -15,16 +17,17 @@ public class Optie {
 
     // voor de keuzemogelijkheden
     @Id
-    private int idOptie;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @NotBlank(message = "{org.blank}")
-    private String optie;
+    private String title;
 
-    @NotBlank(message = "{org.blank}")
     private int duurOptie;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @MapsId
-    @JoinColumn(name = "id")
-    Organisatie organisatie;
+
+  //  @MapsId
+    @JoinColumn(name = "organisatie_id")
+    @ManyToOne
+    private Organisatie organisatie;
 }

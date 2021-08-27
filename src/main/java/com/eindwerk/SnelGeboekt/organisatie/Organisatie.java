@@ -3,11 +3,13 @@ package com.eindwerk.SnelGeboekt.organisatie;
 import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Getter
@@ -53,7 +55,9 @@ public class Organisatie {
     @Column(name = "street")
     private String straat;
 
-    @OneToOne (mappedBy = "organisatie", fetch = FetchType.LAZY)
-    private Optie optie;
 
+    //@Nullable
+    //@JoinColumn(name = "id_optie")
+    @OneToMany(mappedBy = "organisatie")
+    private List<Optie> opties;
 }

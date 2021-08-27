@@ -16,6 +16,8 @@ public interface OptieService {
 
     Optie getOptieByOrganisation(Organisatie organisatie);
 
+    int GetDuurOptie(int DuurOptie);
+
     void delete(int id);
 }
 

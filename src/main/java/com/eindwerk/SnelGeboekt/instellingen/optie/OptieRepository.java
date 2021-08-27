@@ -7,9 +7,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OptieRepository  extends JpaRepository<Optie, String> {
+public interface OptieRepository  extends JpaRepository<Optie, Integer> {
 
     @Query("select o from Optie o where o.organisatie = :organisatie")
     Optie getOptieByOrganisatie(@Param("organisatie") Organisatie organisatie);
 
+    // @Query("select o from Optie o where o.organisatie = :organisatie")
+    // Optie getDuurOptie(@Param("optie") Optie optie);
 }

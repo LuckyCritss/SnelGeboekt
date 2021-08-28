@@ -33,11 +33,21 @@ body {font-family: Verdana, sans-serif;}
 .month .prev {
   float: left;
   padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .month .next {
   float: right;
   padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.prev:hover {
+background-color:red;
+}
+
+.next:hover {
+background-color:red;
 }
 
 .weekdays {
@@ -59,6 +69,8 @@ body {font-family: Verdana, sans-serif;}
   margin: 0;
 }
 
+
+
 .days li {
   list-style-type: none;
   display: inline-block;
@@ -73,64 +85,68 @@ body {font-family: Verdana, sans-serif;}
   padding: 5px;
   background: lightblue;
 }
+
+.days li :hover {
+background-color:red;
+}
 </style>
 </head>
 <body>
 <div class="instellingen" th:fragment="kalender">
 
-<h1 align="center" style="background-color:red" >kalender</h1>
+    <h1 align="center" >Kalender</h1>
 
-<div class="month">
-    <ul>
-        <li class="prev">&#8592;</li>
-        <li class="next">&#8594;</li>
-        <li> augustus 2021<br> </li>
+    <div class="month">
+        <ul>
+            <li class="prev">&#8592;</li>
+            <li class="next">&#8594;</li>
+            <li> augustus 2021<br> </li>
+        </ul>
+    </div>
+
+    <ul class="weekdagen">
+        <li>maandag</li>
+        <li>dinsdag</li>
+        <li>woensdag</li>
+        <li>donderdag</li>
+        <li>vrijdag</li>
+        <li>zaterdag</li>
+        <li>zondag</li>
+    </ul>
+
+    <ul class="days">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>17</li>
+        <li><span class="active">18</span></li>
+        <li>19</li>
+        <li>20</li>
+        <li>21</li>
+        <li>22</li>
+        <li>23</li>
+        <li>24</li>
+        <li>25</li>
+        <li>26</li>
+        <li>27</li>
+        <li>28</li>
+        <li>29</li>
+        <li>30</li>
+        <li>31</li>
     </ul>
 </div>
-
-<ul class="weekdagen">
-    <li>maandag</li>
-    <li>dinsdag</li>
-    <li>woensdag</li>
-    <li>donderdag</li>
-    <li>vrijdag</li>
-    <li>zaterdag</li>
-    <li>zondag</li>
-</ul>
-
-<ul class="days">
-    <li><span class="active">1</span></li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-    <li>6</li>
-    <li>7</li>
-    <li>8</li>
-    <li>9</li>
-    <li>10</li>
-    <li>11</li>
-    <li>12</li>
-    <li>13</li>
-    <li>14</li>
-    <li>15</li>
-    <li>16</li>
-    <li>17</li>
-    <li>18</li>
-    <li>19</li>
-    <li>20</li>
-    <li>21</li>
-    <li>22</li>
-    <li>23</li>
-    <li>24</li>
-    <li>25</li>
-    <li>26</li>
-    <li>27</li>
-    <li>28</li>
-    <li>29</li>
-    <li>30</li>
-    <li>31</li>
-</ul>
-
 </body>
 </html>

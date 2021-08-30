@@ -1,4 +1,4 @@
-package com.eindwerk.SnelGeboekt.instellingen.Optie;
+package com.eindwerk.SnelGeboekt.instellingen.optie;
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +15,8 @@ public interface OptieService {
     Optie getById(int id);
 
     Optie getOptieByOrganisation(Organisatie organisatie);
+
+    int GetDuurOptie(int DuurOptie);
 
     void delete(int id);
 }

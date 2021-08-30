@@ -18,7 +18,7 @@
             <div>
                 <h4>Voeg een optie toe:</h4>
             </div>
-            <form class="card p-3 bg-light" action="#" th:action="@{/instellingen/keuzemogelijkheden}" th:object="${optie}" method="post">
+            <form class="card p-3 bg-light" action="#" th:action="@{/instellingen/keuzemogelijkheden/add}" th:object="${optie}" method="post">
                 <fieldset>
 
                     <div class="form-group">
@@ -27,8 +27,13 @@
 
                     <div class="mb-3">
                         <label>Keuzemogelijkheid</label>
-                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('optie')}" th:errors="*{optie}"></div>
-                        <input type="text" class="form-control" th:field="*{optie}">
+                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                        <input type="text" class="form-control" th:field="*{title}">
+                    </div>
+                    <div class="mb-3">
+                        <label>Duur Keuzemogelijkheid</label>
+                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('duurOptie')}" th:errors="*{duurOptie}"></div>
+                        <input type="number" class="form-control" th:field="*{duurOptie}">
                     </div>
 
                     <p>

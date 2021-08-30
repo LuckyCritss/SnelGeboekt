@@ -1,4 +1,4 @@
-package com.eindwerk.SnelGeboekt.instellingen.Optie;
+package com.eindwerk.SnelGeboekt.instellingen.optie;
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieRepository;
@@ -51,6 +51,12 @@ public class OptieServiceImpl implements OptieService {
     public Optie getOptieByOrganisation(Organisatie organisatie) {
         return optieRepository.getOptieByOrganisatie(organisatie);
     }
+
+    @Override
+    public int GetDuurOptie(int DuurOptie){
+        return DuurOptie;
+    }
+
 
     @Override
     public void delete(int id) {

@@ -1,28 +1,35 @@
-package com.eindwerk.SnelGeboekt.instellingen.Optie;
+package com.eindwerk.SnelGeboekt.tijdsloten;
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import java.time.LocalTime;
 
 @Entity
 @Getter
 @Setter
-@Table(name="optie")
-public class Optie {
+@Table(name = "tijdsloten")
+public class Tijdsloten {
 
-    // voor de keuzemogelijkheden
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "{org.blank}")
-    private String optie;
+    private LocalTime van;
+
+    private LocalTime tot;
+
+    private boolean open;
 
     @OneToOne(cascade = CascadeType.ALL)
     @MapsId
     @JoinColumn(name = "id")
     Organisatie organisatie;
+
+
+
+
+
 }

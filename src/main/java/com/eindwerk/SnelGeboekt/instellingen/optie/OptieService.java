@@ -14,7 +14,7 @@ public interface OptieService {
 
     Optie getById(int id);
 
-    Optie getOptieByOrganisation(Organisatie organisatie);
+    List<Optie> getOptiesByOrganisation(Organisatie organisatie);
 
     int GetDuurOptie(int DuurOptie);
 

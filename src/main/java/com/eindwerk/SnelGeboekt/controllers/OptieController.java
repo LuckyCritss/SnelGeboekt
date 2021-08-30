@@ -1,6 +1,7 @@
-package com.eindwerk.SnelGeboekt.instellingen.optie;
+package com.eindwerk.SnelGeboekt.controllers;
 
-
+import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
+import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import javax.validation.constraints.Email;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Controller
 public class OptieController {
@@ -37,16 +37,14 @@ public class OptieController {
 
     @GetMapping("/instellingen/keuzemogelijkheden")
     public String keuzemogelijkhedenHandler(Principal principal, Model model) {
-        Optie optie = optieService.getOptieByOrganisation
-                (organisatieService.getOrganisatieByEmail(principal.getName()));
-        model.addAttribute("optie", optie);
-        return ("keuzemogelijkheden");
+        List<Optie> opties = optieService.getOptiesByOrganisation(organisatieService.getOrganisatieByEmail(principal.getName()));
+        model.addAttribute("opties", opties);
+        return "keuzemogelijkheden";
     }
 
     @GetMapping("/instellingen/keuzemogelijkheden/add")
     public String add(Model model) {
         model.addAttribute("optie", new Optie());
-        model.addAttribute("duurOptie", new Optie());
         return "addkeuzemogelijkheden";
     }
 
@@ -56,17 +54,11 @@ public class OptieController {
             return "addkeuzemogelijkheden";
         }
         try {
-            Organisatie actieveOrganisatie = organisatieService.getOrganisatieByEmail(principal.getName());
-            List<Optie> opties = actieveOrganisatie.getOpties();
-
-            if (opties == null || opties.size() < 1) {
-                opties = new ArrayList<>();
-                opties.add(optie); // of toch niet...
-                actieveOrganisatie.setOpties(opties);
-                optie.setOrganisatie(actieveOrganisatie);
-            }
-
+            Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
             optieService.saveOrUpdate(optie);
+            List<Optie> opties = new ArrayList<>();
+            opties.add(optie);
+            organisatie.setOpties(opties);
         }catch (DataIntegrityViolationException e) {
             if (e.getMessage().contains("optie_unique")) {
                 bindingResult.rejectValue("optie","optie-unique",e.getMessage());
@@ -85,9 +77,9 @@ public class OptieController {
         return "redirect:/keuzemogelijheden";
     }
 
-    @GetMapping("/instellingen/keuzemogelijkheden/edit/{idOptie}")
-    public String edit(@PathVariable int idOptie, Model model) {
-        Optie optie = optieService.getById(idOptie);
+    @GetMapping("/instellingen/keuzemogelijkheden/edit/{id}")
+    public String edit(@PathVariable int id, Model model) {
+        Optie optie = optieService.getById(id);
         if (optie == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
@@ -95,13 +87,13 @@ public class OptieController {
         return "fragments/keuzemogelijkheden";
     }
 
-    @GetMapping("/instellingen/keuzemogelijkheden/delete/{idOptie}")
-    public String delete(@PathVariable int idOptie){
-        Optie optie = optieService.getById(idOptie);
+    @GetMapping("/instellingen/keuzemogelijkheden/delete/{id}")
+    public String delete(@PathVariable int id){
+        Optie optie = optieService.getById(id);
         if (optie == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
-        optieService.delete(idOptie);
+        optieService.delete(id);
         return "redirect:/keuzemogelijkheden";
     }
 }

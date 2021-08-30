@@ -55,9 +55,6 @@ public class Organisatie {
     @Column(name = "street")
     private String straat;
 
-
-    //@Nullable
-    //@JoinColumn(name = "id_optie")
     @OneToMany(mappedBy = "organisatie")
     private List<Optie> opties;
 }

@@ -23,11 +23,10 @@ public class Optie {
     @NotBlank(message = "{org.blank}")
     private String title;
 
+    @NotNull
     private int duurOptie;
 
-
-  //  @MapsId
-    @JoinColumn(name = "organisatie_id")
     @ManyToOne
+    @JoinColumn(name = "organisatie_id")
     private Organisatie organisatie;
 }

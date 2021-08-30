@@ -48,7 +48,7 @@ public class OptieServiceImpl implements OptieService {
     }
 
     @Override
-    public Optie getOptieByOrganisation(Organisatie organisatie) {
+    public List<Optie> getOptiesByOrganisation(Organisatie organisatie) {
         return optieRepository.getOptieByOrganisatie(organisatie);
     }
 

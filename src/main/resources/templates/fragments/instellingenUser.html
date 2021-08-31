@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment = "instellingen (title)">
+<head th:fragment = "instellingenUser (title)">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Instellingen</title>
@@ -8,10 +8,10 @@
   <link href="/css/static.css" rel="stylesheet">
 </head>
 <body class="text-center">
-<div class="registreer" th:fragment="instellingen">
+<div class="registreer" th:fragment="instellingenUser">
 
   <main class="form-signin">
-    <form action="#" th:action="@{/instellingen}" th:object="${organisatie}" method="post">
+    <form action="#" th:action="@{/instellingen}" th:object="${user}" method="post">
       <h1 class="h3 mb-3 fw-normal">Algemene Instellingen</h1>
 
       <style>
@@ -42,34 +42,22 @@
         <label for="floatingPassword">herhaal wachtwoord</label>
       </div>
 
-      <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('BedrijfsNaam')}" th:errors="*{bedrijfsNaam}"></div>
+      <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('familyNaam')}" th:errors="*{familyNaam}"></div>
       <div class="form-floating">
-        <input type="text" class="form-control" id="BedrijfsNaam" placeholder="BedrijfsNaam" th:field="*{bedrijfsNaam}" >
-        <label for="floatingInput">BedrijfsNaam</label>
+        <input type="text" class="form-control" id="familyNaam" placeholder="familyNaam" th:field="*{familyNaam}" >
+        <label for="floatingInput">FamilyNaam</label>
       </div>
 
-      <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('PaginaNaam')}" th:errors="*{paginaNaam}"></div>
+      <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('naam')}" th:errors="*{naam}"></div>
       <div class="form-floating">
-        <input type="text" class="form-control" id="PaginaNaam" placeholder="PaginaNaam" th:field="*{paginaNaam}" >
-        <label for="floatingInput">PaginaNaam</label>
+        <input type="text" class="form-control" id="naam" placeholder="Naam" th:field="*{naam}" >
+        <label for="floatingInput">Naam</label>
       </div>
 
-      <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('PostCode')}" th:errors="*{postCode}"></div>
+      <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('gsmNummer')}" th:errors="*{gsmNummer}"></div>
       <div class="form-floating">
-        <input type="number" class="form-control" id="PostCode" placeholder="PostCode" th:field="*{postCode}" >
-        <label for="floatingInput">PostCode</label>
-      </div>
-
-      <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('Gemeente')}" th:errors="*{gemeente}"></div>
-      <div class="form-floating">
-        <input type="text" class="form-control" id="Gemeente" placeholder="Gemeente" th:field="*{gemeente}" >
-        <label for="floatingInput">Gemeente</label>
-      </div>
-
-      <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('Straat')}" th:errors="*{straat}"></div>
-      <div class="form-floating">
-        <input type="text" class="form-control" id="Straat" placeholder="Straat" th:field="*{straat}" >
-        <label for="floatingInput">Straat</label>
+        <input type="number" class="form-control" id="gsmNummer" placeholder="GsmNummer" th:field="*{gsmNummer}" >
+        <label for="floatingInput">GsmNummer</label>
       </div>
 
       <button class="w-100 btn btn-lg btn-primary" type="submit" style="text-decoration: none; color:#FFFFFF; background: #F00909;">Bewaren</button>

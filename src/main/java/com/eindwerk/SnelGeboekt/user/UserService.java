@@ -22,7 +22,6 @@ public interface UserService {
     @PreAuthorize("isAuthenticated()")
     User getUserByEmail(String email);
 
-
     User findUser(String needle);
 
     List<User> getAll();

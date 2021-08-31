@@ -1,6 +1,7 @@
 package com.eindwerk.SnelGeboekt.notification;
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
+import com.eindwerk.SnelGeboekt.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,15 +18,27 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void sendAccountRegistration(Organisatie organisatie) {
+    public void sendAccountRegistrationOrganisatie(Organisatie organisatie) {
 
-            sendSimpleMessage(organisatie.getEmail(), "Account registration successfully!","this is an automatic mail to Verify that you successfully created your account on www.SnelGeboekt.be");
+        sendSimpleMessage(organisatie.getEmail(), "Account registration successfully!","this is an automatic mail to Verify that you successfully created your account on www.SnelGeboekt.be");
     }
 
     @Override
-    public void sendAccountUpdate(Organisatie organisatie) {
+    public void sendAccountUpdateOrganisatie(Organisatie organisatie) {
 
         sendSimpleMessage(organisatie.getEmail(), "Account Update successfully!","this is an automatic mail to Verify that you successfully updated your account details");
+    }
+
+    @Override
+    public void sendAccountRegistrationUser(User user) {
+
+        sendSimpleMessage(user.getEmail(), "Account registration successfully!","this is an automatic mail to Verify that you successfully created your account on www.SnelGeboekt.be");
+    }
+
+    @Override
+    public void sendAccountUpdateUser(User user) {
+
+        sendSimpleMessage(user.getEmail(), "Account Update successfully!","this is an automatic mail to Verify that you successfully updated your account details");
     }
 
 

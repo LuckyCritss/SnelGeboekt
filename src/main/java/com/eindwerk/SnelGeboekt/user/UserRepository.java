@@ -10,13 +10,13 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("SELECT u from User u Where u.email = :email")
-    public User getUserByEmail(@Param("email") String email);
+    User getUserByEmail(@Param("email") String email);
 
     @Override
     @Query("SELECT u from User u")
-    public List<User> findAll();
+    List<User> findAll();
 
-    public User getUserById(Integer integer);
+    User getUserById(Integer integer);
 
 }
 

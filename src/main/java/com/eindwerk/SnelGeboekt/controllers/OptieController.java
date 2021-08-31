@@ -37,15 +37,21 @@ public class OptieController {
 
     @GetMapping("/instellingen/keuzemogelijkheden")
     public String keuzemogelijkhedenHandler(Principal principal, Model model) {
-        List<Optie> opties = optieService.getOptiesByOrganisation(organisatieService.getOrganisatieByEmail(principal.getName()));
-        model.addAttribute("opties", opties);
-        return "keuzemogelijkheden";
+        if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
+            List<Optie> opties = optieService.getOptiesByOrganisation(organisatieService.getOrganisatieByEmail(principal.getName()));
+            model.addAttribute("opties", opties);
+            return "keuzemogelijkheden";
+        }
+        return "redirect:/instellingen";
     }
 
     @GetMapping("/instellingen/keuzemogelijkheden/add")
-    public String add(Model model) {
-        model.addAttribute("optie", new Optie());
-        return "addkeuzemogelijkheden";
+    public String add(Model model,Principal principal) {
+        if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
+            model.addAttribute("optie", new Optie());
+            return "addkeuzemogelijkheden";
+        }
+        return "redirect:/instellingen";
     }
 
     @PostMapping("/instellingen/keuzemogelijkheden/add")
@@ -55,10 +61,8 @@ public class OptieController {
         }
         try {
             Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
+            optie.setOrganisatie(organisatie);
             optieService.saveOrUpdate(optie);
-            List<Optie> opties = new ArrayList<>();
-            opties.add(optie);
-            organisatie.setOpties(opties);
         }catch (DataIntegrityViolationException e) {
             if (e.getMessage().contains("optie_unique")) {
                 bindingResult.rejectValue("optie","optie-unique",e.getMessage());

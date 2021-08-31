@@ -1,6 +1,5 @@
 package com.eindwerk.SnelGeboekt.organisatie;
 
-import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

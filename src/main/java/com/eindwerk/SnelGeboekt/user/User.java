@@ -20,24 +20,25 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Size(min = 2, message = "{user.familyNaam}")
+    @Column(name = "family_name")
+    private String familyNaam;
+
+    @Column(name = "name")
+    @Size(min = 2, message = "{user.naam}")
+    private String naam;
+
+
+    @Column(name = "gsm_number")
+    @Size(min = 10, max = 12,message = "{user.gsmNummer}")
+    private String gsmNummer;
+
     @NotBlank(message = "{user.blank}")
     @Size(min = 5, message = "{user.wachtWoord}")
     @Column(name = "password")
     private String wachtWoord;
 
     @Transient
-    private String wachtWoordCheck;
-
-    @Column(name = "name")
-    @Size(min = 2, message = "{user.naam}")
-    private String naam;
-
-    @Size(min = 2, message = "{user.familyNaam}")
-    @Column(name = "familyName")
-    private String familyNaam;
-
-    @Column(name = "phoneNumber")
-    @Size(min = 10, max = 12,message = "{user.gsmNummer}")
-    private String gsmNummer;
+    private String checkWachtWoord;
 
 }

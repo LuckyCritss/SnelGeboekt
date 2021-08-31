@@ -29,9 +29,6 @@ public interface OrganisatieService {
 
     void save(Organisatie organisatie) throws PasswordException, PasswordMisMatchException;
 
-    // keuzemogelijkheden
-    public  Organisatie getNewOrganisatie();
-
-    public Organisatie getById(int id);
+    Organisatie getById(int id);
 
 }

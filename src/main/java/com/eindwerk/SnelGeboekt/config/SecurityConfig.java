@@ -32,11 +32,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("Admin")
                 .password("{noop}admin")
                 .roles("ADMIN");
+
         auth
                 .jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery("select email,password,(true) as enabled from organisations where email=?")
                 .authoritiesByUsernameQuery("select email,('admin') as role from organisations where email=?");
+        auth
+                .jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select email,password,(true) as enabled from users where email=?")
+                .authoritiesByUsernameQuery("select email,('user') as role from users where email=?");
     }
 
     @Override

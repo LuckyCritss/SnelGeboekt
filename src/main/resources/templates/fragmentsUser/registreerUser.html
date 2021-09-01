@@ -25,15 +25,15 @@
 
             <input type="hidden"  th:field="*{id}">
 
-            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('naam')}" th:errors="*{naam}"></div>
+            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('FamilyNaam')}" th:errors="*{FamilyNaam}"></div>
             <div class="form-floating">
-                <input type="text" class="form-control" id="naam" placeholder="naam" th:field="*{naam}" >
-                <label for="floatingInput">Naam</label>
+                <input type="text" class="form-control" id="FamilyNaam" placeholder="FamilyNaam" th:field="*{FamilyNaam}" >
+                <label for="floatingInput">FamilyNaam</label>
             </div>
-            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('voorNaam')}" th:errors="*{voorNaam}"></div>
+            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('Naam')}" th:errors="*{Naam}"></div>
             <div class="form-floating">
-                <input type="text" class="form-control" id="voorNaam" placeholder="voorNaam" th:field="*{voorNaam}" >
-                <label for="floatingInput">Vooraam</label>
+                <input type="text" class="form-control" id="voorNaam" placeholder="voorNaam" th:field="*{Naam}" >
+                <label for="floatingInput">naam</label>
             </div>
 
             <div class="mb-1 alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
@@ -75,7 +75,7 @@
 
             <button class="w-100 btn btn-lg btn-primary" type="submit" style="text-decoration: none; color:#FFFFFF; background: #F00909;">Account Aanmaken</button>
             <p class="mt-3 text-muted">
-                <a th:href="@{/login}" href="#">login met een bestaand account</a>
+                <a th:href="@{/loginUser}" href="#">login met een bestaand account</a>
             </p>
         </form>
     </main>

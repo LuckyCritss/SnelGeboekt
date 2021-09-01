@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
       xmlns:https="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Instellingen</title>
+  <title>Home</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
   <link href="/css/static.css" rel="stylesheet">
 </head>
@@ -11,11 +11,11 @@
 <div class="container-fluid">
   <div class="row">
 
-    <div th:replace="fragments/headL :: headL (title)"></div>
+    <div th:replace="fragmentsUser/headUser :: headUser (title)"></div>
 
-    <div th:replace="fragments/instellingenUser :: instellingenUser (title)"></div>
+    <div th:replace="fragmentsUser/reclameUser :: reclameUser (title)"></div>
 
-    <div th:replace="fragments/feed :: feed (title)"></div>
+    <div th:replace="fragmentsUser/feedUser :: feedUser (title)"></div>
   </div>
 </div>
 </body>

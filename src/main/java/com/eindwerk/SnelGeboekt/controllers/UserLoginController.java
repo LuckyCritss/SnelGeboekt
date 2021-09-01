@@ -22,15 +22,15 @@ public class UserLoginController {
         this.authenticationManager = authenticationManager;
 }
 
-    @GetMapping("/userLogin")
+    @GetMapping("/templatesUser/loginUser")
     public String rootHandler(Principal principal ,HttpServletRequest request) {
         if (principal == null ) {
             //authWithAuthManager(request, "admin", "admin");
         }
         if (principal != null) {
-            return ("redirect:/registreerUser");
+            return ("redirect:/templatesUser/registreerUser");
         }
-        return ("userLogin");
+        return ("loginUser");
     }
     public void authWithAuthManager(HttpServletRequest request, String email, String password) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password);

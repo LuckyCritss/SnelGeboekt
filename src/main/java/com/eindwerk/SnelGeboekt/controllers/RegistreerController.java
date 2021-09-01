@@ -72,7 +72,7 @@ public class RegistreerController {
             }
             return "registreer";
         }
-        notificationService.sendAccountRegistration(organisatie);
+        notificationService.sendAccountRegistrationOrganisatie(organisatie);
         authWithAuthManager(request, organisatie.getEmail(),organisatie.getWachtWoord());
         return "redirect:/instellingen";
     }

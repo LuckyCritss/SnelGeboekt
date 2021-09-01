@@ -1,9 +1,10 @@
 package com.eindwerk.SnelGeboekt.controllers;
 
-import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
 import com.eindwerk.SnelGeboekt.notification.NotificationService;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
+import com.eindwerk.SnelGeboekt.user.User;
+import com.eindwerk.SnelGeboekt.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -15,13 +16,20 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Arrays;
 
 @Controller
 public class InstellingenController {
 
+    private UserService userService;
     private OrganisatieService organisatieService;
     private NotificationService notificationService;
-    private OptieService optieService;
+    private BindingResult bindingResult;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Autowired
     public void setOrganisatieService(OrganisatieService organisatieService){
@@ -33,52 +41,74 @@ public class InstellingenController {
         this.notificationService = notificationService;
     }
 
-    @Autowired
-    public void setOptieService(OptieService optieService) {
-        this.optieService = optieService;
-    }
     @GetMapping("/instellingen")
     public String rootHandler(Principal principal, Model model) {
-        Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
-        model.addAttribute("organisatie", organisatie);
-        return ("instellingen");
+        if(userService.getUserByEmail(principal.getName()) != null){
+            User user = userService.getUserByEmail(principal.getName());
+            model.addAttribute("user", user);
+            return ("instellingenUser");
+        }
+        if(organisatieService.getOrganisatieByEmail(principal.getName()) != null ){
+            Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
+            model.addAttribute("organisatie", organisatie);
+            return ("instellingenOrg");
+        }
+        return "redirect:/login";
     }
 
     @PostMapping("/instellingen")
-    public String processForm(@Valid @ModelAttribute Organisatie organisatie, BindingResult bindingResult) {
+    public String processForm(@Valid @ModelAttribute User user, @Valid @ModelAttribute Organisatie organisatie, Principal principal, BindingResult bindingResult) {
+        if(userService.getUserByEmail(principal.getName()) != null){
+            userForm(user, bindingResult);
+        }
+        if(organisatieService.getOrganisatieByEmail(principal.getName()) != null ){
+            organisatieForm(organisatie, bindingResult);
+        }
+        return "redirect:/login";
+    }
+
+    public String organisatieForm(@Valid @ModelAttribute Organisatie organisatie, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "instellingen";
+            return "instellingenOrg";
         }
         try {
             organisatieService.save(organisatie);
         } catch (OrganisatieService.PasswordException e) {
-            bindingResult.rejectValue("wachtWoord","user.wachtWoord",e.getMessage());
-            return "instellingen";
+            bindingResult.rejectValue("wachtWoord","org.wachtWoord",e.getMessage());
+            return "instellingenOrg";
         } catch (OrganisatieService.PasswordMisMatchException e) {
             bindingResult.rejectValue("wachtWoord","password-mismatch",e.getMessage());
-            return "instellingen";
+            return "instellingenOrg";
+        } catch (DataIntegrityViolationException e) {
+            if (e.getMessage().contains("email_unique")) {
+                bindingResult.rejectValue("email","org.email-unique",e.getMessage());
+            }
+            return "instellingenOrg";
+        }
+        notificationService.sendAccountUpdateOrganisatie(organisatie);
+        return "redirect:/instellingen";
+    }
+
+    public String userForm(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "instellingenUser";
+        }
+        try {
+            userService.save(user);
+        } catch (UserService.PasswordException e) {
+            bindingResult.rejectValue("wachtWoord","user.wachtWoord",e.getMessage());
+            return "instellingenUser";
+        } catch (UserService.PasswordMisMatchException e) {
+            bindingResult.rejectValue("wachtWoord","password-mismatch",e.getMessage());
+            return "instellingenUser";
         } catch (DataIntegrityViolationException e) {
             if (e.getMessage().contains("email_unique")) {
                 bindingResult.rejectValue("email","user.email-unique",e.getMessage());
             }
-            return "instellingen";
+            return "instellingenUser";
         }
-        notificationService.sendAccountUpdate(organisatie);
+        notificationService.sendAccountUpdateUser(user);
         return "redirect:/instellingen";
-    }
-
-    @GetMapping("/instellingen/agenda")
-    public String agendaHandler(Principal principal, Model model) {
-        Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
-        model.addAttribute("organisatie", organisatie);
-        return ("kalender");
-    }
-
-    @GetMapping("/instellingen/tijdslot")
-    public String tijdslotnHandler(Principal principal, Model model) {
-        Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
-        model.addAttribute("organisatie", organisatie);
-        return ("tijdslot");
     }
 
     @InitBinder

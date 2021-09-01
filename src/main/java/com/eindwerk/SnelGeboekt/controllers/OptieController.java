@@ -37,16 +37,21 @@ public class OptieController {
 
     @GetMapping("/instellingen/keuzemogelijkheden")
     public String keuzemogelijkhedenHandler(Principal principal, Model model) {
-        List<Optie> opties = optieService.getOptiesByOrganisation(organisatieService.getOrganisatieByEmail(principal.getName()));
-        model.addAttribute("opties", opties);
-        return "keuzemogelijkheden";
+        if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
+            List<Optie> opties = optieService.getOptiesByOrganisation(organisatieService.getOrganisatieByEmail(principal.getName()));
+            model.addAttribute("opties", opties);
+            return "keuzemogelijkheden";
+        }
+        return "redirect:/instellingen";
     }
 
     @GetMapping("/instellingen/keuzemogelijkheden/add")
-    public String add(Model model) {
-        List<Optie> opties = new ArrayList<>();
-        model.addAttribute("optie", new Optie());
-        return "addkeuzemogelijkheden";
+    public String add(Model model,Principal principal) {
+        if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
+            model.addAttribute("optie", new Optie());
+            return "addkeuzemogelijkheden";
+        }
+        return "redirect:/instellingen";
     }
 
     @PostMapping("/instellingen/keuzemogelijkheden/add")
@@ -55,12 +60,8 @@ public class OptieController {
             return "addkeuzemogelijkheden";
         }
         try {
-            Organisatie actieveOrganisatie = organisatieService.getOrganisatieByEmail(principal.getName());
-            List<Optie> opties = actieveOrganisatie.getOpties();
-            opties.add(optie);
-            actieveOrganisatie.setOpties(opties);
-            optie.setOrganisatie(actieveOrganisatie);
-            optie.getId();
+            Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
+            optie.setOrganisatie(organisatie);
             optieService.saveOrUpdate(optie);
         }catch (DataIntegrityViolationException e) {
             if (e.getMessage().contains("optie_unique")) {

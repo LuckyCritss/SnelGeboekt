@@ -19,7 +19,7 @@ public class UserServiceImpl implements  UserService{
 
     @Override
     public User getUserByEmail(String email) {
-        return null;
+        return userRepository.getUserByEmail(email);
     }
 
     @Override
@@ -37,13 +37,22 @@ public class UserServiceImpl implements  UserService{
     }
 
     @Override
-    public void save(User user) throws UserService.PasswordMisMatchException {
-
-
-        if (!user.getWachtWoord().equals(user.getWachtWoordCheck()) ) {
+    public void save(User user) throws UserService.PasswordException, UserService.PasswordMisMatchException {
+        if (user.getWachtWoord() != null && user.getWachtWoord().length() < 5) {
+            throw new UserService.PasswordException("password malformed");
+        }
+        if (user.getWachtWoord() == null && user.getId() == 0) {
+            throw new UserService.PasswordException("password malformed");
+        }
+        if (user.getWachtWoord().length() > 4 && !user.getWachtWoord().equals(user.getCheckWachtWoord()) ) {
             throw new UserService.PasswordMisMatchException("password mismatch");
         }
-        user.setWachtWoord(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(user.getWachtWoord()));
+
+        if (user.getWachtWoord() == null && user.getId() > 0) {
+            user.setWachtWoord(userRepository.findById(user.getId()).get().getWachtWoord());
+        } else {
+            user.setWachtWoord(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(user.getWachtWoord()));
+        }
         userRepository.save(user);
     }
 }

@@ -22,7 +22,7 @@ public class UserLoginController {
         this.authenticationManager = authenticationManager;
 }
 
-    @GetMapping("/templatesUser/loginUser")
+    @GetMapping("/loginUser")
     public String rootHandler(Principal principal ,HttpServletRequest request) {
         if (principal == null ) {
             //authWithAuthManager(request, "admin", "admin");
@@ -30,7 +30,7 @@ public class UserLoginController {
         if (principal != null) {
             return ("redirect:/templatesUser/registreerUser");
         }
-        return ("loginUser");
+        return ("/templatesUser/loginUser");
     }
     public void authWithAuthManager(HttpServletRequest request, String email, String password) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password);

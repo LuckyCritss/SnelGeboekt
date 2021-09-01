@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:https="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Registreer</title>
+</head>
+
+<body>
+<div class="container-fluid">
+  <div class="row">
+
+    <div th:replace="fragmentsUser/headUser :: headUser (title)"></div>
+
+    <div th:replace="fragmentsUser/registreerUser :: registreerUser (title)"></div>
+
+    <div th:replace="fragmentsUser/feedUser :: feedUser (title)"></div>
+  </div>
+</div>
+</body>
+
+</html>

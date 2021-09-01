@@ -44,6 +44,7 @@ public class OptieController {
 
     @GetMapping("/instellingen/keuzemogelijkheden/add")
     public String add(Model model) {
+        List<Optie> opties = new ArrayList<>();
         model.addAttribute("optie", new Optie());
         return "addkeuzemogelijkheden";
     }
@@ -54,11 +55,13 @@ public class OptieController {
             return "addkeuzemogelijkheden";
         }
         try {
-            Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
-            optieService.saveOrUpdate(optie);
-            List<Optie> opties = new ArrayList<>();
+            Organisatie actieveOrganisatie = organisatieService.getOrganisatieByEmail(principal.getName());
+            List<Optie> opties = actieveOrganisatie.getOpties();
             opties.add(optie);
-            organisatie.setOpties(opties);
+            actieveOrganisatie.setOpties(opties);
+            optie.setOrganisatie(actieveOrganisatie);
+            optie.getId();
+            optieService.saveOrUpdate(optie);
         }catch (DataIntegrityViolationException e) {
             if (e.getMessage().contains("optie_unique")) {
                 bindingResult.rejectValue("optie","optie-unique",e.getMessage());

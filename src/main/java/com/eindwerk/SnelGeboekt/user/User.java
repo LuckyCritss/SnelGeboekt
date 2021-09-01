@@ -32,11 +32,11 @@ public class User {
     @Size(min = 2, message = "{user.naam}")
     private String naam;
 
-    @Size(min = 2, message = "{user.familyNaam}")
-    @Column(name = "familyName")
-    private String familyNaam;
+    @Size(min = 2, message = "{user.voorNaam}")
+    @Column(name = "voorName")
+    private String voorNaam;
 
-    @Column(name = "phoneNumber")
+    @Column(name = "gsmNummer")
     @Size(min = 10, max = 12,message = "{user.gsmNummer}")
     private String gsmNummer;
 

@@ -28,5 +28,7 @@ public class Optie {
 
     @ManyToOne
     @JoinColumn(name = "organisatie_id")
-    private Organisatie organisatie;
+ //   @MapsId
+    Organisatie organisatie;
+
 }

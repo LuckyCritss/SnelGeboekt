@@ -33,7 +33,7 @@
                     <div class="mb-3">
                         <label>Duur Keuzemogelijkheid</label>
                         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('duurOptie')}" th:errors="*{duurOptie}"></div>
-                        <input type="number" class="form-control" th:field="*{duurOptie}">
+                        <input type="text" class="form-control" th:field="*{duurOptie}">
                     </div>
 
                     <p>

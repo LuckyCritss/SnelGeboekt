@@ -19,14 +19,14 @@
       <div class="row">
         <div class="col-md-8 offset-md-2">
 
-          <form class="card p-3 bg-light" action="#" th:action="@{/fragments/tijdslot}" th:object="${tijdsloten}" method="post">
+          <form class="card p-3 bg-light" action="#" th:action="@{/fragments/tijdslot/}" th:object="${tijdslot}" method="post">
             <fieldset>
 
               <div class="openinghourscontent section">
 
                   <h3>OpeningsTijden</h3>
 
-                <div class="row"  th:if="${!tijdsloten.empty}">
+                <div class="row"  >
                   <table class="table table-hover">
                     <thead>
                     <tr>
@@ -38,7 +38,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="tijdslot : ${tijdsloten}">
+                    <tr th:each="tijdslot : ${tijdslot}">
                       <td th:text="${tijdsloten.day.displayName}"></td>
                       <td th:text="${tijdsloten.start}"></td>
                       <td th:text="${tijdsloten.einde}"></td>
@@ -54,7 +54,7 @@
 
 
 
-                <div class="alert alert-primary" role="alert" th:if="${timeranges.empty}">
+                <div class="alert alert-primary" role="alert">
                   Nothing available
                 </div>
 

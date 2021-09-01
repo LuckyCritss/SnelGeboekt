@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalTime;
+import javax.validation.constraints.NotNull;
+
 
 @Entity
 @Getter
@@ -13,15 +14,31 @@ import java.time.LocalTime;
 @Table(name = "tijdsloten")
 public class Tijdsloten {
 
+    public enum Day {
+        SUN("Zondag"), MON("Maandag"), TUE("Dinsdag"), WED("Woensdag"), THU("Donderdag"), FRI("Vrijdag"), SAT("Zaterdag");
+
+        private final String displayName;
+
+        Day(String displayName) {
+            this.displayName = displayName;
+        }
+
+        public String getDisplayName() {
+            return displayName;
+        }
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private LocalTime van;
+    @NotNull(message = "value mismatch")
+    private Day dag = Day.SUN;
 
-    private LocalTime tot;
+    private String start;
 
-    private boolean open;
+    private String einde;
 
     @OneToOne(cascade = CascadeType.ALL)
     @MapsId

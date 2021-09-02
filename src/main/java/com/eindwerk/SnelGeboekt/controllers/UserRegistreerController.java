@@ -46,34 +46,34 @@ public class UserRegistreerController {
         this.notificationService = notificationService;
     }
 
-    @GetMapping("/templatesUser/registreerUser")
+    @GetMapping("/templatesUser/reservatie_optie")
     public String rootHandler(Principal principal, Model model) {
         if (principal != null) {
             return ("redirect:/instellingen");
         }
         User user = new User();
         model.addAttribute("user", user);
-        return ("/fragmentsUser/registreerUser");
+           return "/templatesUser/reservatie_optie";
     }
 
-    @PostMapping("/templatesUser/registreerUser")
+    @PostMapping("/templatesUser/reservatie_optie")
     public String processForm(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
-            return "/fragmentsUser/registreerUser";
+            return "/templatesUser/reservatie_optie";
         }
         try {
             userService.save(user);
         } catch (UserService.PasswordException e) {
             bindingResult.rejectValue("wachtWoord","user.wachtWoord",e.getMessage());
-            return "/fragmentsUser/registreerUser";
+            return "/templatesUser/reservatie_optie";
         } catch (UserService.PasswordMisMatchException e) {
             bindingResult.rejectValue("wachtWoord","password-mismatch",e.getMessage());
-            return "/fragmentsUser/registreerUser";
+            return "/templatesUser/reservatie_optie";
         } catch (DataIntegrityViolationException e) {
             if (e.getMessage().contains("email_unique")) {
                 bindingResult.rejectValue("email","user.email-unique",e.getMessage());
             }
-            return "/fragmentsUser/registreerUser";
+            return "/templatesUser/reservatie_optie";
         }
         notificationService.sendAccountRegistrationUser(user);
         authWithAuthManager(request, user.getEmail(),user.getWachtWoord());

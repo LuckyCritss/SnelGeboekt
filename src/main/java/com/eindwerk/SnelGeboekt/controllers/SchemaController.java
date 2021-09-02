@@ -1,6 +1,7 @@
-package com.eindwerk.SnelGeboekt.tijdsloten;
+package com.eindwerk.SnelGeboekt.controllers;
 
 
+import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.TijdslotenRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SchemaController {
 
     private final TijdslotenRepository tijdslotenRepository;
-
 
     public SchemaController(TijdslotenRepository tijdslotenRepository) {
         this.tijdslotenRepository = tijdslotenRepository;

@@ -1,8 +1,8 @@
 package com.eindwerk.SnelGeboekt.controllers;
 
 import com.eindwerk.SnelGeboekt.notification.NotificationService;
-import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
-import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
+import com.eindwerk.SnelGeboekt.user.User;
+import com.eindwerk.SnelGeboekt.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -27,7 +27,7 @@ import java.security.Principal;
 @Controller
 public class UserRegistreerController {
 
-    private OrganisatieService organisatieService;
+    private UserService userService;
     private AuthenticationManager authenticationManager;
     private NotificationService notificationService;
 
@@ -37,8 +37,8 @@ public class UserRegistreerController {
     }
 
     @Autowired
-    public void setOrganisatieService(OrganisatieService organisatieService) {
-        this.organisatieService = organisatieService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
     @Autowired
@@ -51,22 +51,22 @@ public class UserRegistreerController {
         if (principal != null) {
             return ("redirect:/instellingen");
         }
-        Organisatie organisatie = new Organisatie();
-        model.addAttribute("organisatie", organisatie);
+        User user = new User();
+        model.addAttribute("user", user);
         return ("/fragmentsUser/registreerUser");
     }
 
     @PostMapping("/templatesUser/registreerUser")
-    public String processForm(@Valid @ModelAttribute Organisatie organisatie, BindingResult bindingResult, HttpServletRequest request) {
+    public String processForm(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             return "/fragmentsUser/registreerUser";
         }
         try {
-            organisatieService.save(organisatie);
-        } catch (OrganisatieService.PasswordException e) {
+            userService.save(user);
+        } catch (UserService.PasswordException e) {
             bindingResult.rejectValue("wachtWoord","user.wachtWoord",e.getMessage());
             return "/fragmentsUser/registreerUser";
-        } catch (OrganisatieService.PasswordMisMatchException e) {
+        } catch (UserService.PasswordMisMatchException e) {
             bindingResult.rejectValue("wachtWoord","password-mismatch",e.getMessage());
             return "/fragmentsUser/registreerUser";
         } catch (DataIntegrityViolationException e) {
@@ -75,8 +75,8 @@ public class UserRegistreerController {
             }
             return "/fragmentsUser/registreerUser";
         }
-        notificationService.sendAccountRegistrationOrganisatie(organisatie);
-        authWithAuthManager(request, organisatie.getEmail(),organisatie.getWachtWoord());
+        notificationService.sendAccountRegistrationUser(user);
+        authWithAuthManager(request, user.getEmail(),user.getWachtWoord());
         return "redirect:/instellingen";
     }
 

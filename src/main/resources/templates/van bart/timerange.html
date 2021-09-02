@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <title>Spring Travel - Tours</title>
+</head>
+<body>
+<div class="container">
+  <div class="pb-2 mt-4 mb-4 border-bottom">
+    <h2>Timerange</h2>
+  </div>
+
+  <div class="row"  th:if="${!timeranges.empty}">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">Day</th>
+        <th scope="col">Start</th>
+        <th scope="col">End</th>
+        <th scope="col">Action</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="timeRange : ${timeranges}">
+        <td th:text="${timeRange.day.displayName}"></td>
+        <td th:text="${timeRange.start}"></td>
+        <td th:text="${timeRange.end}"></td>
+        <td>
+          <a class="btn btn-sm btn-primary" th:href="@{/tour/edit/} + ${timeRange.id}">Edit</a>
+          <a class="btn btn-sm btn-danger"  th:href="@{/tour/delete/} + ${timeRange.id}">Delete</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+  <div class="alert alert-primary" role="alert" th:if="${timeranges.empty}">
+    Nothing available
+  </div>
+
+
+  <a class="btn btn-primary" th:href="@{/}">&#8592;&nbsp;Home</a>
+  <a class="btn btn-primary" th:href="@{/tour/add}">&#43;</a>
+
+</div>
+</body>
+</html>

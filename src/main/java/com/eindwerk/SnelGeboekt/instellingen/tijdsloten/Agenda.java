@@ -1,4 +1,4 @@
-package com.eindwerk.SnelGeboekt.tijdsloten;
+package com.eindwerk.SnelGeboekt.instellingen.tijdsloten;
 
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
@@ -6,20 +6,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "schema's")
-
-public class Schema {
+@Table(name = "agenda")
+public class Agenda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String schemaNaam;
+    private String agendaNaam;
 
     @ManyToOne
     @JoinColumn(name = "organisatie_id")

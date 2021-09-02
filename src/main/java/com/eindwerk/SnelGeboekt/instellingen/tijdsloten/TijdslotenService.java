@@ -1,6 +1,4 @@
-package com.eindwerk.SnelGeboekt.tijdsloten;
-
-
+package com.eindwerk.SnelGeboekt.instellingen.tijdsloten;
 
 import java.util.List;
 

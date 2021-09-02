@@ -1,4 +1,4 @@
-package com.eindwerk.SnelGeboekt.tijdsloten;
+package com.eindwerk.SnelGeboekt.instellingen.tijdsloten;
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import lombok.Getter;

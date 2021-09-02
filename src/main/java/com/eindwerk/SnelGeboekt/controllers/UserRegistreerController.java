@@ -77,7 +77,7 @@ public class UserRegistreerController {
         }
         notificationService.sendAccountRegistrationUser(user);
         authWithAuthManager(request, user.getEmail(),user.getWachtWoord());
-        return "redirect:/instellingen";
+        return "redirect:/templatesUser/instellingenUser";
     }
 
     @InitBinder

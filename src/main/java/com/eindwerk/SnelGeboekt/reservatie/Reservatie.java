@@ -1,4 +1,4 @@
-package com.eindwerk.SnelGeboekt.VanBart.bookingwidget;
+package com.eindwerk.SnelGeboekt.reservatie;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import org.springframework.web.context.WebApplicationContext;
 @Getter
 @Component
 @Scope(proxyMode= ScopedProxyMode.TARGET_CLASS, value = WebApplicationContext.SCOPE_SESSION)
-public class Booking {
+public class Reservatie {
     private String slug;
     private StepOneData stepOneData;
     private StepTwoData stepTwoData;

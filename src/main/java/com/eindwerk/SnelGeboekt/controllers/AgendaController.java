@@ -1,10 +1,7 @@
 package com.eindwerk.SnelGeboekt.controllers;
 
-import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
-import com.eindwerk.SnelGeboekt.notification.NotificationService;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
-import com.eindwerk.SnelGeboekt.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -19,28 +16,10 @@ import java.security.Principal;
 public class AgendaController {
 
     private OrganisatieService organisatieService;
-    private UserService userService;
-    private NotificationService notificationService;
-    private OptieService optieService;
 
     @Autowired
     public void setOrganisatieService(OrganisatieService organisatieService){
         this.organisatieService = organisatieService;
-    }
-
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    @Autowired
-    public void setNotificationService(NotificationService notificationService) {
-        this.notificationService = notificationService;
-    }
-
-    @Autowired
-    public void setOptieService(OptieService optieService) {
-        this.optieService = optieService;
     }
 
     @GetMapping("/instellingen/agenda")

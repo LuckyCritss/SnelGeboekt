@@ -1,15 +1,14 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
       xmlns:https="http://www.w3.org/1999/xhtml">
-<head th:replace="snelgeboekt/fragments/booking/head :: head ('Home')">
+<head th:replace="fragmentsReservatie/headres :: headres ('Booking')">
 </head>
 <body>
 <div id="main" class="container">
     <div class="row wrapper">
         <div id="book-appointment-wizard" class="col-12 col-lg-10 col-xl-8">
-            <div th:replace="snelgeboekt/fragments/booking/header1"></div>
-            <div th:replace="snelgeboekt/fragments/booking/step1"></div>
-
+            <div th:replace="fragmentsReservatie/header2"></div>
+            <div th:replace="fragmentsReservatie/step2"></div>
         </div>
     </div>
 </div>

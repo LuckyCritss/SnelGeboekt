@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/instellingen/**").authenticated()
-                .antMatchers("/**", "/login", "/registreer" ).permitAll()
+                .antMatchers("/**", "/login", "/registreer", "/reservatie/**" ).permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")

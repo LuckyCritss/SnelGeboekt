@@ -28,7 +28,6 @@ public class Optie {
 
     @ManyToOne
     @JoinColumn(name = "organisatie_id")
- //   @MapsId
     Organisatie organisatie;
 
 }

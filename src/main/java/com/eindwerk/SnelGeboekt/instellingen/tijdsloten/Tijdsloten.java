@@ -3,10 +3,8 @@ package com.eindwerk.SnelGeboekt.instellingen.tijdsloten;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
 
 @Entity
 @Getter
@@ -40,10 +38,9 @@ public class Tijdsloten {
 
     private String einde;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @MapsId
-    @JoinColumn(name = "id")
-    Organisatie organisatie;
+    @ManyToOne
+    @JoinColumn(name = "agenda_id")
+    Agenda agenda;
 
 
 

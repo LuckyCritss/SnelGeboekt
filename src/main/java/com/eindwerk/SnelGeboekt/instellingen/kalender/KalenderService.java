@@ -5,7 +5,4 @@ import java.util.List;
 public interface KalenderService {
 
     public List<Kalender> getAll();
-
-
-
 }

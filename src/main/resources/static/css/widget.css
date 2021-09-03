@@ -1,0 +1,211 @@
+body {
+    background-color: #f5f8fa;
+}
+
+#book-appointment-wizard .wizard-frame .frame-container {
+    height: auto;
+    min-height: 500px;
+    padding: 15px 0;
+}
+
+#book-appointment-wizard #header {
+    overflow: auto;
+    height: auto;
+    padding: 20px 15px;
+    background: #429a82;
+}
+
+#book-appointment-wizard #company-name {
+    float: none;
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    font-weight: lighter;
+    color: #fff;
+    margin: 20px 0;
+}
+
+#book-appointment-wizard #steps {
+    float: none;
+    display: block;
+    overflow: auto;
+    margin: 15px auto;
+}
+
+#book-appointment-wizard .book-step {
+    display: inline-block;
+    height: 35px;
+    width: 35px;
+    float: left;
+    background: #225d4d;
+    padding: 8px;
+    margin-right: 12px;
+    margin-top: 6px;
+    border-radius: .25rem;
+    transition: all .3s linear;
+}
+
+#book-appointment-wizard .book-step strong {
+    font-size: 12px;
+    display: block;
+    text-align: center;
+    color: #0bb98d;
+    transition: all .3s linear;
+    cursor: default;
+}
+
+#book-appointment-wizard .active-step {
+    display: inline-block;
+    height: 45px;
+    width: 45px;
+    float: left;
+    background: #fff;
+    padding: 7px;
+    margin-right: 13px;
+    margin-top: 0;
+}
+
+#book-appointment-wizard .active-step strong {
+    color: #429a82;
+    font-size: 21px;
+}
+
+#book-appointment-wizard {
+    background: #fff;
+    min-height: 480px;
+    padding: 0;
+    margin: auto;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+#book-appointment-wizard .wizard-frame .command-buttons {
+    float: none;
+    margin: 15px auto;
+    text-align: center;
+}
+
+#book-appointment-wizard .wizard-frame .command-buttons .btn {
+    min-width: 120px;
+    margin-right: 10px;
+}
+
+#book-appointment-wizard .frame-container .frame-title {
+    font-weight: lighter;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+#book-appointment-wizard .frame-container .frame-content {
+    float: none;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+#book-appointment-wizard #wizard-frame-1 label {
+    font-size: 19px;
+    margin-bottom: 12px;
+}
+
+
+
+#book-appointment-wizard .wizard-frame .command-buttons {
+    float: none;
+    margin: 15px auto;
+    text-align: center;
+}
+
+#book-appointment-wizard .wizard-frame .command-buttons .btn:last-child {
+    margin-right: 0;
+}
+
+#book-appointment-wizard .wizard-frame .command-buttons .svg-inline--fa {
+    display: inline-block;
+    font-size: inherit;
+    height: 1em;
+    overflow: visible;
+    vertical-align: -.125em;
+}
+
+#book-appointment-wizard .wizard-frame .command-buttons .svg-inline--fa.fa-w-10 {
+    width: .625em;
+}
+
+#book-appointment-wizard .wizard-frame #select-date {
+    max-width: 288px;
+    margin: auto;
+    padding: 15px 0;
+}
+
+#book-appointment-wizard .wizard-frame #select-time {
+    max-width: 288px;
+    margin: auto;
+    padding: 15px 0;
+}
+
+#book-appointment-wizard #available-hours {
+    overflow: auto;
+    margin: 15px 0;
+    padding-right: 10px;
+    width: auto;
+    max-height: 255px;
+}
+
+#book-appointment-wizard #available-hours .available-hour {
+    margin-bottom: 10px;
+}
+
+#book-appointment-wizard #available-hours .selected-hour {
+    background-color: #439a82;
+    border-color: #439a82;
+    color: #fff;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+
+
+@media (min-width: 768px) {
+    .wrapper {
+        min-height: 100vh;
+    }
+    #book-appointment-wizard #steps {
+        display: inline-block;
+        float: right;
+        margin: 5px auto;
+    }
+
+    #book-appointment-wizard #company-name {
+        display: inline-block;
+        float: left;
+        margin: 10px auto;
+    }
+
+    #book-appointment-wizard .wizard-frame {
+        padding: 10px 20px;
+    }
+
+    #book-appointment-wizard .wizard-frame .command-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .col-md-6 {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}

@@ -1,10 +1,10 @@
 package com.eindwerk.SnelGeboekt.organisatie;
 
 import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
+import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Agenda;
+import com.eindwerk.SnelGeboekt.reservatie.Reservatie;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -54,6 +54,9 @@ public class Organisatie {
     @NotBlank(message = "{org.blank}")
     @Column(name = "street")
     private String straat;
+
+    @OneToMany(mappedBy = "organisatie")
+    private List<Agenda> agenda;
 
     @OneToMany(mappedBy = "organisatie")
     private List<Optie> opties;

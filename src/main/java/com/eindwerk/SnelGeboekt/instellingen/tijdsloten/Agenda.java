@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,6 +24,8 @@ public class Agenda {
     @JoinColumn(name = "organisatie_id")
     Organisatie organisatie;
 
-    //@OneToMany(mappedBy = "schema")
-    //private List<Tijdsloten> tijdsloten;
+    @OneToMany(mappedBy = "agenda")
+    private List<Tijdsloten> tijdsloten;
+
+
 }

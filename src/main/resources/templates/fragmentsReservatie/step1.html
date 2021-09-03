@@ -4,7 +4,7 @@
 <head>
 </head>
 <div th:fragment="frame1" id="wizard-frame-1" class="wizard-frame" style="">
-    <form action="#" th:action="@{/booking/step1}" method="post">
+    <form action="#" th:action="@{/reservatie/step1}" method="post">
         <div class="frame-container">
             <h2 class="frame-title">Kies een dienst en een medewerker</h2>
             <div class="row frame-content">
@@ -25,7 +25,6 @@
                         </label>
 
                         <select id="select-provider" class="form-control">
-                            <option value="2">Jane Doe</option>
                             <option value="any-provider" selected="">- Maakt mij niet uit. -</option>
                         </select>
                     </div>

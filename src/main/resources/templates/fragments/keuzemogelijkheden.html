@@ -9,43 +9,43 @@
 </head>
 <body  class="text-center">
 <div class="keuzemogelijkheden"  th:fragment="keuzemogelijkheden">
-<div class="container">
-    <div class="pb-2 mt-4 mb-4 border-bottom">
+    <div class="container">
+        <div class="pb-2 mt-4 mb-4 border-bottom">
 
 
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div>
-                <h4>Voeg een optie toe:</h4>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div>
+                        <h4>Voeg een optie toe:</h4>
+                    </div>
+                    <form class="card p-3 bg-light" action="#" th:action="@{/instellingen/keuzemogelijkheden/add}" th:object="${optie}" method="post">
+                        <fieldset>
+
+                            <div class="form-group">
+                                <input type="hidden"  th:field="*{id}">
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Keuzemogelijkheid</label>
+                                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                                <input type="text" class="form-control" th:field="*{title}">
+                            </div>
+                            <div class="mb-3">
+                                <label>Duur Keuzemogelijkheid</label>
+                                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('duurOptie')}" th:errors="*{duurOptie}"></div>
+                                <input type="number" class="form-control" th:field="*{duurOptie}">
+                            </div>
+
+                            <p>
+                                <a th:href="@{/instellingen/keuzemogelijkheden}" class="btn btn-secondary ">Annuleren</a>
+                                <input class="btn btn-danger" type="submit" value="Bewaren">
+                            </p>
+
+                        </fieldset>
+                    </form>
+                </div>
             </div>
-            <form class="card p-3 bg-light" action="#" th:action="@{/instellingen/keuzemogelijkheden/add}" th:object="${optie}" method="post">
-                <fieldset>
-
-                    <div class="form-group">
-                        <input type="hidden"  th:field="*{id}">
-                    </div>
-
-                    <div class="mb-3">
-                        <label>Keuzemogelijkheid</label>
-                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
-                        <input type="text" class="form-control" th:field="*{title}">
-                    </div>
-                    <div class="mb-3">
-                        <label>Duur Keuzemogelijkheid</label>
-                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('duurOptie')}" th:errors="*{duurOptie}"></div>
-                        <input type="text" class="form-control" th:field="*{duurOptie}">
-                    </div>
-
-                    <p>
-                        <a th:href="@{/instellingen/keuzemogelijkheden}" class="btn btn-secondary ">Annuleren</a>
-                        <input class="btn btn-danger" type="submit" value="Bewaren">
-                    </p>
-
-                </fieldset>
-            </form>
         </div>
-    </div>
-    </div>
     </div>
 </div>
 </body>

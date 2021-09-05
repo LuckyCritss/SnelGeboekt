@@ -1,3 +1,4 @@
+
 package com.eindwerk.SnelGeboekt.instellingen.optie;
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
@@ -23,11 +24,12 @@ public class Optie {
     @NotBlank(message = "{org.blank}")
     private String title;
 
-    @NotNull
     private int duurOptie;
 
-    @ManyToOne
+    //  @MapsId
     @JoinColumn(name = "organisatie_id")
-    Organisatie organisatie;
-
+    @ManyToOne
+    private Organisatie organisatie;
 }
+
+

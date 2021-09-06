@@ -1,6 +1,6 @@
 package com.eindwerk.SnelGeboekt.controllers;
 
-
+import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
 import com.eindwerk.SnelGeboekt.reservatie.Reservatie;
 import com.eindwerk.SnelGeboekt.reservatie.StepOneData;
 import com.eindwerk.SnelGeboekt.reservatie.StepThreeData;
@@ -10,11 +10,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Access;
+
 @Controller
 @RequestMapping("/reservatie/")
 public class ReservatieController {
 
     private final Reservatie reservatie;
+    private OrganisatieService organisatieService;
+
+    @Autowired
+    public void setOrganisatieService(OrganisatieService organisatieService) {
+        this.organisatieService = organisatieService;
+    }
 
     public ReservatieController(Reservatie reservatie) {
         this.reservatie = reservatie;
@@ -22,11 +30,17 @@ public class ReservatieController {
 
     @GetMapping("/{slug}")
     public String showWidget(@PathVariable String slug) {
+        if(organisatieService.getOrganisatieByName(slug) == null){
+            return "redirect:/templatesUser/boeking";
+        }
         return "redirect:/reservatie/" + slug + "/step1";
     }
 
     @GetMapping("/{slug}/step1")
     public String showWidgetStep1(@PathVariable String slug, Model model) {
+        if(organisatieService.getOrganisatieByName(slug) == null){
+            return "redirect:/templatesUser/boeking";
+        }
         if (reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             reservatie.setSlug(slug);
             reservatie.setStepOneData(new StepOneData());
@@ -48,6 +62,9 @@ public class ReservatieController {
 
     @GetMapping("/{slug}/step2")
     public String showWidgetStep2(@PathVariable String slug, Model model) {
+        if(organisatieService.getOrganisatieByName(slug) == null){
+            return "redirect:/templatesUser/boeking";
+        }
         if (reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug + "/step1";
         }
@@ -71,6 +88,9 @@ public class ReservatieController {
 
     @GetMapping("/{slug}/step3")
     public String showWidgetStep3(@PathVariable String slug, Model model) {
+        if(organisatieService.getOrganisatieByName(slug) == null){
+            return "redirect:/templatesUser/boeking";
+        }
         if (reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug + "/step1";
         }
@@ -97,6 +117,9 @@ public class ReservatieController {
 
     @GetMapping("/{slug}/step4")
     public String showWidgetStep4(@PathVariable String slug, Model model) {
+        if(organisatieService.getOrganisatieByName(slug) == null){
+            return "redirect:/templatesUser/boeking";
+        }
         if (reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug + "/step1";
         }

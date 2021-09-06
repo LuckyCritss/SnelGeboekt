@@ -25,6 +25,9 @@ public interface OrganisatieService {
     @PreAuthorize("isAuthenticated()")
     Organisatie getOrganisatieById(Integer id);
 
+    @PreAuthorize("isAuthenticated()")
+    Organisatie getOrganisatieByName(String name);
+
     List<Organisatie> getAll();
 
     void save(Organisatie organisatie) throws PasswordException, PasswordMisMatchException;

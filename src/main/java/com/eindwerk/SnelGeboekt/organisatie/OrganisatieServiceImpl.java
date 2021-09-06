@@ -27,6 +27,11 @@ public class OrganisatieServiceImpl implements OrganisatieService{
     }
 
     @Override
+    public Organisatie getOrganisatieByName(String name) {
+        return organisatieRepository.getOrganisatieByName(name);
+    }
+
+    @Override
     public List<Organisatie> getAll() {
         return null;
     }

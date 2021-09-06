@@ -12,12 +12,12 @@ import javax.validation.constraints.NotNull;
 @Table(name = "tijdsloten")
 public class Tijdsloten {
 
-    public enum Day {
-        SUN("Zondag"), MON("Maandag"), TUE("Dinsdag"), WED("Woensdag"), THU("Donderdag"), FRI("Vrijdag"), SAT("Zaterdag");
+    public enum Dag {
+        ZON("Zondag"), Maa("Maandag"), Din("Dinsdag"), WOE("Woensdag"), DON("Donderdag"), VRI("Vrijdag"), ZAT("Zaterdag");
 
         private final String displayName;
 
-        Day(String displayName) {
+        Dag(String displayName) {
             this.displayName = displayName;
         }
 
@@ -32,7 +32,7 @@ public class Tijdsloten {
     private int id;
 
     @NotNull(message = "value mismatch")
-    private Day dag = Day.SUN;
+    private Dag dag = Dag.ZON;
 
     private String start;
 

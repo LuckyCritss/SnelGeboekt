@@ -1,6 +1,8 @@
 package com.eindwerk.SnelGeboekt.controllers;
 
+import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
 import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
+import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdsloten;
 import com.eindwerk.SnelGeboekt.notification.NotificationService;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class TijdslotController {
@@ -49,6 +52,15 @@ public class TijdslotController {
             Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
             model.addAttribute("organisatie", organisatie);
             return ("tijdslot");
+        }
+        return "redirect:/instellingen";
+    }
+
+    @GetMapping("/instellingen/tijdslot/add")
+    public String add(Model model,Principal principal) {
+        if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
+            model.addAttribute("tijdsloten", new Tijdsloten());
+            return "addtijdsloten";
         }
         return "redirect:/instellingen";
     }

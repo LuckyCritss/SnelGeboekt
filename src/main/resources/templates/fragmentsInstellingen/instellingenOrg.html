@@ -31,17 +31,6 @@
         <label>Email Address</label>
       </div>
 
-      <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('wachtWoord')}" th:errors="*{wachtWoord}"></div>
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="WachtWoord" th:field="*{wachtWoord}" >
-        <label for="floatingPassword">Wachtwoord</label>
-      </div>
-
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword2" placeholder="checkWachtWoord" th:field="*{checkWachtWoord}">
-        <label for="floatingPassword">herhaal wachtwoord</label>
-      </div>
-
       <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('BedrijfsNaam')}" th:errors="*{bedrijfsNaam}"></div>
       <div class="form-floating">
         <input type="text" class="form-control" id="BedrijfsNaam" placeholder="BedrijfsNaam" th:field="*{bedrijfsNaam}" >
@@ -72,7 +61,19 @@
         <label for="floatingInput">Straat</label>
       </div>
 
-      <button class="w-100 btn btn-lg btn-primary" type="submit" style="text-decoration: none; color:#FFFFFF; background: #F00909;">Bewaren</button>
+      <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('wachtWoord')}" th:errors="*{wachtWoord}"></div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="WachtWoord" th:field="*{wachtWoord}" >
+        <label for="floatingPassword">Wachtwoord</label>
+      </div>
+
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword2" placeholder="checkWachtWoord" th:field="*{checkWachtWoord}">
+        <label for="floatingPassword">herhaal wachtwoord</label>
+      </div>
+
+
+      <button class="w-100 btn btn-lg btn-primary" name="safeOrg" type="submit" style="text-decoration: none; color:#FFFFFF; background: #F00909;">Bewaren</button>
     </form>
   </main>
 

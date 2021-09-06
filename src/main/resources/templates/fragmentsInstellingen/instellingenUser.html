@@ -11,7 +11,7 @@
 <div class="registreer" th:fragment="instellingenUser">
 
   <main class="form-signin">
-    <form action="#" th:action="@{/instellingenUser}" th:object="${user}" method="post">
+    <form action="#" th:action="@{/instellingen}" th:object="${user}" method="post">
       <h1 class="h3 mb-3 fw-normal">Algemene Instellingen</h1>
 
       <style>
@@ -29,17 +29,6 @@
       <div class="form-floating">
         <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" th:field="*{email}" >
         <label>Email Address</label>
-      </div>
-
-      <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('wachtWoord')}" th:errors="*{wachtWoord}"></div>
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="WachtWoord" th:field="*{wachtWoord}" >
-        <label for="floatingPassword">Wachtwoord</label>
-      </div>
-
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword2" placeholder="checkWachtWoord" th:field="*{checkWachtWoord}">
-        <label for="floatingPassword">herhaal wachtwoord</label>
       </div>
 
       <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('familyNaam')}" th:errors="*{familyNaam}"></div>
@@ -60,7 +49,18 @@
         <label for="floatingInput">GsmNummer</label>
       </div>
 
-      <button class="w-100 btn btn-lg btn-primary" type="submit" style="text-decoration: none; color:#FFFFFF; background: #F00909;">Bewaren</button>
+      <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('wachtWoord')}" th:errors="*{wachtWoord}"></div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="WachtWoord" th:field="*{wachtWoord}" >
+        <label for="floatingPassword">Wachtwoord</label>
+      </div>
+
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword2" placeholder="checkWachtWoord" th:field="*{checkWachtWoord}">
+        <label for="floatingPassword">herhaal wachtwoord</label>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" name="safeUser" type="submit" style="text-decoration: none; color:#FFFFFF; background: #F00909;">Bewaren</button>
     </form>
   </main>
 

@@ -45,66 +45,57 @@ public class InstellingenController {
         if(userService.getUserByEmail(principal.getName()) != null){
             User user = userService.getUserByEmail(principal.getName());
             model.addAttribute("user", user);
-            return ("/templatesUser/instellingenUser");
+            return ("/templatesInstellingen/instellingenUser");
         }
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null ){
             Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
             model.addAttribute("organisatie", organisatie);
-            return ("instellingenOrg");
+            return ("/templatesInstellingen/instellingenOrg");
         }
         return "redirect:/login";
     }
 
-    @PostMapping("/instellingen")
-    public String processForm(@Valid @ModelAttribute User user, @Valid @ModelAttribute Organisatie organisatie, Principal principal, BindingResult bindingResult) {
-        if(userService.getUserByEmail(principal.getName()) != null){
-            userForm(user, bindingResult);
-        }
-        if(organisatieService.getOrganisatieByEmail(principal.getName()) != null ){
-            organisatieForm(organisatie, bindingResult);
-        }
-        return "redirect:/login";
-    }
-
-    public String organisatieForm(@Valid @ModelAttribute Organisatie organisatie, BindingResult bindingResult) {
+    @PostMapping(value = "/instellingen", params = "safeOrg")
+    public String processForm(@Valid @ModelAttribute Organisatie organisatie, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "instellingenOrg";
+            return "/templatesInstellingen/instellingenOrg";
         }
         try {
             organisatieService.save(organisatie);
         } catch (OrganisatieService.PasswordException e) {
             bindingResult.rejectValue("wachtWoord","org.wachtWoord",e.getMessage());
-            return "instellingenOrg";
+            return "/templatesInstellingen/instellingenOrg";
         } catch (OrganisatieService.PasswordMisMatchException e) {
             bindingResult.rejectValue("wachtWoord","password-mismatch",e.getMessage());
-            return "instellingenOrg";
+            return "/templatesInstellingen/instellingenOrg";
         } catch (DataIntegrityViolationException e) {
             if (e.getMessage().contains("email_unique")) {
                 bindingResult.rejectValue("email","org.email-unique",e.getMessage());
             }
-            return "instellingenOrg";
+            return "/templatesInstellingen/instellingenOrg";
         }
         notificationService.sendAccountUpdateOrganisatie(organisatie);
         return "redirect:/instellingen";
     }
 
-    public String userForm(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+    @PostMapping(value = "/instellingen", params = "safeUser")
+    public String processForm(@Valid @ModelAttribute User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "instellingenUser";
+            return "/templatesInstellingen/instellingenUser";
         }
         try {
             userService.save(user);
         } catch (UserService.PasswordException e) {
             bindingResult.rejectValue("wachtWoord","user.wachtWoord",e.getMessage());
-            return "instellingenUser";
+            return "/templatesInstellingen/instellingenUser";
         } catch (UserService.PasswordMisMatchException e) {
             bindingResult.rejectValue("wachtWoord","password-mismatch",e.getMessage());
-            return "instellingenUser";
+            return "/templatesInstellingen/instellingenUser";
         } catch (DataIntegrityViolationException e) {
             if (e.getMessage().contains("email_unique")) {
                 bindingResult.rejectValue("email","user.email-unique",e.getMessage());
             }
-            return "instellingenUser";
+            return "/templatesInstellingen/instellingenUser";
         }
         notificationService.sendAccountUpdateUser(user);
         return "redirect:/instellingen";

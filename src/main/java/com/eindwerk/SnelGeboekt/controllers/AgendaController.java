@@ -27,7 +27,7 @@ public class AgendaController {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
             Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
             model.addAttribute("organisatie", organisatie);
-            return ("kalender");
+            return ("/templatesInstellingen/kalender");
         }
         return "redirect:/instellingen";
     }

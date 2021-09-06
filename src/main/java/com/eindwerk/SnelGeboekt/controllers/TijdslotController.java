@@ -1,12 +1,9 @@
 package com.eindwerk.SnelGeboekt.controllers;
 
-import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
 import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdsloten;
-import com.eindwerk.SnelGeboekt.notification.NotificationService;
-import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
+import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.TijdslotenService;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
-import com.eindwerk.SnelGeboekt.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -22,8 +19,7 @@ import java.util.List;
 public class TijdslotController {
 
     private OrganisatieService organisatieService;
-    private UserService userService;
-    private NotificationService notificationService;
+    private TijdslotenService tijdslotenService;
     private OptieService optieService;
 
     @Autowired
@@ -32,13 +28,8 @@ public class TijdslotController {
     }
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    @Autowired
-    public void setNotificationService(NotificationService notificationService) {
-        this.notificationService = notificationService;
+    public void setTijdslotenService(TijdslotenService tijdslotenService) {
+        this.tijdslotenService = tijdslotenService;
     }
 
     @Autowired
@@ -47,11 +38,11 @@ public class TijdslotController {
     }
 
     @GetMapping("/instellingen/tijdslot")
-    public String tijdslotnHandler(Principal principal, Model model) {
+    public String tijdslotHandler(Principal principal, Model model) {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
-            Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
-            model.addAttribute("organisatie", organisatie);
-            return ("tijdslot");
+            List<Tijdsloten> tijdslot = tijdslotenService.getAll();
+            model.addAttribute("tijdlot", new Tijdsloten());
+            return ("/templatesInstellingen/tijdslot");
         }
         return "redirect:/instellingen";
     }
@@ -60,7 +51,7 @@ public class TijdslotController {
     public String add(Model model,Principal principal) {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
             model.addAttribute("tijdsloten", new Tijdsloten());
-            return "addtijdsloten";
+            return "/templatesInstellingen/addtijdsloten";
         }
         return "redirect:/instellingen";
     }

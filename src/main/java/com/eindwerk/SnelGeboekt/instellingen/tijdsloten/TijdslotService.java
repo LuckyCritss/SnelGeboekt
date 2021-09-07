@@ -5,15 +5,15 @@ import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 
 import java.util.List;
 
-public interface TijdslotenService {
+public interface TijdslotService {
 
-    List<Tijdsloten> getAll();
+    List<Tijdslot> getAll();
 
-    void saveOrUpdate(Tijdsloten tijdsloten);
+    void saveOrUpdate(Tijdslot tijdslot);
 
-    Tijdsloten getById(int id);
+    Tijdslot getById(int id);
 
-    List<Tijdsloten> getTijdslotenByOrganisatie(Organisatie organisatie);
+    List<Tijdslot> getTijdslotenByOrganisatie(Organisatie organisatie);
 
     void delete(int id);
 }

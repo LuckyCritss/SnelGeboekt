@@ -18,7 +18,7 @@
           <div>
             <h3>Geef hier u keuzemogelijkheden in:</h3>
           </div>
-          <form class="card p-3 bg-light" action="#" th:action="@{/fragments/lijstkeuzemogelijkheden/}" th:object="${keuzemogelijkheden}" method="post">
+          <form class="card p-3 bg-light" action="#" th:action="@{/fragmentsInstellingen}" th:object="${keuzemogelijkheden}" method="post">
             <fieldset>
               <div class="row" >
                 <table class="table table-hover">
@@ -38,9 +38,9 @@
                     <td th:text="${optie.title}"></td>
                     <td th:text="${optie.duurOptie}"></td>
                     <td>
-                      <a class="btn btn-sm btn-secondary" th:href=@{/instellingen/keuzemogelijkheden/edit} + ${optie.id}>Edit</a>
-                      <a class="btn btn-sm btn-secondary"   th:href=@{/instellingen/keuzemogelijkheden/delete} + ${optie.id}>Delete</a>
-                      <a class="btn btn-sm btn-secondary" th:href=@{/instellingen/tijdslot/} + ${optie.id} >Tijdslot</a>
+                      <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/keuzemogelijkheden/edit/} + ${optie.id}">Edit</a>
+                      <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/keuzemogelijkheden/delete/} + ${optie.id}">Delete</a>
+                      <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/tijdslot/}">Tijdslot</a>
                     </td>
                   </tr>
                   </tbody>

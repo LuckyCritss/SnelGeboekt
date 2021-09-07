@@ -38,7 +38,7 @@ public class OptieController {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
             List<Optie> opties = optieService.getOptiesByOrganisation(organisatieService.getOrganisatieByEmail(principal.getName()));
             model.addAttribute("opties", opties);
-            return "keuzemogelijkheden";
+            return "/templatesInstellingen/keuzemogelijkheden";
         }
         return "redirect:/instellingen";
     }
@@ -47,7 +47,7 @@ public class OptieController {
     public String add(Model model,Principal principal) {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
             model.addAttribute("optie", new Optie());
-            return "addkeuzemogelijkheden";
+            return "/templatesInstellingen/addkeuzemogelijkheden";
         }
         return "redirect:/instellingen";
     }
@@ -55,37 +55,36 @@ public class OptieController {
     @PostMapping("/instellingen/keuzemogelijkheden/add")
     public String addForm(@Valid @ModelAttribute Optie optie, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
-            return "addkeuzemogelijkheden";
+            return "/templatesInstellingen/addkeuzemogelijkheden";
         }
         try {
-            Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
-            optie.setOrganisatie(organisatie);
+            optie.setOrganisatie(organisatieService.getOrganisatieByEmail(principal.getName()));
             optieService.saveOrUpdate(optie);
         }catch (DataIntegrityViolationException e) {
             if (e.getMessage().contains("optie_unique")) {
                 bindingResult.rejectValue("optie","optie-unique",e.getMessage());
             }
-            return "addkeuzemogelijkheden";
+            return "/templatesInstellingen/addkeuzemogelijkheden";
         }
         return "redirect:/instellingen/keuzemogelijkheden";
     }
 
-    @GetMapping("/instellingen/keuzemogelijkheden/add/{id}")
+    @GetMapping("/instellingen/keuzemogelijkheden/edit/{id}")
     public String editadd(@PathVariable int id, Model model) {
         Optie optie = optieService.getById(id);
         if (optie == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
         model.addAttribute("optie", optie);
-        return "redirect:/instellingen/keuzemogelijkheden";
+        return "/templatesInstellingen/keuzemogelijkheden";
     }
 
 
 
-    @PostMapping("/instellingen/keuzemogelijkheden/edit")
+    @PostMapping("/instellingen/keuzemogelijkheden/edit/{id}")
     public String processForm(@Valid @ModelAttribute Optie optie, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/fragments/keuzemogelijheden";
+            return "/fragmentsInstellingen/keuzemogelijkheden";
         }
         optieService.saveOrUpdate(optie);
         return "redirect:/instellingen/keuzemogelijkheden";

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:color="http://www.w3.org/1999/xhtml">
+<head th:fragment = "edit">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Snelgeboekt edit optie</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="/css/login.css" rel="stylesheet">
+</head>
+<body  class="text-center">
+<div class="edit"  th:fragment="edit">
+    <div class="container">
+        <div class="pb-2 mt-4 mb-4 border-bottom">
+
+
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div>
+                        <h4>Edit optie</h4>
+                    </div>
+                    <form class="card p-3 bg-light" action="#" th:action="@{/instellingen/keuzemogelijkheden/edit}" th:object="${optie}" method="post">
+                        <fieldset>
+
+                                <input type="hidden" class="form-control" th:field="*{id}">
+                            <input type="hidden" class="form-control" th:field="*{optie.id}">
+
+
+                            <div class="mb-3">
+                                <label>Keuzemogelijkheid</label>
+                                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                                <input type="text" class="form-control" th:field="*{title}">
+                            </div>
+                            <div class="mb-3">
+                                <label>Duur Keuzemogelijkheid</label>
+                                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('duurOptie')}" th:errors="*{duurOptie}"></div>
+                                <input type="number" class="form-control" th:field="*{duurOptie}">
+                            </div>
+
+                            <p>
+                                <a th:href="@{/instellingen/keuzemogelijkheden}" class="btn btn-secondary ">Annuleren</a>
+                                <input class="btn btn-danger" type="submit" value="Bewaren">
+                            </p>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -18,7 +18,7 @@
           <div>
             <h4>Voeg een tijdslot toe:</h4>
           </div>
-          <form class="card p-3 bg-light" action="#" th:action="@{/instellingen/tijdslot/add}" th:object="${tijdsloten}" method="post">
+          <form class="card p-3 bg-light" action="#" th:action="@{/instellingen/tijdslot/add}" th:object="${tijdslot}" method="post">
             <fieldset>
 
               <div class="form-group">
@@ -28,9 +28,9 @@
               <div class="mb-3">
                 <label>Dag</label>
                 <select name="dag" class="form-control">
-                  <option th:each="dag : ${T(com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdsloten.Dag).values()}"
+                  <option th:each="dag : ${T(com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot.dag).values()}"
                           th:value="${dag}" th:text="${dag.displayName}"
-                          th:selected="${tijdsloten.dag.equals(dag)}">
+                          th:selected="${tijdslot.dag.equals(dag)}">
                   </option>
                 </select>
               </div>

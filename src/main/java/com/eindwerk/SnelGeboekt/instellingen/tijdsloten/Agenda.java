@@ -25,7 +25,7 @@ public class Agenda {
     Organisatie organisatie;
 
     @OneToMany(mappedBy = "agenda")
-    private List<Tijdsloten> tijdsloten;
+    private List<Tijdslot> tijdslot;
 
 
 }

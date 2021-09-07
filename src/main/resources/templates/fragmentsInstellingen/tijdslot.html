@@ -16,10 +16,12 @@
   <div class="container">
     <div class="pb-2 mt-4 mb-4 border-bottom">
 
-      <div class="row">
+      <div class="row" >
         <div class="col-md-8 offset-md-2">
-
-          <form class="card p-3 bg-light" action="#" th:action="@{/fragments/tijdslot/}" th:object="${tijdslot}" method="post">
+          <div>
+            <h3>Geef hier u tijdslot in:</h3>
+          </div>
+          <form class="card p-3 bg-light" action="#" th:action="@{/fragmentsInstellingen}" th:object="${tijdslot}" method="post">
             <fieldset>
 
               <div class="openinghourscontent section">
@@ -38,13 +40,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="tijdslot : ${tijdslot}">
-                      <td th:text="${tijdsloten.day.displayName}"></td>
-                      <td th:text="${tijdsloten.start}"></td>
-                      <td th:text="${tijdsloten.einde}"></td>
+                    <tr th:each="tijdslot : ${tijdsloten}">
+                      <td th:text="${tijdslot.day.displayName}"></td>
+                      <td th:text="${tijdslot.start}"></td>
+                      <td th:text="${tijdslot.einde}"></td>
                       <td>
-                        <a class="btn btn-sm btn-primary" th:href="@{/tijdsloten/edit/} + ${tijdsloten.id}">Edit</a>
-                        <a class="btn btn-sm btn-danger"  th:href="@{/tijdsloten/delete/} + ${tijdsloten.id}">Delete</a>
+                        <a class="btn btn-sm btn-primary" th:href="@{/instellingen/tijdsloten/edit/} + ${tijdsloten.id}">Edit</a>
+                        <a class="btn btn-sm btn-danger"  th:href="@{/instellingen/tijdsloten/delete/} + ${tijdsloten.id}">Delete</a>
                       </td>
                     </tr>
                     </tbody>
@@ -54,13 +56,13 @@
 
 
 
-                <div class="alert alert-primary" role="alert">
-                  Nothing available
+                <div class="alert alert-primary" role="alert" >
+                  Gelieve de mogelijke tijdsloten toe te voegen.
                 </div>
 
 
-                <a class="btn btn-primary" th:href="@{/keuzemogelijkheden}">&#8592;&nbsp;Keuzemogelijkheden</a>
-                <a class="btn btn-primary" th:href="@{/tijdslot/add}">&#43;</a>
+                <a class="btn btn-primary" th:href="@{/instellingen/keuzemogelijkheden}">&#8592;&nbsp;Keuzemogelijkheden</a>
+                <a class="btn btn-primary" th:href="@{/instellingen/tijdslot/add}">&#43;</a>
 
 
 

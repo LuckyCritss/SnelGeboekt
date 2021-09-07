@@ -1,5 +1,6 @@
 package com.eindwerk.SnelGeboekt.instellingen.tijdsloten;
 
+import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +23,18 @@ public class TijdslotenServiceImpl implements TijdslotenService {
 
     @Override
     public void saveOrUpdate(Tijdsloten tijdsloten) {
-
+        tijdslotenRepository.save(tijdsloten);
     }
 
     @Override
     public Tijdsloten getById(int id) {
         return tijdslotenRepository.getById(id);
+    }
+
+    @Override
+    public List<Tijdsloten> getTijdslotenByOrganisatie(Organisatie organisatie) {
+
+        return tijdslotenRepository.getTijdslotenByOrganisatie(organisatie);
     }
 
     @Override

@@ -42,6 +42,10 @@ public class Tijdsloten {
     @JoinColumn(name = "agenda_id")
     Agenda agenda;
 
+    @JoinColumn(name = "organisatie_id")
+    @ManyToOne
+    private Organisatie organisatie;
+
 
 
 

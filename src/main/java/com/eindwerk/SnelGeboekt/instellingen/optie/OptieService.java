@@ -5,7 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+
 public interface OptieService {
 
     List<Optie> getAll();
@@ -18,6 +18,6 @@ public interface OptieService {
 
     int GetDuurOptie(int DuurOptie);
 
-    void delete(int id);
+    public void delete(int id);
 }
 

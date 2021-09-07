@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:color="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment = "lijstkeuzemogelijkheden (title)">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@
           <div>
             <h3>Geef hier u keuzemogelijkheden in:</h3>
           </div>
-          <form class="card p-3 bg-light" action="#" th:action="@{/fragmentsInstellingen}" th:object="${keuzemogelijkheden}" method="post">
+          <form class="card p-3 bg-light" action="#" th:action="@{/fragmentsInstellingen/lijstkeuzemogelijk}" th:object="${keuzemogelijkheden}" method="post">
             <fieldset>
               <div class="row" >
                 <table class="table table-hover">
@@ -28,8 +28,6 @@
                     <th scope="col">Omschrijving</th>
                     <th scope="col">Duur optie</th>
                     <th scope="col">Actie's</th>
-
-
                   </tr>
                   </thead>
                   <tbody>
@@ -38,8 +36,8 @@
                     <td th:text="${optie.title}"></td>
                     <td th:text="${optie.duurOptie}"></td>
                     <td>
-                      <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/keuzemogelijkheden/edit/} + ${optie.id}">Edit</a>
-                      <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/keuzemogelijkheden/delete/} + ${optie.id}">Delete</a>
+                      <a class="btn btn-sm btn-secondary"  th:href="@{/instellingen/keuzemogelijkheden/edit/} + ${optie.id}">Edit</a>
+                      <a class="btn btn-sm btn-secondary"  th:href="@{/instellingen/keuzemogelijkheden/delete/} + ${optie.id}">Delete</a>
                       <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/tijdslot/}">Tijdslot</a>
                     </td>
                   </tr>

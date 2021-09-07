@@ -24,6 +24,7 @@ public class Optie {
     @NotBlank(message = "{org.blank}")
     private String title;
 
+    @NotNull(message = "value mismatch")
     private int duurOptie;
 
     //  @MapsId

@@ -26,7 +26,7 @@ public class OptieServiceImpl implements OptieService {
 
     @Override
     public List<Optie> getAll() {
-        return null;
+        return optieRepository.findAll();
     }
 
     @Override
@@ -44,7 +44,7 @@ public class OptieServiceImpl implements OptieService {
 
     @Override
     public Optie getById(int id) {
-        return null;
+        return optieRepository.getById(id);
     }
 
     @Override
@@ -60,7 +60,13 @@ public class OptieServiceImpl implements OptieService {
 
     @Override
     public void delete(int id) {
-
+        try {
+            // delete tourInfo when available, this will also delete tour (cascade = All)
+            optieRepository.deleteById(id);
+        } catch (Exception e) {
+            // Delete tour only when no tourInfo exists
+            optieRepository.deleteById(id);
+        }
     }
 
 

@@ -33,6 +33,12 @@ public class OptieController {
         this.optieService = optieService;
     }
 
+    @GetMapping
+    public String list(Model model) {
+        model.addAttribute("opties", optieService.getAll());
+        return "fragmentsInstellingen/lijstkeuzemogelijk";
+    }
+
     @GetMapping("/instellingen/keuzemogelijkheden")
     public String keuzemogelijkhedenHandler(Principal principal, Model model) {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
@@ -70,7 +76,7 @@ public class OptieController {
     }
 
     @GetMapping("/instellingen/keuzemogelijkheden/edit/{id}")
-    public String editadd(@PathVariable int id, Model model) {
+    public String edit(@PathVariable int id, Model model) {
         Optie optie = optieService.getById(id);
         if (optie == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
@@ -81,7 +87,7 @@ public class OptieController {
 
 
 
-    @PostMapping("/instellingen/keuzemogelijkheden/edit/{id}")
+    @PostMapping("/instellingen/keuzemogelijkheden/edit/")
     public String processForm(@Valid @ModelAttribute Optie optie, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/fragmentsInstellingen/keuzemogelijkheden";

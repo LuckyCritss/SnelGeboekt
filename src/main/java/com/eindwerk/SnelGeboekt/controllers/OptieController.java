@@ -70,24 +70,28 @@ public class OptieController {
         return "redirect:/instellingen/keuzemogelijkheden";
     }
 
-    @PostMapping("/instellingen/keuzemogelijkheden/edit")
-    public String processForm(@Valid @ModelAttribute Optie optie, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "keuzemogelijheden";
-        }
-        optieService.saveOrUpdate(optie);
-        return "redirect:/keuzemogelijheden";
-    }
-
-    @GetMapping("/instellingen/keuzemogelijkheden/edit/{id}")
-    public String edit(@PathVariable int id, Model model) {
+    @GetMapping("/instellingen/keuzemogelijkheden/add/{id}")
+    public String editadd(@PathVariable int id, Model model) {
         Optie optie = optieService.getById(id);
         if (optie == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
         model.addAttribute("optie", optie);
-        return "fragments/keuzemogelijkheden";
+        return "redirect:/instellingen/keuzemogelijkheden";
     }
+
+
+
+    @PostMapping("/instellingen/keuzemogelijkheden/edit")
+    public String processForm(@Valid @ModelAttribute Optie optie, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/fragments/keuzemogelijheden";
+        }
+        optieService.saveOrUpdate(optie);
+        return "redirect:/instellingen/keuzemogelijkheden";
+    }
+
+
 
     @GetMapping("/instellingen/keuzemogelijkheden/delete/{id}")
     public String delete(@PathVariable int id){
@@ -96,6 +100,6 @@ public class OptieController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
         optieService.delete(id);
-        return "redirect:/keuzemogelijkheden";
+        return "redirect:/instellingen/keuzemogelijkheden";
     }
 }

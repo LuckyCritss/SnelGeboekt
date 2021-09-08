@@ -84,9 +84,7 @@ public class OptieController {
         model.addAttribute("optie", optie);
         return "/templatesInstellingen/keuzemogelijkheden";
     }
-
-
-
+    
     @PostMapping("/instellingen/keuzemogelijkheden/edit/")
     public String processForm(@Valid @ModelAttribute Optie optie, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -95,8 +93,6 @@ public class OptieController {
         optieService.saveOrUpdate(optie);
         return "redirect:/instellingen/keuzemogelijkheden";
     }
-
-
 
     @GetMapping("/instellingen/keuzemogelijkheden/delete/{id}")
     public String delete(@PathVariable int id){

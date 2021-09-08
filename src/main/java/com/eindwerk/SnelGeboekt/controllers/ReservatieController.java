@@ -5,6 +5,7 @@ import com.eindwerk.SnelGeboekt.reservatie.Reservatie;
 import com.eindwerk.SnelGeboekt.reservatie.StepOneData;
 import com.eindwerk.SnelGeboekt.reservatie.StepThreeData;
 import com.eindwerk.SnelGeboekt.reservatie.StepTwoData;
+import com.eindwerk.SnelGeboekt.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,7 +46,7 @@ public class ReservatieController {
             reservatie.setSlug(slug);
             reservatie.setStepOneData(new StepOneData());
             reservatie.setStepTwoData(new StepTwoData());
-            reservatie.setStepThreeData(new StepThreeData());
+            reservatie.setUser(new User());
         }
         model.addAttribute("stepOneData", reservatie.getStepOneData());
         return "templatesReservatie/booking_step1";
@@ -94,7 +95,7 @@ public class ReservatieController {
         if (reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug + "/step1";
         }
-        model.addAttribute("stepThreeData", reservatie.getStepThreeData());
+        model.addAttribute("user", reservatie.getUser());
         return "templatesReservatie/booking_step3";
     }
 

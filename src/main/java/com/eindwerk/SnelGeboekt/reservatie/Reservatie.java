@@ -1,5 +1,6 @@
 package com.eindwerk.SnelGeboekt.reservatie;
 
+import com.eindwerk.SnelGeboekt.user.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.annotation.Scope;
@@ -15,5 +16,6 @@ public class Reservatie {
     private String slug;
     private StepOneData stepOneData;
     private StepTwoData stepTwoData;
-    private StepThreeData stepThreeData;
+
+    private User user;
 }

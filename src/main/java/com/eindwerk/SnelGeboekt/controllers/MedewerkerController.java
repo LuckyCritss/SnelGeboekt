@@ -55,7 +55,7 @@ public class MedewerkerController {
     public String add(Model model,Principal principal) {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
             model.addAttribute("medewerker", new Medewerker());
-            return "/templatesInstellingen/addmedewerkers";
+            return "/templatesInstellingen/addmedewerker";
         }
         return "redirect:/instellingen";
     }
@@ -63,7 +63,7 @@ public class MedewerkerController {
     @PostMapping("/instellingen/medewerker/add")
     public String addForm(@Valid @ModelAttribute Medewerker medewerker, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
-            return "/templatesInstellingen/addmedewerkers";
+            return "/templatesInstellingen/addmedewerker";
         }
         try {
             medewerker.setOrganisatie(organisatieService.getOrganisatieByEmail(principal.getName()));
@@ -72,7 +72,7 @@ public class MedewerkerController {
             if (e.getMessage().contains("medewerker_unique")) {
                 bindingResult.rejectValue("medewerker","medewerker-unique",e.getMessage());
             }
-            return "/templatesInstellingen/addmedewerkers";
+            return "/templatesInstellingen/addmedewerker";
         }
         return "redirect:/instellingen/medewerker";
     }

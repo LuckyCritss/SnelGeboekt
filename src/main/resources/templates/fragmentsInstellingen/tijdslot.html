@@ -32,16 +32,16 @@
                   <table class="table table-hover">
                     <thead>
                     <tr>
-                      <th scope="col">Day</th>
+                      <th scope="col">Dag</th>
                       <th scope="col">Start</th>
-                      <th scope="col">End</th>
-                      <th scope="col">Action</th>
+                      <th scope="col">Einde</th>
+                      <th scope="col">Actie</th>
 
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="tijdslot : ${tijdsloten}">
-                      <td th:text="${tijdslot.day.displayName}"></td>
+                      <td th:text="${tijdslot.Dag.displayName}"></td>
                       <td th:text="${tijdslot.start}"></td>
                       <td th:text="${tijdslot.einde}"></td>
                       <td>

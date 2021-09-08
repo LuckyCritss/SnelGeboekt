@@ -35,7 +35,7 @@ public class MedewerkerController {
         this.medewerkerService = medewerkerService;
     }
 
-    @GetMapping("/instellingen/medewerker/list")
+    @GetMapping("/instellingen/")
     public String list(Model model) {
         model.addAttribute("medewerkers", medewerkerService.getAll());
         return "fragmentsInstellingen/lijstmedewerkers";

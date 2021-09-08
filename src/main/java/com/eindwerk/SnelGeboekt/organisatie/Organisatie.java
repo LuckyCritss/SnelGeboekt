@@ -1,5 +1,6 @@
 package com.eindwerk.SnelGeboekt.organisatie;
 
+import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
 import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Agenda;
 import com.eindwerk.SnelGeboekt.reservatie.Reservatie;
@@ -60,4 +61,7 @@ public class Organisatie {
 
     @OneToMany(mappedBy = "organisatie")
     private List<Optie> opties;
+
+    @OneToMany(mappedBy = "organisatie")
+    private List<Medewerker> medewerker;
 }

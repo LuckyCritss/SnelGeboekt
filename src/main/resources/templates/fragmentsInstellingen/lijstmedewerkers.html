@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment = "lijstmedewerkers (title)">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snelgeboekt login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link href="/css/login.css" rel="stylesheet">
+</head>
+<body  class="text-center">
+<div class="lijstmedewerkers"  th:fragment="lijstmedewerkers">
+  <div class="container">
+    <div class="pb-2 mt-4 mb-4 border-bottom">
+
+
+      <div class="row" th:if="${!medewerkers.empty}">
+        <div class="col-md-8 offset-md-2">
+          <div>
+            <h3>Geef hier u medewerkers in:</h3>
+          </div>
+          <form class="card p-3 bg-light" action="#" th:action="@{/fragmentsInstellingen/lijstmedewerkers}" th:object="${medewerker}" method="post">
+            <fieldset>
+              <div class="row" >
+                <table class="table table-hover">
+                  <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Naam</th>
+                    <th scope="col">Actie's</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="medewerker : ${medewerkers}">
+                    <td th:text="${medewerkerStat.count}"></td>
+                    <td th:text="${medewerker.naam}"></td>
+                    <td>
+                      <a class="btn btn-sm btn-secondary"  th:href="@{/instellingen/medewerker/edit/} + ${medewerker.id}">Edit</a>
+                      <a class="btn btn-sm btn-secondary"  th:href="@{/instellingen/medewerker/delete/} + ${medewerker.id}">Delete</a>
+                      <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/tijdslot/}">Tijdslot</a>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="alert alert-primary" role="alert" th:if="${medewerkers.empty}">
+                Gelieve de mogelijke medewerkers toe te voegen.
+              </div>
+
+              <a class="btn btn-danger" th:href="@{/}">&#8592;&nbsp;Home</a>
+              <a class="btn btn-danger" th:href="@{/instellingen/medewerker/add}">&#43;</a>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

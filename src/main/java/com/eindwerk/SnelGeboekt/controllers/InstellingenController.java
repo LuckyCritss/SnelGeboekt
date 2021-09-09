@@ -45,7 +45,7 @@ public class InstellingenController {
         if(userService.getUserByEmail(principal.getName()) != null){
             User user = userService.getUserByEmail(principal.getName());
             model.addAttribute("user", user);
-            return ("/templatesUser/instellingenUser");
+            return ("/templatesInstellingen/instellingenUser");
         }
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null ){
             Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());

@@ -1,5 +1,6 @@
 package com.eindwerk.SnelGeboekt.user;
 
+import com.eindwerk.SnelGeboekt.reservatie.Reservatie;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
@@ -40,5 +41,8 @@ public class User {
 
     @Transient
     private String checkWachtWoord;
+
+    @Transient
+    private Reservatie reservatie;
 
 }

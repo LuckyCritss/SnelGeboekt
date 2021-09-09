@@ -30,7 +30,7 @@
                 <select name="dag" class="form-control">
                   <option th:each="dag : ${T(com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot.Dag).values()}"
                           th:value="${dag}" th:text="${dag.displayName}"
-                          th:selected="${tijdsloten.dag.equals(dag)}">
+                          th:selected="${tijdslot.dag.equals(dag)}">
                   </option>
                 </select>
               </div>

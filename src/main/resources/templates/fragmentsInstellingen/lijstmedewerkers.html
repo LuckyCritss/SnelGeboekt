@@ -13,7 +13,7 @@
     <div class="pb-2 mt-4 mb-4 border-bottom">
 
 
-      <div class="row" th:if="${!medewerkers.empty}">
+
         <div class="col-md-8 offset-md-2">
           <div>
             <h3>Geef hier u medewerkers in:</h3>
@@ -29,6 +29,7 @@
                     <th scope="col">Actie's</th>
                   </tr>
                   </thead>
+                  <div class="row" th:if="${!medewerkers.empty}">
                   <tbody>
                   <tr th:each="medewerker : ${medewerkers}">
                     <td th:text="${medewerkerStat.count}"></td>
@@ -40,7 +41,9 @@
                     </td>
                   </tr>
                   </tbody>
+                  </div>
                 </table>
+
               </div>
               <div class="alert alert-primary" role="alert" th:if="${medewerkers.empty}">
                 Gelieve de mogelijke medewerkers toe te voegen.

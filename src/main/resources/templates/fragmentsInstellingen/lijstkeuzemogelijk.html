@@ -13,7 +13,7 @@
     <div class="pb-2 mt-4 mb-4 border-bottom">
 
 
-      <div class="row" th:if="${!opties.empty}">
+
         <div class="col-md-8 offset-md-2">
           <div>
             <h3>Geef hier u keuzemogelijkheden in:</h3>
@@ -30,6 +30,7 @@
                     <th scope="col">Actie's</th>
                   </tr>
                   </thead>
+                  <div class="row" th:if="${!opties.empty}">
                   <tbody>
                   <tr th:each="optie : ${opties}">
                     <td th:text="${optieStat.count}"></td>
@@ -42,6 +43,7 @@
                     </td>
                   </tr>
                   </tbody>
+                  </div>
                 </table>
               </div>
               <div class="alert alert-primary" role="alert" th:if="${opties.empty}">

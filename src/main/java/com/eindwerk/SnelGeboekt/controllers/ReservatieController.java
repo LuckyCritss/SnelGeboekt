@@ -36,7 +36,7 @@ public class ReservatieController {
     private Reservatie reservatie;
     private AuthenticationManager authenticationManager;
 
-    @Autowired
+
     public void setReservatieService(ReservatieService reservatieService) {
         this.reservatieService = reservatieService;
     }

@@ -30,7 +30,7 @@
                     <th scope="col">Actie's</th>
                   </tr>
                   </thead>
-                  <div class="row" th:if="${!opties.empty}">
+                  <div class="row" th:if="${opties !=null && !opties.empty}">
                   <tbody>
                   <tr th:each="optie : ${opties}">
                     <td th:text="${optieStat.count}"></td>
@@ -45,8 +45,9 @@
                   </tbody>
                   </div>
                 </table>
+
               </div>
-              <div class="alert alert-primary" role="alert" th:if="${opties.empty}">
+              <div class="alert alert-primary" role="alert" th:if="${opties == null || opties.empty}">
                 Gelieve de mogelijke optie's toe te voegen.
               </div>
 
@@ -57,6 +58,7 @@
         </div>
     </div>
   </div>
+</div>
 </div>
 </body>
 </html>

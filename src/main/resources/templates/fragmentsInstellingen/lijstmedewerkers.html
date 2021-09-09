@@ -29,7 +29,7 @@
                     <th scope="col">Actie's</th>
                   </tr>
                   </thead>
-                  <div class="row" th:if="${!medewerkers.empty}">
+                  <div class="row" th:if="${medewerkers !=null && !medewerkers.empty}">
                   <tbody>
                   <tr th:each="medewerker : ${medewerkers}">
                     <td th:text="${medewerkerStat.count}"></td>
@@ -45,7 +45,7 @@
                 </table>
 
               </div>
-              <div class="alert alert-primary" role="alert" th:if="${medewerkers.empty}">
+              <div class="alert alert-primary" role="alert" th:if="${medewerkers == null || medewerkers.empty}">
                 Gelieve de mogelijke medewerkers toe te voegen.
               </div>
 

@@ -3,68 +3,53 @@
 <head th:fragment = "tijdslot (title)">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OpeningsUren</title>
+  <title>Snelgeboekt tijdslot</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
   <link href="/css/login.css" rel="stylesheet">
 </head>
-<style>
-
-</style>
-
 <body  class="text-center">
-<div class="instellingen"  th:fragment="tijdslot">
+<div class="tijdslot"  th:fragment="tijdslot">
   <div class="container">
     <div class="pb-2 mt-4 mb-4 border-bottom">
 
-      <div class="row" >
+
+      <div class="row">
         <div class="col-md-8 offset-md-2">
           <div>
-            <h3>Geef hier u tijdslot in:</h3>
+            <h4>Voeg een tijdslot toe:</h4>
           </div>
-          <form class="card p-3 bg-light" action="#" th:action="@{/fragmentsInstellingen}" th:object="${tijdslot}" method="post">
+          <form class="card p-3 bg-light" action="#" th:action="@{/instellingen/tijdslot/add}" th:object="${tijdslot}" method="post">
             <fieldset>
 
-              <div class="openinghourscontent section">
+              <div class="form-group">
+                <input type="hidden"  th:field="*{id}">
+              </div>
 
-                  <h3>OpeningsTijden</h3>
+              <div class="mb-3">
+                <label>Dag</label>
+                <select name="dag" class="form-control">
+                  <option th:each="dag : ${T(com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot.Dag).values()}"
+                          th:value="${dag}" th:text="${dag.displayName}"
+                          th:selected="${tijdsloten.dag.equals(dag)}">
+                  </option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label>Start</label>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('start')}" th:errors="*{start}"></div>
+                <input type="number" class="form-control" th:field="*{start}">
+              </div>
 
-                <div class="row"  >
-                  <table class="table table-hover">
-                    <thead>
-                    <tr>
-                      <th scope="col">Dag</th>
-                      <th scope="col">Start</th>
-                      <th scope="col">Einde</th>
-                      <th scope="col">Actie</th>
+              <div class="mb-3">
+                <label>Einde</label>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('einde')}" th:errors="*{einde}"></div>
+                <input type="number" class="form-control" th:field="*{einde}">
+              </div>
 
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="tijdslot : ${tijdsloten}">
-                      <td th:text="${tijdslot.Dag.displayName}"></td>
-                      <td th:text="${tijdslot.start}"></td>
-                      <td th:text="${tijdslot.einde}"></td>
-                      <td>
-                        <a class="btn btn-sm btn-primary" th:href="@{/instellingen/tijdsloten/edit/} + ${tijdsloten.id}">Edit</a>
-                        <a class="btn btn-sm btn-danger"  th:href="@{/instellingen/tijdsloten/delete/} + ${tijdsloten.id}">Delete</a>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-
-
-
-                <div class="alert alert-primary" role="alert" >
-                  Gelieve de mogelijke tijdsloten toe te voegen.
-                </div>
-
-
-                <a class="btn btn-primary" th:href="@{/instellingen/keuzemogelijkheden}">&#8592;&nbsp;Keuzemogelijkheden</a>
-                <a class="btn btn-primary" th:href="@{/instellingen/tijdslot/add}">&#43;</a>
-
-
+              <p>
+                <a th:href="@{/instellingen/lijsttijdslot}" class="btn btn-secondary ">Annuleren</a>
+                <input class="btn btn-danger" type="submit" value="Bewaren">
+              </p>
 
             </fieldset>
           </form>

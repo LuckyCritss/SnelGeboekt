@@ -48,8 +48,7 @@ public class RegistreerController {
         if (principal != null) {
             return ("redirect:/instellingen");
         }
-        Organisatie organisatie = new Organisatie();
-        model.addAttribute("organisatie", organisatie);
+        model.addAttribute("organisatie", new Organisatie());
         return ("registreer");
     }
 

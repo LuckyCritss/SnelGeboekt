@@ -9,14 +9,21 @@ import com.eindwerk.SnelGeboekt.reservatie.Reservatie;
 import com.eindwerk.SnelGeboekt.reservatie.StepOneData;
 import com.eindwerk.SnelGeboekt.reservatie.StepTwoData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-
 
 @Controller
 @RequestMapping("/reservatie/")
@@ -27,6 +34,7 @@ public class ReservatieController {
     private UserService userService;
     private NotificationService notificationService;
     private Reservatie reservatie;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     public void setReservatieService(ReservatieService reservatieService) {
@@ -46,6 +54,11 @@ public class ReservatieController {
     @Autowired
     public void setNotificationService(NotificationService notificationService) {
         this.notificationService = notificationService;
+    }
+
+    @Autowired
+    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
     }
 
 
@@ -127,6 +140,7 @@ public class ReservatieController {
         if (bindingResult.hasErrors()) {
             return "templatesReservatie/booking_step3";
         }
+        reservatie.setUser(user);
         if(user.getWachtWoord() != null){
             try {
                 userService.save(user);
@@ -144,7 +158,6 @@ public class ReservatieController {
             }
             notificationService.sendAccountRegistrationUser(user);
         }
-        reservatie.setUser(user);
 
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step4";
     }
@@ -176,5 +189,14 @@ public class ReservatieController {
         return "fragmentsReservatie/hours";
     }
 
-
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+    }
+    public void authWithAuthManager(HttpServletRequest request, String email, String password) {
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password);
+        authToken.setDetails(new WebAuthenticationDetails(request));
+        Authentication authentication = authenticationManager.authenticate(authToken);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
 }

@@ -82,7 +82,7 @@ public class OptieController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
         model.addAttribute("optie", optie);
-        return "/templatesInstellingen/keuzemogelijkheden";
+        return "/templatesInstellingen/addkeuzemogelijkheden";
     }
     
     @PostMapping("/instellingen/keuzemogelijkheden/edit/")

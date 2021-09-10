@@ -84,7 +84,7 @@ public class MedewerkerController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
         model.addAttribute("medewerker", medewerker);
-        return "/templatesInstellingen/medewerker";
+        return "/templatesInstellingen/addmedewerker";
     }
     
     @PostMapping("/instellingen/medewerker/edit/")

@@ -6,13 +6,15 @@
 <body>
 <div id="main" class="container">
     <div class="row wrapper">
+
         <div th:replace="fragmentsUser/headUser :: headUser (title)"></div>
+
         <div id="book-appointment-wizard" class="col-12 col-lg-10 col-xl-8">
 
             <div th:replace="fragmentsReservatie/header1"></div>
+            <div th:replace="fragmentsReservatie/optieUser :: optieUser (title)"></div>
             <div th:replace="fragmentsReservatie/step1"></div>
 
-            </div>
 
             <div th:replace="fragments/feed :: feed (title)"></div>
 

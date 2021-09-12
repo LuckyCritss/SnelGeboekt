@@ -1,5 +1,7 @@
 package com.eindwerk.SnelGeboekt.reservatie;
 
+import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
+import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot;
 import com.eindwerk.SnelGeboekt.user.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,10 +28,10 @@ public class Reservatie {
     private String slug;
 
     @Transient
-    private StepOneData stepOneData;
+    private Optie optie;
 
     @Transient
-    private StepTwoData stepTwoData;
+    private Tijdslot tijdslot;
 
     @Transient
     private User user;

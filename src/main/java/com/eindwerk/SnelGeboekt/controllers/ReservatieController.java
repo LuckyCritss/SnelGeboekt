@@ -1,5 +1,9 @@
 package com.eindwerk.SnelGeboekt.controllers;
 
+import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
+import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
+import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot;
+import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.TijdslotService;
 import com.eindwerk.SnelGeboekt.notification.NotificationService;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
 import com.eindwerk.SnelGeboekt.reservatie.ReservatieService;
@@ -24,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/reservatie/")
@@ -35,7 +40,8 @@ public class ReservatieController {
     private NotificationService notificationService;
     private Reservatie reservatie;
     private AuthenticationManager authenticationManager;
-
+    private OptieService optieService;
+    private TijdslotService tijdslotService;
 
     public void setReservatieService(ReservatieService reservatieService) {
         this.reservatieService = reservatieService;
@@ -61,6 +67,15 @@ public class ReservatieController {
         this.authenticationManager = authenticationManager;
     }
 
+    @Autowired
+    public void setOptieService(OptieService optieService) {
+        this.optieService = optieService;
+    }
+
+    @Autowired
+    public void setTijdslotService(TijdslotService tijdslotService) {
+        this.tijdslotService = tijdslotService;
+    }
 
     @GetMapping("/{slug}")
     public String showWidget(@PathVariable String slug) {
@@ -78,14 +93,19 @@ public class ReservatieController {
         if (reservatie == null || reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
-        model.addAttribute("stepOneData", new StepOneData());
+        List<Optie> opties = optieService.getOptiesByOrganisation(organisatieService.getOrganisatieByName(slug));
+        model.addAttribute("optie", opties);
         return "templatesReservatie/booking_step1";
     }
 
+    @PostMapping(value = "/step1", params = "cancel")
+    public String processWidgetStepCancel() {
+        return "redirect:/";
+    }
 
-    @PostMapping("/step1")
-    public String processWidgetStep1(@ModelAttribute StepOneData stepOneData) {
-        reservatie.setStepOneData(stepOneData);
+    @PostMapping(value = "/step1", params = "next")
+    public String processWidgetStep1(@ModelAttribute Optie optie) {
+        reservatie.setOptie(optie);
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step2";
     }
 
@@ -95,9 +115,9 @@ public class ReservatieController {
         if (reservatie == null || reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
-
+        List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByOrganisatie(organisatieService.getOrganisatieByName(slug));
         model.addAttribute("slug", reservatie.getSlug());
-        model.addAttribute("stepTwoData", new StepTwoData());
+        model.addAttribute("tijdslot", tijdsloten);
         return "templatesReservatie/booking_step2";
     }
 
@@ -109,8 +129,8 @@ public class ReservatieController {
 
 
     @PostMapping(value = "/step2", params = "select")
-    public String processWidgetStep2Next(@ModelAttribute StepTwoData stepTwoData, @RequestParam("select") String select) {
-        reservatie.setStepTwoData(stepTwoData);
+    public String processWidgetStep2Next(@ModelAttribute Tijdslot tijdslot, @RequestParam("select") String select) {
+        reservatie.setTijdslot(tijdslot);
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step3";
     }
 

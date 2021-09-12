@@ -34,7 +34,7 @@
                   <tbody>
                   <tr th:each="optie : ${opties}">
                     <td th:text="${optieStat.count}"></td>
-                    <td th:text="${optie.title}"></td>
+                    <td th:text="${optie.titel}"></td>
                     <td th:text="${optie.duurOptie}"></td>
                     <td>
                       <a class="btn btn-sm btn-secondary"  th:href="@{/instellingen/keuzemogelijkheden/edit/} + ${optie.id}">Edit</a>

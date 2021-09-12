@@ -16,13 +16,15 @@ import javax.validation.constraints.NotNull;
 @Table(name="optie")
 public class Optie {
 
+
+
     // voor de keuzemogelijkheden
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotBlank(message = "{org.blank}")
-    private String title;
+    private String titel;
 
     @NotNull(message = "value mismatch")
     private int duurOptie;

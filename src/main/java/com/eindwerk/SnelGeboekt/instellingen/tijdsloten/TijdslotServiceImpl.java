@@ -1,6 +1,7 @@
 package com.eindwerk.SnelGeboekt.instellingen.tijdsloten;
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
+import com.eindwerk.SnelGeboekt.organisatie.OrganisatieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,13 @@ import java.util.List;
 @Service
 public class TijdslotServiceImpl implements TijdslotService {
 
+    private OrganisatieRepository organisatieRepository;
     private TijdslotRepository tijdslotRepository;
+
+    @Autowired
+    public void setOrganisatieRepository(OrganisatieRepository organisatieRepository){
+        this.organisatieRepository = organisatieRepository;
+    }
 
     @Autowired
     public void setTijdslotenRepository(TijdslotRepository tijdslotRepository) {
@@ -22,8 +29,8 @@ public class TijdslotServiceImpl implements TijdslotService {
     }
 
     @Override
-    public void saveOrUpdate(Tijdslot tijdsloten) {
-        tijdslotRepository.save(tijdsloten);
+    public void saveOrUpdate(Tijdslot tijdslot) {
+        tijdslotRepository.save(tijdslot);
     }
 
     @Override
@@ -33,12 +40,18 @@ public class TijdslotServiceImpl implements TijdslotService {
 
     @Override
     public List<Tijdslot> getTijdslotenByOrganisatie(Organisatie organisatie) {
-
         return tijdslotRepository.getTijdslotenByOrganisatie(organisatie);
     }
 
     @Override
     public void delete(int id) {
+        try {
+            // delete tourInfo when available, this will also delete tour (cascade = All)
+            tijdslotRepository.deleteById(id);
+        } catch (Exception e) {
+            // Delete tour only when no tourInfo exists
+            tijdslotRepository.deleteById(id);
+        }
 
     }
 }

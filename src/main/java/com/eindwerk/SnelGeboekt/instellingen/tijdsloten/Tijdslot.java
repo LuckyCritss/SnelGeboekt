@@ -41,6 +41,7 @@ public class Tijdslot {
     @JoinColumn(name = "agenda_id")
     Agenda agenda;
 
+    //@MapsId
     @JoinColumn(name = "organisatie_id")
     @ManyToOne
     private Organisatie organisatie;

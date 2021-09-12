@@ -1,5 +1,6 @@
 package com.eindwerk.SnelGeboekt.controllers;
 
+import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
 import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot;
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.TijdslotService;
@@ -24,7 +25,7 @@ public class TijdslotController {
 
     private OrganisatieService organisatieService;
     private TijdslotService tijdslotService;
-    private OptieService optieService;
+
 
     @Autowired
     public void setOrganisatieService(OrganisatieService organisatieService){
@@ -32,19 +33,22 @@ public class TijdslotController {
     }
 
     @Autowired
-    public void setTijdslotenService(TijdslotService tijdslotService) {
+    public void setTijdslotService(TijdslotService tijdslotService) {
         this.tijdslotService = tijdslotService;
     }
 
-    @Autowired
-    public void setOptieService(OptieService optieService) {
-        this.optieService = optieService;
+
+    @GetMapping("/instel/")
+    public String listTijdslot(Model model){
+        model.addAttribute("tijdsloten", tijdslotService.getAll());
+        return "fragmentsInstellingen/lijsttijdsloten";
     }
+
 
     @GetMapping("/instellingen/tijdslot")
     public String tijdslotHandler(Principal principal, Model model) {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
-            List<Tijdslot> tijdsloten = tijdslotService.getAll();
+            List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByOrganisatie(organisatieService.getOrganisatieByEmail(principal.getName()));
             model.addAttribute("tijdloten", tijdsloten);
             return ("/templatesInstellingen/tijdslot");
         }
@@ -69,20 +73,11 @@ public class TijdslotController {
             tijdslot.setOrganisatie(organisatieService.getOrganisatieByEmail(principal.getName()));
             tijdslotService.saveOrUpdate(tijdslot);
         }catch (DataIntegrityViolationException e) {
-            if (e.getMessage().contains("tijdsloten_unique")) {
-                bindingResult.rejectValue("tijdsloten","tijdsloten-unique",e.getMessage());
+            if (e.getMessage().contains("tijdslot_unique")) {
+                bindingResult.rejectValue("tijdslot","tijdslot-unique",e.getMessage());
             }
             return "/templatesInstellingen/addtijdsloten";
         }
-        return "redirect:/instellingen/tijdslot";
-    }
-
-    @PostMapping("/instellingen/tijdslot/edit")
-    public String processForm(@Valid @ModelAttribute Tijdslot tijdslot, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "/templatesInstellingen/tijdslot";
-        }
-        tijdslotService.saveOrUpdate(tijdslot);
         return "redirect:/instellingen/tijdslot";
     }
 
@@ -93,8 +88,19 @@ public class TijdslotController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
         model.addAttribute("tijdslot", tijdslot);
-        return "/templatesInstellingen/tijdslot";
+        return "/templatesInstellingen/addtijdslot";
     }
+
+    @PostMapping("/instellingen/tijdslot/edit/")
+    public String processForm(@Valid @ModelAttribute Tijdslot tijdslot, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/templatesInstellingen/tijdslot";
+        }
+        tijdslotService.saveOrUpdate(tijdslot);
+        return "redirect:/instellingen/tijdslot";
+    }
+
+
 
     @GetMapping("/instellingen/tijdslot/delete/{id}")
     public String delete(@PathVariable int id){

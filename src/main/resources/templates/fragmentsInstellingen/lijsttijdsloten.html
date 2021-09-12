@@ -39,30 +39,31 @@
 
                     </tr>
                     </thead>
+                    <div class="row" th:if="${tijdsloten !=null && !tijdsloten.empty}">
                     <tbody>
                     <tr th:each="tijdslot : ${tijdsloten}">
                       <td th:text="${tijdslot.Dag.displayName}"></td>
                       <td th:text="${tijdslot.start}"></td>
                       <td th:text="${tijdslot.einde}"></td>
                       <td>
-                        <a class="btn btn-sm btn-primary" th:href="@{/instellingen/tijdsloten/edit/} + ${tijdsloten.id}">Edit</a>
-                        <a class="btn btn-sm btn-danger"  th:href="@{/instellingen/tijdsloten/delete/} + ${tijdsloten.id}">Delete</a>
+                        <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/tijdsloten/edit/} + ${tijdsloten.id}">Edit</a>
+                        <a class="btn btn-sm btn-secondary"  th:href="@{/instellingen/tijdsloten/delete/} + ${tijdsloten.id}">Delete</a>
                       </td>
                     </tr>
                     </tbody>
+                    </div>
                   </table>
                 </div>
 
 
 
-
-                <div class="alert alert-primary" role="alert" >
+                <div class="alert alert-primary" role="alert" th:if="${tijdsloten == null || tijdsloten.empty}">
                   Gelieve de mogelijke tijdsloten toe te voegen.
                 </div>
 
 
-                <a class="btn btn-primary" th:href="@{/instellingen/keuzemogelijkheden}">&#8592;&nbsp;Keuzemogelijkheden</a>
-                <a class="btn btn-primary" th:href="@{/instellingen/tijdslot/add}">&#43;</a>
+                <a class="btn btn-danger" th:href="@{/instellingen/keuzemogelijkheden}">&#8592;&nbsp;Keuzemogelijkheden</a>
+                <a class="btn btn-danger" th:href="@{/instellingen/tijdslot/add}">&#43;</a>
 
 
 

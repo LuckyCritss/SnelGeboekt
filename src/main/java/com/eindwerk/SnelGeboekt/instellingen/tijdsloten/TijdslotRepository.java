@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface TijdslotRepository extends JpaRepository<Tijdslot, Integer> {
 
-    Tijdslot getTijdslotenById(Integer integer);
 
     @Query("select t from Tijdslot t where t.organisatie = :organisatie")
     List<Tijdslot> getTijdslotenByOrganisatie(@Param("organisatie") Organisatie organisatie);

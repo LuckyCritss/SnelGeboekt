@@ -10,7 +10,6 @@
 
   <div class="reclame">
 
-
       <div class="container"  style=" float: right; margin: 30px;margin-right: 30px; border: 1px solid #999; clear: right; width: 500px; height: 250px">
           <img src="/Afbeeldingen/snel.jpg" style="height: 250px; width: 480px; margin-right: 30px">
           </div>
@@ -22,15 +21,30 @@
       <h3 class="frame-title">Kies het bedrijf waar je een reservatie wil maken</h3>
         <br>
         <br>
-          <select id="select-provider" class="form-control" style="width: 700px">
-              <option value="${organisation}" selected>${organisation.organisation}</option>
-              <option value="Alt Bike" selected="">Alt Bike</option>
-              <option value="Athletics Area" selected="">Athletics Area</option>
-          </select>
-      </div>
-    <br>
-    <br>
-    </p>
+  //    <form action="#" th:action="@{/instellingen}" th:object="${organisatie}" method="post">
+      <fieldset>
+          <div class="container" >
+              <table class="table table_striped">
+                  <thead>
+                  <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Bedrijfsnaam</th>
+                      <th scope="col">Url</th>
+                  </tr>
+                  </thead>
+                  <div class="row" th:if="${organisatie !=null && !organisatie.empty}">
+                      <tbody>
+                      <tr th:each="organisatie : ${organisatie}">
+                          <td th:text="${organisatieStat.count}"></td>
+                          <td th:text="${organisatie.bedrijfsNaam}"></td>
+                          <td th:text="${organisatie.paginaNaam}"></td>
+                      </tr>
+                      </tbody>
+                  </div>
+              </table>
+          </div>
+      </fieldset>
+      </form>
 </div>
 </div>
 </body>

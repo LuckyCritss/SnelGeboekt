@@ -1,5 +1,6 @@
 package com.eindwerk.SnelGeboekt.instellingen.tijdsloten;
 
+import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
 import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 
@@ -13,7 +14,7 @@ public interface TijdslotService {
 
     Tijdslot getById(int id);
 
-    List<Tijdslot> getTijdslotenByOrganisatie(Organisatie organisatie);
+    List<Tijdslot> getTijdslotenByMedewerker(Medewerker medewerker);
 
     void delete(int id);
 }

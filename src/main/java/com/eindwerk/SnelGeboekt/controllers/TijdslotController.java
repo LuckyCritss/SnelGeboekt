@@ -1,6 +1,7 @@
 package com.eindwerk.SnelGeboekt.controllers;
 
 import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
+import com.eindwerk.SnelGeboekt.instellingen.medewerker.MedewerkerService;
 import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot;
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.TijdslotService;
@@ -25,11 +26,16 @@ public class TijdslotController {
 
     private OrganisatieService organisatieService;
     private TijdslotService tijdslotService;
-
+    private MedewerkerService medewerkerService;
 
     @Autowired
     public void setOrganisatieService(OrganisatieService organisatieService){
         this.organisatieService = organisatieService;
+    }
+
+    @Autowired
+    public void setMedewerkerService(MedewerkerService medewerkerService) {
+        this.medewerkerService = medewerkerService;
     }
 
     @Autowired
@@ -38,25 +44,18 @@ public class TijdslotController {
     }
 
 
-    @GetMapping("/instel/")
-    public String listTijdslot(Model model){
-        model.addAttribute("tijdsloten", tijdslotService.getAll());
-        return "fragmentsInstellingen/lijsttijdsloten";
-    }
-
-
-    @GetMapping("/instellingen/tijdslot")
-    public String tijdslotHandler(Principal principal, Model model) {
+    @GetMapping("/instellingen/medewerker/{id}/tijdslot")
+    public String tijdslotHandler(@PathVariable int id, Principal principal, Model model) {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
-            List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByOrganisatie(organisatieService.getOrganisatieByEmail(principal.getName()));
+            List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByMedewerker(medewerkerService.getMedewerkerById(id));
             model.addAttribute("tijdloten", tijdsloten);
             return ("/templatesInstellingen/tijdslot");
         }
         return "redirect:/instellingen";
     }
 
-    @GetMapping("/instellingen/tijdslot/add")
-    public String add(Model model,Principal principal) {
+    @GetMapping("/instellingen/medewerker/{id}/tijdslot/add")
+    public String add(@PathVariable int id, Model model,Principal principal) {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
             model.addAttribute("tijdslot", new Tijdslot());
             return "/templatesInstellingen/addtijdsloten";
@@ -64,13 +63,13 @@ public class TijdslotController {
         return "redirect:/instellingen";
     }
 
-    @PostMapping("/instellingen/tijdslot/add")
-    public String addForm(@Valid @ModelAttribute Tijdslot tijdslot, BindingResult bindingResult, Principal principal) {
+    @PostMapping("/instellingen/medewerker/{id}/tijdslot/add")
+    public String addForm(@PathVariable int id, @Valid @ModelAttribute Tijdslot tijdslot, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
             return "/templatesInstellingen/addtijdsloten";
         }
         try {
-            tijdslot.setOrganisatie(organisatieService.getOrganisatieByEmail(principal.getName()));
+            tijdslot.setMedewerker(medewerkerService.getMedewerkerById(id));
             tijdslotService.saveOrUpdate(tijdslot);
         }catch (DataIntegrityViolationException e) {
             if (e.getMessage().contains("tijdslot_unique")) {
@@ -81,7 +80,7 @@ public class TijdslotController {
         return "redirect:/instellingen/tijdslot";
     }
 
-    @GetMapping("/instellingen/tijdsloten/edit/{id}")
+    @GetMapping("/instellingen/medewerker/{id}/tijdsloten/edit")
     public String edit(@PathVariable int id, Model model) {
         Tijdslot tijdslot = tijdslotService.getById(id);
         if (tijdslot == null) {
@@ -91,8 +90,8 @@ public class TijdslotController {
         return "/templatesInstellingen/addtijdslot";
     }
 
-    @PostMapping("/instellingen/tijdslot/edit/")
-    public String processForm(@Valid @ModelAttribute Tijdslot tijdslot, BindingResult bindingResult) {
+    @PostMapping("/instellingen/medewerker/{id}/tijdslot/edit")
+    public String processForm(@PathVariable int id, @Valid @ModelAttribute Tijdslot tijdslot, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/templatesInstellingen/tijdslot";
         }
@@ -102,7 +101,7 @@ public class TijdslotController {
 
 
 
-    @GetMapping("/instellingen/tijdslot/delete/{id}")
+    @GetMapping("/instellingen/medewerker/{id}/tijdslot/delete")
     public String delete(@PathVariable int id){
         Tijdslot tijdslot = tijdslotService.getById(id);
         if (tijdslot == null) {

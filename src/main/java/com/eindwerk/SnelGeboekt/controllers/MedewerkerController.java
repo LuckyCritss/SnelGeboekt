@@ -35,6 +35,7 @@ public class MedewerkerController {
         this.medewerkerService = medewerkerService;
     }
 
+
     @GetMapping("/instellingen/")
     public String list(Model model) {
         model.addAttribute("medewerkers", medewerkerService.getAll());
@@ -44,7 +45,7 @@ public class MedewerkerController {
     @GetMapping("/instellingen/medewerker")
     public String medewerkerHandler(Principal principal, Model model) {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
-            List<Medewerker> medewerkers = medewerkerService.getMedewerkerByOrganisation(organisatieService.getOrganisatieByEmail(principal.getName()));
+            List<Medewerker> medewerkers = medewerkerService.getMedewerkersByOrganisation(organisatieService.getOrganisatieByEmail(principal.getName()));
             model.addAttribute("medewerkers", medewerkers);
             return "/templatesInstellingen/medewerker";
         }
@@ -87,8 +88,8 @@ public class MedewerkerController {
         return "/templatesInstellingen/addmedewerker";
     }
     
-    @PostMapping("/instellingen/medewerker/edit/")
-    public String processForm(@Valid @ModelAttribute Medewerker medewerker, BindingResult bindingResult) {
+    @PostMapping("/instellingen/medewerker/edit/{id}")
+    public String processForm(@PathVariable int id, @Valid @ModelAttribute Medewerker medewerker, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/fragmentsInstellingen/medewerker";
         }

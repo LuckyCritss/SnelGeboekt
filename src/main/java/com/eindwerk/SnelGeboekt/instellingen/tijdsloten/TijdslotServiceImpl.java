@@ -1,5 +1,6 @@
 package com.eindwerk.SnelGeboekt.instellingen.tijdsloten;
 
+import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,8 @@ public class TijdslotServiceImpl implements TijdslotService {
     }
 
     @Override
-    public List<Tijdslot> getTijdslotenByOrganisatie(Organisatie organisatie) {
-        return tijdslotRepository.getTijdslotenByOrganisatie(organisatie);
+    public List<Tijdslot> getTijdslotenByMedewerker(Medewerker medewerker) {
+        return tijdslotRepository.getTijdslotenByMedewerker(medewerker);
     }
 
     @Override

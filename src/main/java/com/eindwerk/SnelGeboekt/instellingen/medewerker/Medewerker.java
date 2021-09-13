@@ -24,9 +24,7 @@ public class Medewerker {
                 MedewerkerLijst(String naamMedewerker) {
                         this.naamMedewerker = naamMedewerker;
                 }
-
-
-
+                
                 public String getDisplayName() {
                         return naamMedewerker;
                 }

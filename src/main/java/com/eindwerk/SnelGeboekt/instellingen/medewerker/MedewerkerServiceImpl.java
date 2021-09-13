@@ -43,11 +43,16 @@ public class MedewerkerServiceImpl implements MedewerkerService {
 
 
         @Override
-        public List<Medewerker> getMedewerkerByOrganisation(Organisatie organisatie) {
-            return medewerkerRepository.getMedewerkerByOrganisatie(organisatie);
+        public List<Medewerker> getMedewerkersByOrganisation(Organisatie organisatie) {
+            return medewerkerRepository.getMedewerkersByOrganisatie(organisatie);
         }
 
-        @Override
+    @Override
+    public Medewerker getMedewerkerById(int id) {
+        return medewerkerRepository.getMedewerkerById(id);
+    }
+
+    @Override
         public void delete(int id) {
             try {
                 // delete tourInfo when available, this will also delete tour (cascade = All)

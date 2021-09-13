@@ -1,5 +1,6 @@
 package com.eindwerk.SnelGeboekt.instellingen.tijdsloten;
 
+import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,12 +39,9 @@ public class Tijdslot {
     private String einde;
 
     @ManyToOne
-    @JoinColumn(name = "agenda_id")
-    Agenda agenda;
+    @JoinColumn(name = "medewerker_id")
+    Medewerker medewerker;
 
-    //@MapsId
-    @JoinColumn(name = "organisatie_id")
-    @ManyToOne
-    private Organisatie organisatie;
+
 
 }

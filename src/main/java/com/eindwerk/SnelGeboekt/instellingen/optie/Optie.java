@@ -1,6 +1,7 @@
 
 package com.eindwerk.SnelGeboekt.instellingen.optie;
 
+import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,10 +30,9 @@ public class Optie {
     @NotNull(message = "value mismatch")
     private int duurOptie;
 
-    //  @MapsId
-    @JoinColumn(name = "organisatie_id")
     @ManyToOne
-    private Organisatie organisatie;
+    @JoinColumn(name = "medewerker_id")
+    Medewerker medewerker;
 }
 
 

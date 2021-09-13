@@ -36,21 +36,22 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="select-provider">
+                            <label for="naamMedewerker">
                                 <strong>Medewerker</strong>
                             </label>
-                            <form class="card p-3 bg-light" action="#" th:action="@{/fragmentsInstellingen/lijstmedewerkers}" th:object="${medewerker}" method="post">
-                            <select id="select-provider" class="form-control">
-                                <option value="any-provider" selected="">Niet van toepassing</option>
-                                <select id="medewerker" class="form-control" th:field="*{medewerkers}">
-                                    <option th:each="medewerker : ${T(com.eindwerk.SnelGeboekt.instellingen.medewerker).values()}"
-                                            th:value="${medewerker}" th:text="${medewerker.naam}"
-                                            th:selected="${medewerker.naam != null ? medewerker.naam.equals(naam) : false}"></option>
+                            <select id="naamMedewerker" class="form-control">
+                                    <option th:each="naamMedewerker : ${T(com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker.MedewerkerLijst).values()}"
+                                            th:value="${naamMedewerker}" th:text="${MedewerkerLijst.naamMedewerker}">
+
+                                    </option>
                                 </select>
-                            </select>
-                            </form>
                         </div>
                     </div>
+                </div>
+
+                        </div>
+        </form>
+    </main>
                     </div>
             </div>
         </form>

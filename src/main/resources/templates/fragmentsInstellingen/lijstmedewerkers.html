@@ -37,8 +37,8 @@
                     <td>
                       <a class="btn btn-sm btn-secondary"  th:href="@{/instellingen/medewerker/edit/} + ${medewerker.id}">Edit</a>
                       <a class="btn btn-sm btn-secondary"  th:href="@{/instellingen/medewerker/delete/} + ${medewerker.id}">Delete</a>
-                      <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/medewerker/${medewerker.id}/keuzemogelijkheden}">Dienst</a>
-                      <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/medewerker/${medewerker.id}/tijdslot}">Tijdslot</a>
+                      <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/medewerker/{medewerkerId}/keuzemogelijkheden/add(medewerkerId=${medewerker.id})}">Dienst</a>
+                      <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/medewerker/{medewerkerId}/tijdslot/add(medewerkerId=${medewerker.id})}">Tijdslot</a>
                     </td>
                   </tr>
                   </tbody>

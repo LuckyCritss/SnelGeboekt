@@ -57,11 +57,5 @@ public class Organisatie {
     private String straat;
 
     @OneToMany(mappedBy = "organisatie")
-    private List<Agenda> agenda;
-
-    @OneToMany(mappedBy = "organisatie")
-    private List<Optie> opties;
-
-    @OneToMany(mappedBy = "organisatie")
     private List<Medewerker> medewerker;
 }

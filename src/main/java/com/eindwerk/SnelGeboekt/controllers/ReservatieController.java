@@ -1,17 +1,19 @@
+/*
 package com.eindwerk.SnelGeboekt.controllers;
 
+import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
+import com.eindwerk.SnelGeboekt.instellingen.medewerker.MedewerkerService;
 import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
 import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot;
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.TijdslotService;
 import com.eindwerk.SnelGeboekt.notification.NotificationService;
+import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
 import com.eindwerk.SnelGeboekt.reservatie.ReservatieService;
 import com.eindwerk.SnelGeboekt.user.User;
 import com.eindwerk.SnelGeboekt.user.UserService;
 import com.eindwerk.SnelGeboekt.reservatie.Reservatie;
-import com.eindwerk.SnelGeboekt.reservatie.StepOneData;
-import com.eindwerk.SnelGeboekt.reservatie.StepTwoData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -25,7 +27,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.List;
@@ -34,6 +35,7 @@ import java.util.List;
 @RequestMapping("/reservatie/")
 public class ReservatieController {
 
+    private MedewerkerService medewerkerService;
     private ReservatieService reservatieService;
     private OrganisatieService organisatieService;
     private UserService userService;
@@ -43,38 +45,37 @@ public class ReservatieController {
     private OptieService optieService;
     private TijdslotService tijdslotService;
 
+    @Autowired
     public void setReservatieService(ReservatieService reservatieService) {
         this.reservatieService = reservatieService;
     }
-
     @Autowired
     public void setOrganisatieService(OrganisatieService organisatieService) {
         this.organisatieService = organisatieService;
     }
-
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
-
     @Autowired
     public void setNotificationService(NotificationService notificationService) {
         this.notificationService = notificationService;
     }
-
     @Autowired
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
-
     @Autowired
     public void setOptieService(OptieService optieService) {
         this.optieService = optieService;
     }
-
     @Autowired
     public void setTijdslotService(TijdslotService tijdslotService) {
         this.tijdslotService = tijdslotService;
+    }
+    @Autowired
+    public void setMedewerkerService(MedewerkerService medewerkerService) {
+        this.medewerkerService = medewerkerService;
     }
 
     @GetMapping("/{slug}")
@@ -93,8 +94,11 @@ public class ReservatieController {
         if (reservatie == null || reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
-        List<Optie> opties = optieService.getOptiesByOrganisation(organisatieService.getOrganisatieByName(slug));
+        Organisatie organisatie = organisatieService.getOrganisatieByName(slug);
+        List<Optie> opties = optieService.getOptiesByMedewerkers();
+        List<Medewerker> medewerkers = medewerkerService.getMedewerkersByOrganisation(organisatie);
         model.addAttribute("optie", opties);
+        model.addAttribute("medewerker", medewerkers);
         return "templatesReservatie/booking_step1";
     }
 
@@ -115,8 +119,8 @@ public class ReservatieController {
         if (reservatie == null || reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
-        List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByOrganisatie(organisatieService.getOrganisatieByName(slug));
-        model.addAttribute("slug", reservatie.getSlug());
+        Organisatie organisatie = organisatieService.getOrganisatieByName(slug);
+        List<Tijdslot> tijdsloten = tijdslotService.get(organisatie);
         model.addAttribute("tijdslot", tijdsloten);
         return "templatesReservatie/booking_step2";
     }
@@ -219,4 +223,8 @@ public class ReservatieController {
         Authentication authentication = authenticationManager.authenticate(authToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
+
+
 }
+
+ */

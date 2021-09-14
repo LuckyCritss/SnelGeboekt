@@ -39,7 +39,7 @@
                     <td>
                       <a class="btn btn-sm btn-secondary"  th:href="@{/instellingen/medewerker/} + ${idMedewerker} + @{/keuzemogelijkheden/edit/} + ${optie.id}">Edit</a>
                       <a class="btn btn-sm btn-secondary"  th:href="@{/instellingen/medewerker/} + ${idMedewerker} + @{/keuzemogelijkheden/delete/} + ${optie.id}">Delete</a>
-                      <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/medewerker/}">Medewerker</a>
+                      <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/medewerker/}  + ${idMedewerker} + @{/tijdslot}">Tijdslot</a>
                     </td>
                   </tr>
                   </tbody>
@@ -51,7 +51,7 @@
                 Gelieve de mogelijke optie's toe te voegen.
               </div>
 
-              <a class="btn btn-danger" th:href="@{/}">&#8592;&nbsp;Home</a>
+              <a class="btn btn-danger" th:href="@{/instellingen/medewerker/}">&#8592;&nbsp;Medewerker</a>
               <a class="btn btn-danger" th:href="@{/instellingen/medewerker/} + ${idMedewerker} + @{/keuzemogelijkheden/add}">&#43;</a>
             </fieldset>
           </form>

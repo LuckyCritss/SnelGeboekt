@@ -48,7 +48,7 @@ public class TijdslotController {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
             List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByMedewerker(medewerkerService.getMedewerkerById(id));
             model.addAttribute("idMedewerker", id);
-            model.addAttribute("tijdloten", tijdsloten);
+            model.addAttribute("tijdsloten", tijdsloten);
             return ("/templatesInstellingen/tijdslot");
         }
         return "redirect:/instellingen";
@@ -81,25 +81,26 @@ public class TijdslotController {
         return "redirect:/instellingen/medewerker/" + id + "/tijdslot";
     }
 
-    @GetMapping("/instellingen/medewerker/{id}/tijdsloten/edit/{idTijdslot}")
+    @GetMapping("/instellingen/medewerker/{id}/tijdslot/edit/{idTijdslot}")
     public String edit(@PathVariable int id,@PathVariable int idTijdslot, Model model) {
-        Tijdslot tijdslot = tijdslotService.getById(id);
+        Tijdslot tijdslot = tijdslotService.getById(idTijdslot);
+        idTijdslot = tijdslot.getId();
         if (tijdslot == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
         model.addAttribute("idMedewerker", id);
         model.addAttribute("idTijdslot", idTijdslot);
         model.addAttribute("tijdslot", tijdslot);
-        return "/templatesInstellingen/addtijdslot";
+        return "/templatesInstellingen/addtijdsloten";
     }
 
     @PostMapping("/instellingen/medewerker/{id}/tijdslot/edit/{idTijdslot}")
     public String processForm(@PathVariable int id, @PathVariable int idTijdslot, @Valid @ModelAttribute Tijdslot tijdslot, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/templatesInstellingen/tijdslot";
+            return "/fragmentsInstellingen/tijdslot";
         }
         tijdslotService.saveOrUpdate(tijdslot);
-        return "redirect:instellingen/medewerker/" + id + "/tijdslot";
+        return "redirect:/instellingen/medewerker/" + id + "/tijdslot";
     }
 
 
@@ -111,7 +112,7 @@ public class TijdslotController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
         tijdslotService.delete(idTijdslot);
-        return "redirect:instellingen/medewerker/" + id + "/tijdslot";
+        return "redirect:/instellingen/medewerker/" + id + "/tijdslot";
     }
 
     @InitBinder

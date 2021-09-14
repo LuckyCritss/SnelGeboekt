@@ -43,7 +43,7 @@ public class Medewerker {
         
         //  @MapsId
         @JoinColumn(name = "organisatie_id")
-        @ManyToOne(cascade = {CascadeType.ALL})
+        @ManyToOne
         private Organisatie organisatie;
 
 }

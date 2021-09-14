@@ -56,6 +56,6 @@ public class Organisatie {
     @Column(name = "street")
     private String straat;
 
-    @OneToMany(mappedBy = "organisatie",cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "organisatie")
     private List<Medewerker> medewerker;
 }

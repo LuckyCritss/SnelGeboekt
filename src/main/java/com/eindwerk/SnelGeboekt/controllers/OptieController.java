@@ -40,6 +40,11 @@ public class OptieController {
         this.optieService = optieService;
     }
 
+    @GetMapping
+    public String list(Model model) {
+        model.addAttribute("opties", optieService.getAll());
+        return "fragmentsInstellingen/lijstkeuzemogelijk";
+    }
 
     @GetMapping("/instellingen/medewerker/{id}/keuzemogelijkheden")
     public String keuzemogelijkhedenHandler(@PathVariable int id, Principal principal, Model model) {

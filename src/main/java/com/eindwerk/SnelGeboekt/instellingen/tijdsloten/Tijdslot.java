@@ -38,7 +38,7 @@ public class Tijdslot {
 
     private String einde;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "medewerker_id")
     Medewerker medewerker;
 

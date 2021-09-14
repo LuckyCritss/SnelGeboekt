@@ -19,7 +19,7 @@
 <div class="registreer" th:fragment="optieUser">
 
     <main class="form-signin">
-        <form action="#" th:action="@{/reservatie/step1}" th:object="${optie}" method="post">
+        <form action="#" th:action="@{/reservatie/} + ${slug} + @{/step1}" th:object="${optie}" th:object="${medewerker}" method="post">
             <div class="frame-container">
                 <h2 class="frame-title">Kies een dienst en een medewerker</h2>
                 <div class="row frame-content">
@@ -41,7 +41,7 @@
                             </label>
                             <select id="naamMedewerker" class="form-control">
                                     <option th:each="naamMedewerker : ${T(com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker.MedewerkerLijst).values()}"
- //                                           th:value="${naamMedewerker}" th:text="${MedewerkerLijst.naamMedewerker}">
+                                            th:value="${naamMedewerker}" th:text="${MedewerkerLijst.naamMedewerker}">
 
                                     </option>
                                 </select>

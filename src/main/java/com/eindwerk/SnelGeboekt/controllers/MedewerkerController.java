@@ -2,6 +2,8 @@ package com.eindwerk.SnelGeboekt.controllers;
 
 import com.eindwerk.SnelGeboekt.instellingen.medewerker.MedewerkerService;
 import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
+import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
+import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.TijdslotService;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -24,17 +26,25 @@ public class MedewerkerController {
 
     private MedewerkerService medewerkerService;
     private OrganisatieService organisatieService;
+    private TijdslotService tijdslotService;
+    private OptieService optieService;
 
     @Autowired
     public void setOrganisatieService(OrganisatieService organisatieService) {
         this.organisatieService = organisatieService;
     }
-
     @Autowired
     public void setMedewerkerService(MedewerkerService medewerkerService) {
         this.medewerkerService = medewerkerService;
     }
-
+    @Autowired
+    public void setTijdslotService(TijdslotService tijdslotService) {
+        this.tijdslotService = tijdslotService;
+    }
+    @Autowired
+    public void setOptieService(OptieService optieService) {
+        this.optieService = optieService;
+    }
 
     @GetMapping("/instellingen/medewerker")
     public String medewerkerHandler(Principal principal, Model model) {
@@ -93,7 +103,7 @@ public class MedewerkerController {
 
     @GetMapping("/instellingen/medewerker/delete/{id}")
     public String delete(@PathVariable int id){
-        Medewerker medewerker = medewerkerService.getById(id);
+        Medewerker medewerker = medewerkerService.getMedewerkerById(id);
         if (medewerker == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }

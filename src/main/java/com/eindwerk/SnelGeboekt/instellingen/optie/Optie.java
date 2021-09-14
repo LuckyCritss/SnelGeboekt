@@ -30,7 +30,7 @@ public class Optie {
     @NotNull(message = "value mismatch")
     private int duurOptie;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "medewerker_id")
     Medewerker medewerker;
 }

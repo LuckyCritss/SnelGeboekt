@@ -17,8 +17,12 @@ public interface OptieService {
 
     List<Optie> getOptiesByMedewerker(Medewerker medewerker);
 
+    List<Optie> getOptiesByMedewerkers(List<Medewerker> medewerkers);
+
     int GetDuurOptie(int DuurOptie);
 
-    public void delete(int id);
+    void delete(int id);
+
+    void deleteOptiesByMedewerkerId(int medewerkerId);
 }
 

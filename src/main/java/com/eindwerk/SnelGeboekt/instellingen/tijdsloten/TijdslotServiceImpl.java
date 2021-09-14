@@ -1,7 +1,6 @@
 package com.eindwerk.SnelGeboekt.instellingen.tijdsloten;
 
 import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
-import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +44,11 @@ public class TijdslotServiceImpl implements TijdslotService {
     }
 
     @Override
+    public List<Tijdslot> getTijdslotenByMedewerkers(List<Medewerker> medewerkers) {
+        return tijdslotRepository.getTijdslotenByMedewerkers(medewerkers);
+    }
+
+    @Override
     public void delete(int id) {
         try {
             // delete tourInfo when available, this will also delete tour (cascade = All)
@@ -53,6 +57,16 @@ public class TijdslotServiceImpl implements TijdslotService {
             // Delete tour only when no tourInfo exists
             tijdslotRepository.deleteById(id);
         }
+    }
 
+    @Override
+    public void deleteTijdslotenByMedewerkerId(int medewerkerId) {
+        try {
+            // delete tourInfo when available, this will also delete tour (cascade = All)
+            tijdslotRepository.deleteTijdslotenByMedewerkerId(medewerkerId);
+        } catch (Exception e) {
+            // Delete tour only when no tourInfo exists
+            tijdslotRepository.deleteTijdslotenByMedewerkerId(medewerkerId);
+        }
     }
 }

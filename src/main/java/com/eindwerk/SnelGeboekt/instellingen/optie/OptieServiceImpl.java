@@ -42,6 +42,11 @@ public class OptieServiceImpl implements OptieService {
     }
 
     @Override
+    public List<Optie> getOptiesByMedewerkers(List<Medewerker> medewerkers) {
+        return optieRepository.getOptiesByMedewerkers(medewerkers);
+    }
+
+    @Override
     public int GetDuurOptie(int DuurOptie){
         return DuurOptie;
     }
@@ -55,6 +60,17 @@ public class OptieServiceImpl implements OptieService {
         } catch (Exception e) {
             // Delete tour only when no tourInfo exists
             optieRepository.deleteById(id);
+        }
+    }
+
+    @Override
+    public void deleteOptiesByMedewerkerId(int medewerkerId) {
+        try {
+            // delete tourInfo when available, this will also delete tour (cascade = All)
+            optieRepository.deleteOptiesByMedewerkerId(medewerkerId);
+        } catch (Exception e) {
+            // Delete tour only when no tourInfo exists
+            optieRepository.deleteOptiesByMedewerkerId(medewerkerId);
         }
     }
 

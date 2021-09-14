@@ -17,6 +17,6 @@ public interface MedewerkerService {
 
     Medewerker getMedewerkerById(int id);
 
-    public void delete(int id);
+    void delete(int id);
 }
 

@@ -1,4 +1,3 @@
-/*
 package com.eindwerk.SnelGeboekt.controllers;
 
 import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
@@ -94,11 +93,11 @@ public class ReservatieController {
         if (reservatie == null || reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
-        Organisatie organisatie = organisatieService.getOrganisatieByName(slug);
-        List<Optie> opties = optieService.getOptiesByMedewerkers();
-        List<Medewerker> medewerkers = medewerkerService.getMedewerkersByOrganisation(organisatie);
-        model.addAttribute("optie", opties);
-        model.addAttribute("medewerker", medewerkers);
+        List<Medewerker> medewerkers = medewerkerService.getMedewerkersByOrganisation(organisatieService.getOrganisatieByName(slug));
+        List<Optie> opties = optieService.getOptiesByMedewerkers(medewerkers);
+        model.addAttribute("slug", slug);
+        model.addAttribute("medewerkers", medewerkers);
+        model.addAttribute("opties", opties);
         return "templatesReservatie/booking_step1";
     }
 
@@ -119,9 +118,10 @@ public class ReservatieController {
         if (reservatie == null || reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
-        Organisatie organisatie = organisatieService.getOrganisatieByName(slug);
-        List<Tijdslot> tijdsloten = tijdslotService.get(organisatie);
-        model.addAttribute("tijdslot", tijdsloten);
+        List<Medewerker> medewerkers = medewerkerService.getMedewerkersByOrganisation(organisatieService.getOrganisatieByName(slug));
+        List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByMedewerkers(medewerkers);
+        model.addAttribute("medewerkers", medewerkers);
+        model.addAttribute("tijdsloten", tijdsloten);
         return "templatesReservatie/booking_step2";
     }
 
@@ -226,5 +226,3 @@ public class ReservatieController {
 
 
 }
-
- */

@@ -33,7 +33,7 @@ public class OrganisatieServiceImpl implements OrganisatieService{
 
     @Override
     public List<Organisatie> getAll() {
-        return null;
+        return organisatieRepository.findAll();
     }
 
     @Override

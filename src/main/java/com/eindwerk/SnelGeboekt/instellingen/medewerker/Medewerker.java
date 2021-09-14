@@ -1,5 +1,6 @@
 package com.eindwerk.SnelGeboekt.instellingen.medewerker;
 
+import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
 @Entity
@@ -36,6 +38,7 @@ public class Medewerker {
         private int id;
 
         @NotNull(message = "value mismatch")
+        @Transient
         private MedewerkerLijst naamMedewerker = MedewerkerLijst.NVT;
 
         @NotBlank(message = "{org.blank}")
@@ -43,7 +46,12 @@ public class Medewerker {
         
         //  @MapsId
         @JoinColumn(name = "organisatie_id")
-        @ManyToOne
+        @ManyToOne()
         private Organisatie organisatie;
 
+        @OneToMany(mappedBy = "medewerker" , orphanRemoval = true, cascade = CascadeType.ALL)
+        private List<Tijdslot> tijdslot;
+
+        @OneToMany(mappedBy = "medewerker" , orphanRemoval = true, cascade = CascadeType.ALL)
+        private List<Optie> opties;
 }

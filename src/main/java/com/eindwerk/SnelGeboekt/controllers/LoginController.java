@@ -33,23 +33,6 @@ public class LoginController {
         return ("login");
     }
 
-    @GetMapping("/loginUser")
-    public String rootHandlerUser(Principal principal ,HttpServletRequest request) {
-        if (principal == null ) {
-            //authWithAuthManager(request, "admin", "admin");
-        }
-        if (principal != null) {
-            return ("redirect:/instellingen");
-        }
-        return ("loginUser");
-    }
-
-    @GetMapping("/templatesUser/boeking")
-    public String onlineReservatie(Principal principal ,HttpServletRequest request) {
-        return ("/templatesUser/boeking");
-    }
-
-
     public void authWithAuthManager(HttpServletRequest request, String email, String password) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password);
         authToken.setDetails(new WebAuthenticationDetails(request));

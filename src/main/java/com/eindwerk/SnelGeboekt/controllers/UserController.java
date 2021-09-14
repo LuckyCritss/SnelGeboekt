@@ -1,6 +1,8 @@
 package com.eindwerk.SnelGeboekt.controllers;
 
 import com.eindwerk.SnelGeboekt.notification.NotificationService;
+import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
+import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
 import com.eindwerk.SnelGeboekt.user.User;
 import com.eindwerk.SnelGeboekt.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +27,11 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
-public class UserRegistreerController {
+public class UserController {
 
-    private UserService userService;
+    private OrganisatieService organisatieService;
     private AuthenticationManager authenticationManager;
-    private NotificationService notificationService;
+
 
     @Autowired
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {
@@ -37,47 +39,14 @@ public class UserRegistreerController {
     }
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setOrganisatieService(OrganisatieService organisatieService) {
+        this.organisatieService = organisatieService;
     }
 
-    @Autowired
-    public void setNotificationService(NotificationService notificationService) {
-        this.notificationService = notificationService;
-    }
-
-    @GetMapping("/templatesUser/reservatie_optie")
-    public String rootHandler(Principal principal, Model model) {
-        if (principal != null) {
-            return ("redirect:/instellingen");
-        }
-        User user = new User();
-        model.addAttribute("user", user);
-           return "/templatesUser/reservatie_optie";
-    }
-
-    @PostMapping("/templatesUser/reservatie_optie")
-    public String processForm(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpServletRequest request) {
-        if (bindingResult.hasErrors()) {
-            return "/templatesUser/reservatie_optie";
-        }
-        try {
-            userService.save(user);
-        } catch (UserService.PasswordException e) {
-            bindingResult.rejectValue("wachtWoord","user.wachtWoord",e.getMessage());
-            return "/templatesUser/reservatie_optie";
-        } catch (UserService.PasswordMisMatchException e) {
-            bindingResult.rejectValue("wachtWoord","password-mismatch",e.getMessage());
-            return "/templatesUser/reservatie_optie";
-        } catch (DataIntegrityViolationException e) {
-            if (e.getMessage().contains("email_unique")) {
-                bindingResult.rejectValue("email","user.email-unique",e.getMessage());
-            }
-            return "/templatesUser/reservatie_optie";
-        }
-        notificationService.sendAccountRegistrationUser(user);
-        authWithAuthManager(request, user.getEmail(),user.getWachtWoord());
-        return "redirect:/templatesUser/instellingenUser";
+    @GetMapping("/reservatielijst")
+    public String onlineReservatie(Model model) {
+        model.addAttribute("organisaties" ,organisatieService.getAll());
+        return ("/templatesUser/boeking");
     }
 
     @InitBinder

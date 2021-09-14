@@ -11,17 +11,7 @@
 
     <div th:replace="fragments/head :: head (title)"></div>
 
-    <div >
-      <form action="/registreer/gebruiker">
-        <button type="submit">gebruiker</button>
-      </form>
-    </div>
-
-    <div>
-      <form action="/registreer/organisatie">
-        <button type="submit">organisatie</button>
-      </form>
-    </div>
+    <div th:replace="fragments/registreerGebruiker :: registreerGebruiker (title)"></div>
 
     <div th:replace="fragments/feed :: feed (title)"></div>
   </div>

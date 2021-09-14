@@ -47,6 +47,7 @@ public class TijdslotController {
     public String tijdslotHandler(@PathVariable int id, Principal principal, Model model) {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
             List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByMedewerker(medewerkerService.getMedewerkerById(id));
+            model.addAttribute("idMedewerker", id);
             model.addAttribute("tijdloten", tijdsloten);
             return ("/templatesInstellingen/tijdslot");
         }
@@ -64,7 +65,7 @@ public class TijdslotController {
     }
 
     @PostMapping("/instellingen/medewerker/{id}/tijdslot/add")
-    public String addForm(@PathVariable int id, @Valid @ModelAttribute Tijdslot tijdslot, BindingResult bindingResult, Principal principal) {
+    public String addForm(@PathVariable int id, @Valid @ModelAttribute Tijdslot tijdslot, BindingResult bindingResult ) {
         if (bindingResult.hasErrors()) {
             return "/templatesInstellingen/addtijdsloten";
         }
@@ -77,7 +78,7 @@ public class TijdslotController {
             }
             return "/templatesInstellingen/addtijdsloten";
         }
-        return "redirect:/instellingen/tijdslot";
+        return "redirect:/instellingen/medewerker/" + id + "/tijdslot";
     }
 
     @GetMapping("/instellingen/medewerker/{id}/tijdsloten/edit/{idTijdslot}")
@@ -98,7 +99,7 @@ public class TijdslotController {
             return "/templatesInstellingen/tijdslot";
         }
         tijdslotService.saveOrUpdate(tijdslot);
-        return "redirect:/instellingen/tijdslot";
+        return "redirect:instellingen/medewerker/" + id + "/tijdslot";
     }
 
 
@@ -110,7 +111,7 @@ public class TijdslotController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
         tijdslotService.delete(idTijdslot);
-        return "redirect:instellingen/tijdslot";
+        return "redirect:instellingen/medewerker/" + id + "/tijdslot";
     }
 
     @InitBinder

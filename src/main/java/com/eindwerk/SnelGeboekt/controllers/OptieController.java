@@ -40,12 +40,6 @@ public class OptieController {
         this.optieService = optieService;
     }
 
-    @GetMapping
-    public String list(Model model) {
-        model.addAttribute("opties", optieService.getAll());
-        return "fragmentsInstellingen/lijstkeuzemogelijk";
-    }
-
     @GetMapping("/instellingen/medewerker/{id}/keuzemogelijkheden")
     public String keuzemogelijkhedenHandler(@PathVariable int id, Principal principal, Model model) {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
@@ -81,12 +75,13 @@ public class OptieController {
             }
             return "/templatesInstellingen/addkeuzemogelijkheden";
         }
-        return "redirect:/instellingen/keuzemogelijkheden";
+        return "redirect:/instellingen/medewerker/" + id + "/keuzemogelijkheden";
     }
 
     @GetMapping("/instellingen/medewerker/{id}/keuzemogelijkheden/edit/{idOptie}")
     public String edit(@PathVariable int id, @PathVariable int idOptie, Model model) {
         Optie optie = optieService.getById(idOptie);
+        idOptie = optie.getId();
         if (optie == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
@@ -102,7 +97,7 @@ public class OptieController {
             return "/fragmentsInstellingen/keuzemogelijkheden";
         }
         optieService.saveOrUpdate(optie);
-        return "redirect:/instellingen/keuzemogelijkheden";
+        return "redirect:/instellingen/medewerker/" + id + "/keuzemogelijkheden";
     }
 
     @GetMapping("/instellingen/medewerker/{id}/keuzemogelijkheden/delete/{idOptie}")
@@ -112,6 +107,6 @@ public class OptieController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
         optieService.delete(idOptie);
-        return "redirect:/instellingen/keuzemogelijkheden";
+        return "redirect:/instellingen/medewerker/" + id + "/keuzemogelijkheden";
     }
 }

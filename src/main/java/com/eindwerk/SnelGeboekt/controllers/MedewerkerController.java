@@ -36,12 +36,6 @@ public class MedewerkerController {
     }
 
 
-    @GetMapping("/instellingen/")
-    public String list(Model model) {
-        model.addAttribute("medewerkers", medewerkerService.getAll());
-        return "fragmentsInstellingen/lijstmedewerkers";
-    }
-
     @GetMapping("/instellingen/medewerker")
     public String medewerkerHandler(Principal principal, Model model) {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
@@ -84,7 +78,6 @@ public class MedewerkerController {
         if (medewerker == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
-        model.addAttribute("idMedewerker", id);
         model.addAttribute("medewerker", medewerker);
         return "/templatesInstellingen/addmedewerker";
     }

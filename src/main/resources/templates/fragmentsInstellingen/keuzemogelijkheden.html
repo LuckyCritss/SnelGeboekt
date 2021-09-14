@@ -18,7 +18,7 @@
                     <div>
                         <h4>Voeg een optie toe:</h4>
                     </div>
-                    <form class="card p-3 bg-light" action="#" th:action="@{/instellingen/keuzemogelijkheden/add}" th:object="${optie}" method="post">
+                    <form class="card p-3 bg-light" action="#" th:action="@{/instellingen/medewerker/} + ${idMedewerker} + @{/keuzemogelijkheden/add}" th:object="${optie}" method="post">
                         <fieldset>
 
                             <div class="form-group">

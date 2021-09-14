@@ -46,8 +46,8 @@
                       <td th:text="${tijdslot.start}"></td>
                       <td th:text="${tijdslot.einde}"></td>
                       <td>
-                        <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/tijdsloten/edit/} + ${tijdsloten.id}">Edit</a>
-                        <a class="btn btn-sm btn-secondary"  th:href="@{/instellingen/tijdsloten/delete/} + ${tijdsloten.id}">Delete</a>
+                        <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/medewerker/} + ${idMedewerker} + @{/tijdsloten/edit/} + ${tijdslot.id}">Edit</a>
+                        <a class="btn btn-sm btn-secondary"  th:href="@{/instellingen/medewerker/} + ${idMedewerker} + @{/tijdsloten/delete/} + ${tijdslot.id}">Delete</a>
                       </td>
                     </tr>
                     </tbody>
@@ -62,8 +62,8 @@
                 </div>
 
 
-                <a class="btn btn-danger" th:href="@{/instellingen/keuzemogelijkheden}">&#8592;&nbsp;Keuzemogelijkheden</a>
-                <a class="btn btn-danger" th:href="@{/instellingen/tijdslot/add}">&#43;</a>
+                <a class="btn btn-danger" th:href="@{/}">&#8592;&nbsp;Home</a>
+                <a class="btn btn-danger" th:href="@{/instellingen/medewerker/} + ${idMedewerker} + @{/tijdslot/add}">&#43;</a>
 
 
 

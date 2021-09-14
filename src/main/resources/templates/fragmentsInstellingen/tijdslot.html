@@ -18,7 +18,7 @@
           <div>
             <h4>Voeg een tijdslot toe:</h4>
           </div>
-          <form class="card p-3 bg-light" action="#" th:action="@{/instellingen/tijdslot/add}" th:object="${tijdslot}" method="post">
+          <form class="card p-3 bg-light" action="#" th:action="@{/instellingen/medewerker/} + ${idMedewerker} + @{/tijdslot/add}" th:object="${tijdslot}" method="post">
             <fieldset>
 
               <div class="form-group">

@@ -21,29 +21,32 @@
       <h3 class="frame-title">Kies het bedrijf waar je een reservatie wil maken</h3>
         <br>
         <br>
-      <form action="#" th:action="@{/instellingen}" th:object="${organisatie}" method="post">
-      <fieldset>
-          <div class="container" >
-              <table class="table table_striped">
-                  <thead>
-                  <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Bedrijfsnaam</th>
-                      <th scope="col">Url</th>
-                  </tr>
-                  </thead>
-                  <div class="row" th:if="${organisatie !=null && !organisatie.empty}">
-                      <tbody>
-                      <tr th:each="organisatie : ${organisatie}">
-                          <td th:text="${organisatieStat.count}"></td>
-                          <td th:text="${organisatie.bedrijfsNaam}"></td>
-                          <td th:text="${organisatie.paginaNaam}"></td>
+
+      <form class="card p-3 bg-light" action="#" th:action="@{/fragmentsInstellingen/instellingenOrg}" th:object="${organisatie}" method="post">
+          <fieldset>
+              <div class="row" >
+                  <table class="table table-hover">
+                      <thead>
+                      <tr>
+                          <th scope="col">Naam</th>
+                          <th scope="col">Url</th>
+                          <th scope="col">Actie's</th>
                       </tr>
-                      </tbody>
-                  </div>
-              </table>
-          </div>
-      </fieldset>
+                      </thead>
+                      <div class="row" th:if="${organisatie !=null && !organisatie.empty}">
+                          <tbody>
+                          <tr th:each="organisatie : ${organisatie}">
+                              <td th:text="${organisatie.bedrijfsNaam}"></td>
+                              <td th:text="${organiatie.paginaNaam}"></td>
+                              <td>
+                                  <a class="btn btn-sm btn-secondary" th:href="@{/instellingen/booking_step1/}">Reserveer</a>
+                              </td>
+                          </tr>
+                          </tbody>
+                      </div>
+                  </table>
+              </div>
+          </fieldset>
       </form>
 </div>
 </div>

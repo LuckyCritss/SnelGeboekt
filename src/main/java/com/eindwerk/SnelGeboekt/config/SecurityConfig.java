@@ -32,7 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("Admin")
                 .password("{noop}admin")
                 .roles("ADMIN");
-
         auth
                 .jdbcAuthentication()
                 .dataSource(dataSource)

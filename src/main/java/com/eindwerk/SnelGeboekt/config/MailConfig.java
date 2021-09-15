@@ -17,7 +17,6 @@ public class MailConfig {
         mailSender.setPort(2525);
 
         mailSender.setUsername("info@javafanatics.com");
-        //mailSender.setPassword("3g@NCfPg9pYgB3s");
         mailSender.setPassword("B62C1E07EB2053E73EEB9D80329731CA1CC1");
 
         Properties props = mailSender.getJavaMailProperties();
@@ -25,7 +24,6 @@ public class MailConfig {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.debug", "true");
-
         return mailSender;
     }
 
@@ -33,9 +31,7 @@ public class MailConfig {
     public SimpleMailMessage templateSimpleMessage() {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setSubject("Account registration successfully!");
-        message.setText("this is an automatic mail to Verify tou that you successfully created your account on www.snelgeboekt.be");
+        message.setText("this is an automatic email to Verify you that you successfully created your account on www.snelgeboekt.be");
         return message;
     }
-
-
 }

@@ -37,13 +37,13 @@
               <div class="mb-3">
                 <label>Start</label>
                 <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('start')}" th:errors="*{start}"></div>
-                <input type="number" class="form-control" th:field="*{start}">
+                <input type="time" class="form-control" th:field="*{start}">
               </div>
 
               <div class="mb-3">
                 <label>Einde</label>
                 <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('einde')}" th:errors="*{einde}"></div>
-                <input type="number" class="form-control" th:field="*{einde}">
+                <input type="time" class="form-control" th:field="*{einde}">
               </div>
 
               <p>

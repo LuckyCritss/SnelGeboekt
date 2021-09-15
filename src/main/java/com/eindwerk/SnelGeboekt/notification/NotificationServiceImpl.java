@@ -43,7 +43,6 @@ public class NotificationServiceImpl implements NotificationService {
 
 
     private void sendSimpleMessage(String to, String subject, String text) {
-
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("noreply@SnelGeboekt.be");
         message.setTo(to);

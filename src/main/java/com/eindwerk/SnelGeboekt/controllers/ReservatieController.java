@@ -87,7 +87,6 @@ public class ReservatieController {
         return "redirect:/reservatie/" + slug + "/step1";
     }
 
-
     @GetMapping("/{slug}/step1")
     public String showWidgetStep1(@PathVariable String slug, Model model) {
         if (reservatie == null || reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
@@ -112,7 +111,6 @@ public class ReservatieController {
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step2";
     }
 
-
     @GetMapping("/{slug}/step2")
     public String showWidgetStep2(@PathVariable String slug, Model model) {
         if (reservatie == null || reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
@@ -125,19 +123,16 @@ public class ReservatieController {
         return "templatesReservatie/booking_step2";
     }
 
-
     @PostMapping(value = "/step2", params = "previous")
     public String processWidgetStep2Previous() {
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step1";
     }
-
 
     @PostMapping(value = "/step2", params = "select")
     public String processWidgetStep2Next(@ModelAttribute Tijdslot tijdslot, @RequestParam("select") String select) {
         reservatie.setTijdslot(tijdslot);
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step3";
     }
-
 
     @GetMapping("/{slug}/step3")
     public String showWidgetStep3(@PathVariable String slug, Model model, Principal principal) {
@@ -152,12 +147,10 @@ public class ReservatieController {
         return "templatesReservatie/booking_step3";
     }
 
-
     @PostMapping(value = "/step3", params = "previous")
     public String processWidgetStep3Previous() {
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step2";
     }
-
 
     @PostMapping(value = "/step3", params = "next")
     public String processWidgetStep3Next(@ModelAttribute User user, BindingResult bindingResult) {
@@ -182,7 +175,6 @@ public class ReservatieController {
             }
             notificationService.sendAccountRegistrationUser(user);
         }
-
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step4";
     }
 
@@ -207,7 +199,6 @@ public class ReservatieController {
         }
     }
 
-
     @GetMapping("/{slug}/getschedule")
     public String ajaxDates(@PathVariable String slug, @RequestParam String date, Model model) {
         return "fragmentsReservatie/hours";
@@ -217,6 +208,7 @@ public class ReservatieController {
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
+
     public void authWithAuthManager(HttpServletRequest request, String email, String password) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password);
         authToken.setDetails(new WebAuthenticationDetails(request));

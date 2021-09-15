@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalTime;
 
 @Entity
 @Getter
@@ -34,9 +35,9 @@ public class Tijdslot {
     @NotNull(message = "value mismatch")
     private Dag dag = Dag.ZON;
 
-    private String start;
+    private LocalTime start;
 
-    private String einde;
+    private LocalTime einde;
 
     @ManyToOne
     @JoinColumn(name = "medewerker_id")

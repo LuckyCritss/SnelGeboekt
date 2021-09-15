@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name="medewerker")
 public class Medewerker {
 
-        public enum MedewerkerLijst {
+ /*       public enum MedewerkerLijst {
                 NVT("Niet van toepassing"), Med1("Medewerker 1");
 
                 private final String naamMedewerker;
@@ -30,16 +30,16 @@ public class Medewerker {
                 public String getDisplayName() {
                         return naamMedewerker;
                 }
-        }
+        }*/
 
     
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
 
-        @NotNull(message = "value mismatch")
+   /*     @NotNull(message = "value mismatch")
         @Transient
-        private MedewerkerLijst naamMedewerker = MedewerkerLijst.NVT;
+        private MedewerkerLijst medewerkerLijst = MedewerkerLijst.NVT;*/
 
         @NotBlank(message = "{org.blank}")
         private String naam;
@@ -54,4 +54,8 @@ public class Medewerker {
 
         @OneToMany(mappedBy = "medewerker" , orphanRemoval = true, cascade = CascadeType.ALL)
         private List<Optie> opties;
+
+        @OneToMany(mappedBy = "medewerker")
+        private List<Medewerker> medewerkersLijst;
+
 }

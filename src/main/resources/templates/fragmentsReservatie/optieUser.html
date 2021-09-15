@@ -25,25 +25,25 @@
                 <div class="row frame-content">
                     <div class="col">
                         <div class="form-group">
-                            <label for="select-service">
-                                <strong>Dienst</strong>
+                            <label for ="medewerker">
+                                <strong>Medewerker</strong>
                             </label>
-
-                            <select id="select-service" class="form-control">
-                                <option value="1">Niet van toepassing</option>
-
+                            <select id="medewerker" class="form-control" th:classappend="${#fields.hasErrors('medewerker') ? 'is-invalid' : ''}"
+                                    th:field="*{medewerker.id}">
+                                <option value="-1">Kies een medewerker</option>
+                                <option th:each="medewerker : ${availableMedewerkers}"
+                                        th:value="${medewerker.id}" th:text="${medewerker.naam}"
+                                        th:selected="${medewerker.medewerker != null ? medewerker.Medewerker.equals(medewerker.name) : false}"></option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="naamMedewerker">
-                                <strong>Medewerker</strong>
+                            <label for="select-dienst">
+                                <strong>Dienst</strong>
                             </label>
-                            <select id="naamMedewerker" class="form-control">
-                                    <option th:each="naamMedewerker : ${T(com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker.MedewerkerLijst).values()}"
-                                            th:value="${naamMedewerker}" th:text="${MedewerkerLijst.naamMedewerker}">
-
-                                    </option>
+                            <select id="select-dienst" class="form-control">
+                                <option value="1">Niet van toepassing</option>
+                                <option value="1">lijst</option>
                                 </select>
                         </div>
                     </div>

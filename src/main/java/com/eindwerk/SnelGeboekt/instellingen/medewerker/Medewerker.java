@@ -32,6 +32,7 @@ public class Medewerker {
                 }
         }*/
 
+
     
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,7 +56,6 @@ public class Medewerker {
         @OneToMany(mappedBy = "medewerker" , orphanRemoval = true, cascade = CascadeType.ALL)
         private List<Optie> opties;
 
-        @OneToMany(mappedBy = "medewerker")
-        private List<Medewerker> medewerkersLijst;
+
 
 }

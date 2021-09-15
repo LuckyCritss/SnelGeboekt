@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Getter
@@ -33,6 +34,8 @@ public class Optie {
     @ManyToOne
     @JoinColumn(name = "medewerker_id")
     Medewerker medewerker;
+
+
 }
 
 

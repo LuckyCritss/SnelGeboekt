@@ -49,7 +49,7 @@
                                 <option value="-1">Kies een dienst</option>
                                 <option th:each="medewerker : ${Medewerker}"
                                         th:text="${medewerker.opties}"
-                                        th:selected="${medewerker.opties != null ? instellingen.medewerker.equals(medewerker.opties) : false}"></option>
+                                        th:selected="${medewerker.opties != null ? medewerker.opties.equals(organisatie.opties) : false}"></option>
                             </select>
                         </div>
                             </select>

@@ -19,7 +19,6 @@ import java.util.List;
 public class Optie {
 
 
-
     // voor de keuzemogelijkheden
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +33,6 @@ public class Optie {
     @ManyToOne
     @JoinColumn(name = "medewerker_id")
     Medewerker medewerker;
-
 
 }
 

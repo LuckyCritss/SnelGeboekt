@@ -60,7 +60,6 @@ public class MedewerkerController {
     public String add(Model model,Principal principal) {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
             model.addAttribute("medewerker", new Medewerker());
-         //   model.addAttribute("medewerkersLijst", Medewerker.getmedewerkersLijst());
             return "/templatesInstellingen/addmedewerker";
         }
         return "redirect:/instellingen";

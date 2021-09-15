@@ -19,7 +19,7 @@
 <div class="registreer" th:fragment="optieUser">
 
     <main class="form-signin">
-        <form action="#" th:action="@{/reservatie/} + ${slug} + @{/step1}" th:object="${medewerker}" method="post">
+        <form action="#" th:action="@{/reservatie/} + ${slug} + @{/step1}" th:object="${medewerkers}" method="post">
             <div class="frame-container">
                 <h2 class="frame-title">Kies een dienst en een medewerker</h2>
                 <div class="row frame-content">
@@ -32,38 +32,35 @@
                             <br>
                             <select id="select-medewerker" class="form-control">
                                 <option value="-1">Kies een medewerker</option>
-                                <option th:each="organisatie : ${organisaties}"
-                                        th:text="${organisatie.medewerker}"
-                                        th:selected="${organisatie.medewerker != null ? organisatie.medewerker.equals(organisatie.medewerker) : false}"></option>
+                                <option th:each="medewerker : ${medewerkers}"
+                                        th:value="${medewerker.id}"
+                                        th:text="${medewerker.naam}"
+                                        ></option>
                             </select>
                         </div>
-                        <br>
-                        <br>
-                        <div class="form-group">
-                            <label for="select-dienst">
-                                <strong>Dienst</strong>
-                            </label>
-                            <br>
-                            <br>
-                            <select id="select-dienst" class="form-control">
-                                <option value="-1">Kies een dienst</option>
-                                <option th:each="medewerker : ${Medewerker}"
-                                        th:text="${medewerker.opties}"
-                                        th:selected="${medewerker.opties != null ? medewerker.opties.equals(organisatie.opties) : false}"></option>
-                            </select>
-                        </div>
-                            </select>
+                    </div>
                 </div>
-                    </div>
-                        </div>
-        </form>
-    </main>
-                    </div>
             </div>
         </form>
-            <div class="command-buttons">
-                <span>&nbsp;</span>
+        <br>
+        <br>
+        <form action="#" th:action="@{/reservatie/} + ${slug} + @{/step1}" th:object="${opties}" method="post">
+            <div class="form-group">
+                <label for="select-dienst">
+                    <strong>Dienst</strong>
+                </label>
+                <br>
+                <br>
+                <select id="select-dienst" class="form-control">
+                    <option value="-1">Kies een dienst</option>
+                    <option th:each="optie : ${opties}"
+                            th:text="${optie.titel}"></option>
+                </select>
             </div>
+        </form>
+        <div class="command-buttons">
+            <span>&nbsp;</span>
+        </div>
     </main>
 </div>
 </body>

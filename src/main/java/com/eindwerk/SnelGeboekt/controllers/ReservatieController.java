@@ -93,10 +93,10 @@ public class ReservatieController {
             return "redirect:/reservatie/" + slug;
         }
         List<Medewerker> medewerkers = medewerkerService.getMedewerkersByOrganisation(organisatieService.getOrganisatieByName(slug));
-        List<Optie> opties = optieService.getOptiesByMedewerkers(medewerkers);
+        //<Optie> opties = optieService.getOptiesByMedewerkers(medewerkers);
         model.addAttribute("slug", slug);
         model.addAttribute("medewerkers", medewerkers);
-        model.addAttribute("opties", opties);
+       //model.addAttribute("opties", opties);
         return "templatesReservatie/booking_step1";
     }
 
@@ -116,10 +116,8 @@ public class ReservatieController {
         if (reservatie == null || reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
-        List<Medewerker> medewerkers = medewerkerService.getMedewerkersByOrganisation(organisatieService.getOrganisatieByName(slug));
-        List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByMedewerkers(medewerkers);
-        model.addAttribute("medewerkers", medewerkers);
-        model.addAttribute("tijdsloten", tijdsloten);
+        //List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByMedewerkers(medewerkers);
+       //model.addAttribute("tijdsloten", tijdsloten);
         return "templatesReservatie/booking_step2";
     }
 

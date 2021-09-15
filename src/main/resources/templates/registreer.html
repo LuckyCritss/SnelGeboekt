@@ -1,27 +1,65 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
       xmlns:https="http://www.w3.org/1999/xhtml">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link href="/css/static.css" rel="stylesheet">
 <head>
   <title>Registreer</title>
+  <style>
+    button[type=submitgeb] {
+      background-color: green;
+      border: black;
+      color: white;
+      padding: 20px 40px;
+      text-decoration: -moz-buttonhoverface;
+      margin: 20px 350px;
+      cursor: pointer;
+    }
+
+    button[type=submitorg] {
+      background-color: red;
+      border: black;
+      color: white;
+      padding: 20px 40px;
+      text-decoration: -moz-buttonhoverface;
+      margin: 20px 350px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
 <div class="container-fluid">
   <div class="row">
 
-    <div th:replace="fragments/head :: head (title)"></div>
 
+    <div th:replace="fragments/head :: head (title)"></div>
+      <div class="container">
+          <img src="Afbeeldingen/registreer.jpg" style="height: 163px; width: 193px; margin-right: 10px; float: right; clear: right">
+      </div>
+
+    <h4>Wil je niet telkens al u gegevens moeten invullen bij het reserveren?
+        Maak dan hier gratis een account</h4>
     <div >
       <form action="/registreer/gebruiker">
-        <button type="submit">gebruiker</button>
+        <button type="submitgeb">gebruiker</button>
       </form>
     </div>
+    <br>
+    <br>
+    <br>
 
+
+    <h4>Zou je graag gebruik maken van onze service en deze handige pagina toevoegen aan U website,
+        dan kan je u hier registreren ! </h4>
     <div>
       <form action="/registreer/organisatie">
-        <button type="submit">organisatie</button>
+        <button type="submitorg">organisatie</button>
       </form>
     </div>
+    <br>
+    <br>
+    <br>
 
     <div th:replace="fragments/feed :: feed (title)"></div>
   </div>

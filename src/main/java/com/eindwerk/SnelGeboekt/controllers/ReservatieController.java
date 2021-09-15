@@ -184,7 +184,7 @@ public class ReservatieController {
         if (reservatie == null || reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
-        model.addAttribute("user", reservatie.getUser());
+        model.addAttribute("reservatie", reservatie);
         return "templatesReservatie/booking_step4";
     }
 

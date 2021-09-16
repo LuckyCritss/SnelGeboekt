@@ -72,6 +72,9 @@ public class MedewerkerController {
         }
         try {
             medewerker.setOrganisatie(organisatieService.getOrganisatieByEmail(principal.getName()));
+            if(medewerker.getNaam().equals("")){
+                medewerker.setNaam("Niet van Toepassing");
+            }
             medewerkerService.saveOrUpdate(medewerker);
         }catch (DataIntegrityViolationException e) {
             if (e.getMessage().contains("medewerker_unique")) {

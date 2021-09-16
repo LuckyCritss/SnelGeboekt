@@ -26,6 +26,20 @@
                           </div>
                           <thead>
                           <tr>
+                              <th scope="col">Medewerker</th>
+                          </tr>
+                          </thead>
+                          <div class="row" th:if="${organisaties !=null && !organisaties.empty}">
+                              <tbody>
+                              <tr th:each="organisatie : ${organisaties}">
+                                  <td th:text="${organisatie.bedrijfsNaam}"></td>
+                                  <td th:text="${organisatie.paginaNaam}"></td>
+                              </tr>
+                              </tbody>
+                          </div>
+                          <thead>
+                          <thead>
+                          <tr>
                               <th scope="col">Dienst</th>
                           </tr>
                           </thead>
@@ -54,9 +68,9 @@
                   </div>
               </fieldset>
               <div style="text-align:center;">
-                  <button class="w-60 btn btn-lg btn-success" type="submit" style="width: 400px;">Bevestig u afspraak</button>
+                  <button class="w-60 btn btn-lg btn-success" name="bevestig" type="submit" style="width: 400px;">Bevestig u afspraak</button>
                   <br>
-                  <button class="w-60 btn btn-lg btn-success" type="submit" style="width: 400px;">Annuleren</button>
+                  <button class="w-60 btn btn-lg btn-success" name="anuleer" type="submit" style="width: 400px;">Annuleren</button>
               </div>
           </form>
   </div>

@@ -19,6 +19,25 @@
 <div class="registreer" th:fragment="optieUser">
 
     <main class="form-signin">
+        <br>
+        <br>
+        <form action="#" th:action="@{/reservatie/} + ${slug} + @{/step1}" th:object="${opties}" method="post">
+            <div class="form-group">
+                <label for="select-dienst">
+                    <strong>Dienst</strong>
+                </label>
+                <br>
+                <br>
+                <select id="select-dienst" class="form-control">
+                    <option value="-1">Kies een dienst</option>
+                    <option th:each="optie : ${opties}"
+                            th:value="${optie}"
+                            th:text="${optie}"></option>
+                </select>
+            </div>
+        </form>
+        <br>
+        <br>
         <form action="#" th:action="@{/reservatie/} + ${slug} + @{/step1}" th:object="${medewerkers}" method="post">
             <div class="frame-container">
                 <div class="row frame-content">
@@ -35,28 +54,11 @@
                                 <option th:each="medewerker : ${medewerkers}"
                                         th:value="${medewerker.id}"
                                         th:text="${medewerker.naam}"
-                                        ></option>
+                                ></option>
                             </select>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
-        <br>
-        <br>
-        <form action="#" th:action="@{/reservatie/} + ${slug} + @{/step1}" th:object="${opties}" method="post">
-            <div class="form-group">
-                <label for="select-dienst">
-                    <strong>Dienst</strong>
-                </label>
-                <br>
-                <br>
-                <select id="select-dienst" class="form-control">
-                    <option value="-1">Kies een dienst</option>
-                    <option th:each="optie : ${opties}"
-                            th:value="${optie}"
-                            th:text="${optie}"></option>
-                </select>
             </div>
         </form>
         <div class="command-buttons">

@@ -21,10 +21,10 @@
     <main class="form-signin">
         <form action="#" th:action="@{/reservatie/} + ${slug} + @{/step1}" th:object="${medewerkers}" method="post">
             <div class="frame-container">
-                <h2 class="frame-title">Kies een dienst en een medewerker</h2>
                 <div class="row frame-content">
                     <div class="col">
                         <div class="form-group">
+
                             <label for="select-dienst">
                                 <strong>Medewerker</strong>
                             </label>
@@ -54,6 +54,7 @@
                 <select id="select-dienst" class="form-control">
                     <option value="-1">Kies een dienst</option>
                     <option th:each="optie : ${opties}"
+                            th:value="${optie.id}"
                             th:text="${optie.titel}"></option>
                 </select>
             </div>

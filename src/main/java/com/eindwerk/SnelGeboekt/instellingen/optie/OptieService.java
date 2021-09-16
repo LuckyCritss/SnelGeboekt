@@ -19,6 +19,8 @@ public interface OptieService {
 
     List<String> getOptiesByMedewerkersId(List<Integer> medewerkersId);
 
+    Optie getOptieByMedewerkerAndString(Medewerker medewerker, String titel);
+
     int GetDuurOptie(int DuurOptie);
 
     void delete(int id);

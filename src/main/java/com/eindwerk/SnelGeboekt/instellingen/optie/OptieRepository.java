@@ -21,4 +21,7 @@ public interface OptieRepository  extends JpaRepository<Optie, Integer> {
     @Query("delete from Optie o where o.medewerker.id = :medewerkerId")
     void deleteOptiesByMedewerkerId(@Param("medewerkerId") int medewerkerId);
 
+    @Query("select o from Optie o where o.medewerker = :medewerker and o.titel = :titel")
+    Optie getOptieByMedewerkerAndString(@Param("medewerker") Medewerker medewerkers , @Param("titel") String titel);
+
 }

@@ -47,6 +47,11 @@ public class OptieServiceImpl implements OptieService {
     }
 
     @Override
+    public Optie getOptieByMedewerkerAndString(Medewerker medewerker, String titel) {
+        return optieRepository.getOptieByMedewerkerAndString(medewerker, titel);
+    }
+
+    @Override
     public int GetDuurOptie(int DuurOptie){
         return DuurOptie;
     }

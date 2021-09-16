@@ -1,5 +1,6 @@
 package com.eindwerk.SnelGeboekt.reservatie;
 
+import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
 import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot;
 import com.eindwerk.SnelGeboekt.user.User;
@@ -26,6 +27,9 @@ public class Reservatie {
 
     @Transient
     private String slug;
+
+    @Transient
+    private Medewerker medewerker;
 
     @Transient
     private Optie optie;

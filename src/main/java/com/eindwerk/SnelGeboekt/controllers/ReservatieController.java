@@ -27,6 +27,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -107,7 +108,9 @@ public class ReservatieController {
     }
 
     @PostMapping(value = "/step1", params = "next")
-    public String processWidgetStep1(@ModelAttribute Optie optie) {
+    public String processWidgetStep1(@ModelAttribute String optieKeuze, @ModelAttribute Medewerker medewerker) {
+        reservatie.setMedewerker(medewerker);
+        Optie optie = optieService.getOptieByMedewerkerAndString(medewerker,optieKeuze);
         reservatie.setOptie(optie);
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step2";
     }

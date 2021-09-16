@@ -42,31 +42,31 @@
                 <label for="floatingPassword">herhaal wachtwoord</label>
             </div>
 
-            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('BedrijfsNaam')}" th:errors="*{bedrijfsNaam}"></div>
+            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('bedrijfsNaam')}" th:errors="*{bedrijfsNaam}"></div>
             <div class="form-floating">
                 <input type="text" class="form-control" id="BedrijfsNaam" placeholder="BedrijfsNaam" th:field="*{bedrijfsNaam}" >
                 <label for="floatingInput">BedrijfsNaam</label>
             </div>
 
-            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('PaginaNaam')}" th:errors="*{paginaNaam}"></div>
+            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('paginaNaam')}" th:errors="*{paginaNaam}"></div>
             <div class="form-floating">
                 <input type="text" class="form-control" id="PaginaNaam" placeholder="PaginaNaam" th:field="*{paginaNaam}" >
                 <label for="floatingInput">PaginaNaam</label>
             </div>
 
-            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('PostCode')}" th:errors="*{postCode}"></div>
+            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('postCode')}" th:errors="*{postCode}"></div>
             <div class="form-floating">
                 <input type="number" class="form-control" id="PostCode" placeholder="PostCode" th:field="*{postCode}" >
                 <label for="floatingInput">PostCode</label>
             </div>
 
-            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('Gemeente')}" th:errors="*{gemeente}"></div>
+            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('gemeente')}" th:errors="*{gemeente}"></div>
             <div class="form-floating">
                 <input type="text" class="form-control" id="Gemeente" placeholder="Gemeente" th:field="*{gemeente}" >
                 <label for="floatingInput">Gemeente</label>
             </div>
 
-            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('Straat')}" th:errors="*{straat}"></div>
+            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('straat')}" th:errors="*{straat}"></div>
             <div class="form-floating">
                 <input type="text" class="form-control" id="Straat" placeholder="Straat" th:field="*{straat}" >
                 <label for="floatingInput">Straat</label>

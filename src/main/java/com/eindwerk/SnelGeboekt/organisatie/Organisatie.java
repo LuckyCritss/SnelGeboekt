@@ -27,6 +27,7 @@ public class Organisatie {
     @Column(name = "email")
     private String email;
 
+    @NotBlank(message = "{org.blank}")
     @Size(min = 5, message = "{org.wachtwoord}")
     @Column(name = "password")
     private String wachtWoord;
@@ -35,7 +36,7 @@ public class Organisatie {
     private String checkWachtWoord;
 
     @NotBlank(message = "{org.blank}")
-    @Size(min = 2, message = "{org.bedrijfsNaam}")
+    @Size(min = 2, message = "{org.bedrijfsnaam}")
     @Column(name = "organisation")
     private String bedrijfsNaam;
 
@@ -44,6 +45,7 @@ public class Organisatie {
     @Column(name = "pageName")
     private String paginaNaam;
 
+    @NotBlank(message = "{org.blank}")
     @Column(name = "zipCode")
     private int postCode;
 

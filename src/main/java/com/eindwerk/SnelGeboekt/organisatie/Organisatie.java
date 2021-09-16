@@ -45,7 +45,7 @@ public class Organisatie {
     @Column(name = "pageName")
     private String paginaNaam;
 
-    @NotBlank(message = "{org.blank}")
+
     @Column(name = "zipCode")
     private int postCode;
 

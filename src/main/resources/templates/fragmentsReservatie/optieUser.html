@@ -54,8 +54,8 @@
                 <select id="select-dienst" class="form-control">
                     <option value="-1">Kies een dienst</option>
                     <option th:each="optie : ${opties}"
-                            th:value="${optie.id}"
-                            th:text="${optie.titel}"></option>
+                            th:value="${optie}"
+                            th:text="${optie}"></option>
                 </select>
             </div>
         </form>

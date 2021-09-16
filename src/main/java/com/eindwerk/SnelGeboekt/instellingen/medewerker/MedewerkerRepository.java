@@ -14,6 +14,9 @@ public interface MedewerkerRepository extends JpaRepository<Medewerker, Integer>
     @Query("select o from Medewerker o where o.organisatie = :organisatie")
     List<Medewerker> getMedewerkersByOrganisatie(@Param("organisatie") Organisatie organisatie);
 
+    @Query("select o.id from Medewerker o where o.organisatie = :organisatie")
+    List<Integer> getMedewerkersIdByOrganisatie(@Param("organisatie") Organisatie organisatie);
+
     @Query("select o from Medewerker o where o.id = :id")
     Medewerker getMedewerkerById(@Param("id")int id);
 

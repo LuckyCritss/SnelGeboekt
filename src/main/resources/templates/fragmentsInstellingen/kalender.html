@@ -6,147 +6,49 @@
     <title>Kalender</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link href="/css/static.css" rel="stylesheet">
-    <style>
-* {box-sizing: border-box;}
-ul {list-style-type: none;}
-body {font-family: Verdana, sans-serif;}
 
-.month {
-  padding: 70px 25px;
-  width: 100%;
-  background: lightblue;
-  text-align: center;
-}
-
-.month ul {
-  margin: 0;
-  padding: 0;
-}
-
-.month ul li {
-  color: white;
-  font-size: 20px;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-}
-
-.month .prev {
-  float: left;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.month .next {
-  float: right;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.prev:hover {
-background-color:red;
-}
-
-.next:hover {
-background-color:red;
-}
-
-.weekdays {
-  margin: 0;
-  padding: 10px 0;
-  background-color: #ddd;
-}
-
-.weekdagen li {
-  display: inline-block;
-  width: 13.5%;
-  color: #666;
-  text-align: center;
-}
-
-.days {
-  padding: 10px 0;
-  background: #eee;
-  margin: 0;
-}
-
-
-
-.days li {
-  list-style-type: none;
-  display: inline-block;
-  width: 13.6%;
-  text-align: center;
-  margin-bottom: 5px;
-  font-size:12px;
-  color: #777;
-}
-
-.days li .active {
-  padding: 5px;
-  background: lightblue;
-}
-
-.days li :hover {
-background-color:red;
-}
-</style>
 </head>
-<body>
+<body class="text-center">
 <div class="instellingen" th:fragment="kalender">
+    <div class="row" >
+        <div class="col-md-8 offset-md-2">
+            <div>
+                <h1 align="center" >Agenda</h1>
+            </div>
+            <form class="card p-3 bg-light" action="#" th:action="@{/fragmentsInstellingen/kalender}" th:object="${users}" method="post">
+                <fieldset>
+                    <div class="row" >
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Naam</th>
+                                <th scope="col">Familienaam</th>
+                                <th scope="col">Optie</th>
+                                <th scope="col">Startuur</th>
+                                <th scope="col">Einduur</th>
+                                <th scope="col">Gsm-nummer</th>
+                            </tr>
+                            </thead>
+                            <div>
+                                <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </div>
+                        </table>
+                    </div>
+                    <a class="btn btn-danger" th:href="@{/}">&#8592;&nbsp;Home</a>
+                </fieldset>
+            </form>
 
-    <h1 align="center" >Kalender</h1>
 
-    <div class="month">
-        <ul>
-            <li class="prev">&#8592;</li>
-            <li class="next">&#8594;</li>
-            <li> augustus 2021<br> </li>
-        </ul>
-    </div>
 
-    <ul class="weekdagen">
-        <li>maandag</li>
-        <li>dinsdag</li>
-        <li>woensdag</li>
-        <li>donderdag</li>
-        <li>vrijdag</li>
-        <li>zaterdag</li>
-        <li>zondag</li>
-    </ul>
 
-    <ul class="days">
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li>10</li>
-        <li>11</li>
-        <li>12</li>
-        <li>13</li>
-        <li>14</li>
-        <li>15</li>
-        <li>16</li>
-        <li>17</li>
-        <li><span class="active" >18</span></li>
-        <li>19</li>
-        <li>20</li>
-        <li>21</li>
-        <li>22</li>
-        <li>23</li>
-        <li>24</li>
-        <li>25</li>
-        <li>26</li>
-        <li>27</li>
-        <li>28</li>
-        <li>29</li>
-        <li>30</li>
-        <li>31</li>
-    </ul>
+        </div>
+</div>
 </div>
 </body>
 </html>

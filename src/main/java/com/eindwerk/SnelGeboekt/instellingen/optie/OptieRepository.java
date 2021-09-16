@@ -15,8 +15,8 @@ public interface OptieRepository  extends JpaRepository<Optie, Integer> {
     @Query("select o from Optie o where o.medewerker= :medewerker")
     List<Optie> getOptiesByMedewerker(@Param("medewerker") Medewerker medewerker);
 
-    @Query("select o.titel from Optie o where o.medewerker = :medewerkers")
-    List<Optie> getOptiesByMedewerkers(@Param("medewerkers") List<Medewerker>medewerkers);
+    @Query("select o.titel from Optie o where o.medewerker.id = :medewerkersId")
+    List<String> getOptiesByMedewerkersId(@Param("medewerkersId") List<Integer> medewerkersId);
 
     @Query("delete from Optie o where o.medewerker.id = :medewerkerId")
     void deleteOptiesByMedewerkerId(@Param("medewerkerId") int medewerkerId);

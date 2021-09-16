@@ -93,10 +93,11 @@ public class ReservatieController {
             return "redirect:/reservatie/" + slug;
         }
         List<Medewerker> medewerkers = medewerkerService.getMedewerkersByOrganisation(organisatieService.getOrganisatieByName(slug));
-        //<Optie> opties = optieService.getOptiesByMedewerkers(medewerkers);
+        List<Integer> medewerkersId = medewerkerService.getMedewerkersIdByOrganisation(organisatieService.getOrganisatieByName(slug));
+        List<String> opties = optieService.getOptiesByMedewerkersId(medewerkersId);
         model.addAttribute("slug", slug);
         model.addAttribute("medewerkers", medewerkers);
-       //model.addAttribute("opties", opties);
+        model.addAttribute("opties", opties);
         return "templatesReservatie/booking_step1";
     }
 

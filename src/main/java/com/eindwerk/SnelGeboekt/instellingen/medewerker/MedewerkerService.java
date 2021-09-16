@@ -15,6 +15,8 @@ public interface MedewerkerService {
 
     List<Medewerker> getMedewerkersByOrganisation(Organisatie organisatie);
 
+    List<Integer> getMedewerkersIdByOrganisation(Organisatie organisatie);
+
     Medewerker getMedewerkerById(int id);
 
     void delete(int id);

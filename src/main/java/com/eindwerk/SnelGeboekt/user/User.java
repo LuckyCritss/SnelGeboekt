@@ -31,7 +31,7 @@ public class User {
     @Size(min = 2, message = "{user.naam}")
     private String naam;
 
-    @NotBlank(message = "{user.blank}")
+
     @Column(name = "gsm_number")
     @Size(min = 10, max = 12,message = "{user.gsmnummer}")
     private String gsmNummer;

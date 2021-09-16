@@ -7,7 +7,7 @@
 <div th:fragment = "frame1" id="wizard-frame-1" class="wizard-frame" style="">
       <div class="frame-container">
         <h2 class="frame-title">Bevestiging</h2>
-          <form class="card p-3 bg-light" action="#"  th:object="${organisaties}" method="post">
+          <form class="card p-3 bg-light" action="#"  th:object="${reservatie}" method="post">
               <fieldset>
                   <div class="row" >
                       <table class="table table-hover">
@@ -16,28 +16,21 @@
                               <th scope="col">Organisatie boeking</th>
                           </tr>
                           </thead>
-                          <div class="row" th:if="${organisaties !=null && !organisaties.empty}">
-                              <tbody>
-                              <tr th:each="organisatie : ${organisaties}">
-                                  <td th:text="${organisatie.bedrijfsNaam}"></td>
-                                  <td th:text="${organisatie.paginaNaam}"></td>
-                              </tr>
-                              </tbody>
-                          </div>
+                          <tbody>
+                          <tr th:object="${reservatie}">
+                              <td th:text="${reservatie.slug}"></td>
+                          </tr>
+                          </tbody>
                           <thead>
                           <tr>
                               <th scope="col">Medewerker</th>
                           </tr>
                           </thead>
-                          <div class="row" th:if="${organisaties !=null && !organisaties.empty}">
-                              <tbody>
-                              <tr th:each="organisatie : ${organisaties}">
-                                  <td th:text="${organisatie.bedrijfsNaam}"></td>
-                                  <td th:text="${organisatie.paginaNaam}"></td>
-                              </tr>
-                              </tbody>
-                          </div>
-                          <thead>
+                          <tbody>
+                          <tr th:object="${reservatie}">
+                              <td th:text="${reservatie.slug}"></td>
+                          </tr>
+                          </tbody>
                           <thead>
                           <tr>
                               <th scope="col">Dienst</th>

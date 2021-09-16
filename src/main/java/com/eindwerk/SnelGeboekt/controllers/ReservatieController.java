@@ -182,11 +182,17 @@ public class ReservatieController {
         if (reservatie == null || reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
-        model.addAttribute("user", reservatie.getUser());
+        model.addAttribute("reservatie", reservatie);
         return "templatesReservatie/booking_step4";
     }
 
-    @PostMapping("/{slug}/step4")
+    @PostMapping(value = "/{slug}/step4", params = "anuleer")
+    public String processStep4Anuleer(@PathVariable String slug,Principal principal) {
+            return "redirect:/reservatielijst";
+
+    }
+
+    @PostMapping(value = "/{slug}/step4", params = "bevestig")
     public String processStep4(@PathVariable String slug,Principal principal) {
         if(principal != null){
             reservatie.setUser(userService.getUserByEmail(principal.getName()));

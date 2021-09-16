@@ -21,21 +21,23 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Size(min = 2, message = "{user.familyNaam}")
+    @NotBlank(message = "{user.blank}")
+    @Size(min = 2, message = "{user.familynaam}")
     @Column(name = "family_name")
     private String familyNaam;
 
+    @NotBlank(message = "{user.blank}")
     @Column(name = "name")
     @Size(min = 2, message = "{user.naam}")
     private String naam;
 
-
+    @NotBlank(message = "{user.blank}")
     @Column(name = "gsm_number")
-    @Size(min = 10, max = 12,message = "{user.gsmNummer}")
+    @Size(min = 10, max = 12,message = "{user.gsmnummer}")
     private String gsmNummer;
 
     @NotBlank(message = "{user.blank}")
-    @Size(min = 5, message = "{user.wachtWoord}")
+    @Size(min = 5, message = "{user.wachtwoord}")
     @Column(name = "password")
     private String wachtWoord;
 

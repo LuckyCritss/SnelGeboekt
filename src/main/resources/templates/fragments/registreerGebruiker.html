@@ -26,14 +26,14 @@
 
             <input type="hidden"  th:field="*{id}">
 
-            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('FamilyNaam')}" th:errors="*{FamilyNaam}"></div>
+            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('familyNaam')}" th:errors="*{familyNaam}"></div>
             <div class="form-floating">
-                <input type="text" class="form-control" id="FamilyNaam" placeholder="FamilyNaam" th:field="*{FamilyNaam}" >
+                <input type="text" class="form-control" id="familyNaam" placeholder="familyNaam" th:field="*{familyNaam}" >
                 <label for="floatingInput">FamilyNaam</label>
             </div>
-            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('Naam')}" th:errors="*{Naam}"></div>
+            <div class="mb-1 mt-2 alert alert-danger" role="alert" th:if="${#fields.hasErrors('naam')}" th:errors="*{naam}"></div>
             <div class="form-floating">
-                <input type="text" class="form-control" id="voorNaam" placeholder="voorNaam" th:field="*{Naam}" >
+                <input type="text" class="form-control" id="voorNaam" placeholder="voorNaam" th:field="*{naam}" >
                 <label for="floatingInput">naam</label>
             </div>
 

@@ -23,18 +23,23 @@
                             <tr>
                                 <th scope="col">Naam</th>
                                 <th scope="col">Familienaam</th>
-                                <th scope="col">Optie</th>
-                                <th scope="col">Startuur</th>
-                                <th scope="col">Einduur</th>
                                 <th scope="col">Gsm-nummer</th>
+                                <th scope="col">Optie</th>
+                                <th scope="col">Datum</th>
+                                <th scope="col">Startuur</th>
                             </tr>
                             </thead>
-                            <div>
+                            <div class="row" th:if="${reservaties !=null && !reservaties.empty}">
                                 <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                <tr th:each="user : ${users}">
+                                    <td th:text="${user.naam}"></td>
+                                    <td th:text="${user.familyNaam}"></td>
+                                    <td th:text="${user.gsmNummer}"></td>
+
+                                <tr th:each="reservatie : ${reservaties}">
+                                    <td th:text="${reservatie.optie}"></td>
+                                    <td th:text="${reservatie.date}"></td>
+                                    <td th:text="${reservatie.uur}"></td>
                                 </tr>
                                 </tbody>
                             </div>

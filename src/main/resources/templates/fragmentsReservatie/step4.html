@@ -9,11 +9,11 @@
         <h2 class="frame-title">Bevestiging</h2>
           <form class="card p-3 bg-light" action="#"  th:object="${reservatie}" method="post">
               <fieldset>
-                  <div class="row" >
+                  <div class="row">
                       <table class="table table-hover">
                           <thead>
                           <tr>
-                              <th scope="col">Organisatie boeking</th>
+                              <th scope="col">Organisatie reservatie</th>
                           </tr>
                           </thead>
                           <tbody>
@@ -22,6 +22,7 @@
                           </tr>
                           </tbody>
                           <thead>
+                          <br>
                           <tr>
                               <th scope="col">Medewerker</th>
                           </tr>
@@ -32,15 +33,17 @@
                           </tr>
                           </tbody>
                           <thead>
+                          <br>
                           <tr>
                               <th scope="col">Dienst</th>
                           </tr>
                           </thead>
                           <<tbody>
-                      <tr th:object="${reservatie}">
-                          <td th:text="${reservatie.optie}"></td>
-                      </tr>
+                            <tr th:object="${reservatie}">
+                            <td th:text="${reservatie.optie}"></td>
+                            </tr>
                       </tbody>
+                          <br>
                           <thead>
                           <tr>
                               <th scope="col">Tijdstip</th>
@@ -50,7 +53,7 @@
                           <tr th:object="${reservatie}">
                               <td th:text="${reservatie.date}"></td>
                               <td th:text="${reservatie.uur}"></td>
-                              <td th:text="${reservatie.duratie}"></td>
+                              <td th:text="${reservatie.duration}"></td>
                           </tr>
                           </tbody>
                       </table>

@@ -2,6 +2,8 @@ package com.eindwerk.SnelGeboekt.controllers;
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
+import com.eindwerk.SnelGeboekt.reservatie.Reservatie;
+import com.eindwerk.SnelGeboekt.reservatie.ReservatieService;
 import com.eindwerk.SnelGeboekt.user.User;
 import com.eindwerk.SnelGeboekt.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 
 import java.security.Principal;
+import java.util.List;
 
 public class KlantAgendaController {
 
     private UserService userService;
+    private ReservatieService reservatieService;
+
+    @Autowired
+    public void setReservatieService(ReservatieService reservatieService) {
+        this.reservatieService = reservatieService;
+    }
 
     @Autowired
     public void setUserService(UserService userService){
@@ -25,8 +34,8 @@ public class KlantAgendaController {
     @GetMapping("/instellingen/klantagenda")
     public String agendaHandler(Principal principal, Model model) {
         if(userService.getUserByEmail(principal.getName()) != null){
-            User user = userService.getUserByEmail(principal.getName());
-            model.addAttribute("user", user);
+            List<Reservatie> reservaties = reservatieService.getReservatiesByUser(userService.getUserByEmail(principal.getName());
+            model.addAttribute("reservaties", reservatie);
             return ("/templatesInstellingen/lopendereservaties");
         }
         return "redirect:/instellingen";

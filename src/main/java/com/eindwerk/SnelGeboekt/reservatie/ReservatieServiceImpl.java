@@ -1,20 +1,26 @@
 package com.eindwerk.SnelGeboekt.reservatie;
 
 
+import com.eindwerk.SnelGeboekt.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
 public class ReservatieServiceImpl implements ReservatieService {
 
-    ReservatieService reservatieService;
+    private ReservatieRepository reservatieRepository;
 
     @Autowired
-    public void setReservatieService(ReservatieService reservatieService) {
-        this.reservatieService = reservatieService;
+    public void setReservatieRepository(ReservatieRepository reservatieRepository) {
+        this.reservatieRepository = reservatieRepository;
     }
 
 
-
+    @Override
+    public List<Reservatie> getReservatiesByUser(User user) {
+        return ReservatieRepository.getReservatiesByUser(user);
+    }
 }

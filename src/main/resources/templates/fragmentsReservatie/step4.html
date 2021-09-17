@@ -18,7 +18,7 @@
                           </thead>
                           <tbody>
                           <tr th:object="${reservatie}">
-                              <td th:text="${reservatie.slug}"></td>
+                              <td th:text="${reservatie.organisatie}"></td>
                           </tr>
                           </tbody>
                           <thead>
@@ -28,7 +28,7 @@
                           </thead>
                           <tbody>
                           <tr th:object="${reservatie}">
-                              <td th:text="${reservatie.slug}"></td>
+                              <td th:text="${reservatie.medewerker}"></td>
                           </tr>
                           </tbody>
                           <thead>
@@ -36,13 +36,11 @@
                               <th scope="col">Dienst</th>
                           </tr>
                           </thead>
-                          <div class="row" th:if="${organisaties !=null && !organisaties.empty}">
-                              <tbody>
-                              <tr th:each="organisatie : ${organisaties}">
-                                  <td th:text="${organisatie.bedrijfsNaam}"></td>
-                                  <td th:text="${organisatie.paginaNaam}"></td>
-                              </tr>
-                              </tbody>
+                          <<tbody>
+                      <tr th:object="${reservatie}">
+                          <td th:text="${reservatie.optie}"></td>
+                      </tr>
+                      </tbody>
                           </div>
                           <thead>
                           <tr>

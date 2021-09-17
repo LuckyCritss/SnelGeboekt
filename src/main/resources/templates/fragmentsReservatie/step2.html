@@ -4,7 +4,7 @@
 <head>
 </head>
 <div th:fragment="frame1" id="wizard-frame-1" class="wizard-frame" style="">
-    <form action="#" th:action="@{/booking/step2}" method="post">
+    <form action="#" th:action="@{/reservatie/step2}" method="post">
         <div class="frame-container">
             <h2 class="frame-title">Kies een tijdstip</h2>
 
@@ -47,9 +47,9 @@
 </div>
 <script th:inline="javascript">
     $(function () {
-        let service = [[${stepOneData.service}]];
-        let employee = [[${stepOneData.employee}]];
-        let request = "getschedule?service=" + service + "&employee=" + employee +"&date=";
+        let service = [[${optie}]];
+        let employee = [[${medewerker}]];
+        let request = "getschedule?optie=" + optie + "&medewerker=" + medewerker +"&date=";
         $("#select-date").datepicker({
             onSelect: function(date) {
                 request += encodeURIComponent(date);

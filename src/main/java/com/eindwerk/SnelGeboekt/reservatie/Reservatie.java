@@ -1,7 +1,6 @@
 package com.eindwerk.SnelGeboekt.reservatie;
 
-import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
-import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
+
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot;
 import com.eindwerk.SnelGeboekt.user.User;
 import lombok.Getter;
@@ -25,18 +24,23 @@ public class Reservatie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Transient
-    private String slug;
+    private String organisatie;
+
+    private String optie;
+
+    private int duration;
+
+    private String medewerker;
+
+    private String date;
+
+    private String uur;
 
     @Transient
-    private Medewerker medewerker;
-
-    @Transient
-    private Optie optie;
-
-    @Transient
+    @OneToOne(cascade = CascadeType.ALL)
     private Tijdslot tijdslot;
 
     @Transient
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 }

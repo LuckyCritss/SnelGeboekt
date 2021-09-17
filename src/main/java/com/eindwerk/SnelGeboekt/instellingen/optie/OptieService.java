@@ -21,7 +21,7 @@ public interface OptieService {
 
     Optie getOptieByMedewerkerAndString(Medewerker medewerker, String titel);
 
-    int GetDuurOptie(int DuurOptie);
+    int getDuurOptie(String titel, String medewerkerNaam);
 
     void delete(int id);
 

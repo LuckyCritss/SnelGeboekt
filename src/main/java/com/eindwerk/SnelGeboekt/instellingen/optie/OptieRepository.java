@@ -24,4 +24,7 @@ public interface OptieRepository  extends JpaRepository<Optie, Integer> {
     @Query("select o from Optie o where o.medewerker = :medewerker and o.titel = :titel")
     Optie getOptieByMedewerkerAndString(@Param("medewerker") Medewerker medewerkers , @Param("titel") String titel);
 
+    @Query("select o.duurOptie from Optie o where o.medewerker.naam = :medewerkerNaam and o.titel = :titel")
+    int getDuurOptie(@Param("medewerkerNaam") String medewerkerNaam , @Param("titel") String titel);
+
 }

@@ -84,16 +84,16 @@ public class ReservatieController {
             return "redirect:/templatesUser/boeking";
         }
         reservatie = new Reservatie();
-        reservatie.setSlug(slug);
+        reservatie.setOrganisatie(slug);
         return "redirect:/reservatie/" + slug + "/step1";
     }
 
     @GetMapping("/{slug}/step1")
     public String showWidgetStep1(@PathVariable String slug, Model model) {
-        if (reservatie == null || reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
+        if (reservatie == null || reservatie.getOrganisatie() == null || !reservatie.getOrganisatie().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
-        List<Medewerker> medewerkers = medewerkerService.getMedewerkersByOrganisation(organisatieService.getOrganisatieByName(slug));
+        List<String> medewerkers = medewerkerService.getMedewerkersNaamByOrganisation(organisatieService.getOrganisatieByName(slug));
         List<Integer> medewerkersId = medewerkerService.getMedewerkersIdByOrganisation(organisatieService.getOrganisatieByName(slug));
         List<String> opties = optieService.getOptiesByMedewerkersId(medewerkersId);
         model.addAttribute("slug", slug);
@@ -108,42 +108,41 @@ public class ReservatieController {
     }
 
     @PostMapping(value = "/step1", params = "next")
-    public String processWidgetStep1(@ModelAttribute String optieKeuze, @ModelAttribute Medewerker medewerker) {
+    public String processWidgetStep1(@ModelAttribute String optie, @ModelAttribute String medewerker) {
         reservatie.setMedewerker(medewerker);
-        Optie optie = optieService.getOptieByMedewerkerAndString(medewerker,optieKeuze);
         reservatie.setOptie(optie);
-        return "redirect:/reservatie/" + reservatie.getSlug() + "/step2";
+        //reservatie.setDuration(optieService.getDuurOptie(medewerker, optie));
+        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step2";
     }
 
     @GetMapping("/{slug}/step2")
     public String showWidgetStep2(@PathVariable String slug, Model model) {
-        if (reservatie == null || reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
+        if (reservatie == null || reservatie.getOrganisatie() == null || !reservatie.getOrganisatie().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
-        //List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByMedewerkers(medewerkers);
-       //model.addAttribute("tijdsloten", tijdsloten);
+       //model.addAttribute("tijdslot", tijdslot);
         return "templatesReservatie/booking_step2";
     }
 
     @PostMapping(value = "/step2", params = "previous")
     public String processWidgetStep2Previous() {
-        return "redirect:/reservatie/" + reservatie.getSlug() + "/step1";
+        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step1";
     }
 
     @PostMapping(value = "/step2", params = "select")
     public String processWidgetStep2Next(@ModelAttribute Tijdslot tijdslot, @RequestParam("select") String select) {
         reservatie.setTijdslot(tijdslot);
-        return "redirect:/reservatie/" + reservatie.getSlug() + "/step3";
+        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step3";
     }
 
     @GetMapping("/{slug}/step3")
     public String showWidgetStep3(@PathVariable String slug, Model model, Principal principal) {
-        if (reservatie == null || reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
+        if (reservatie == null || reservatie.getOrganisatie() == null || !reservatie.getOrganisatie().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
         if(principal != null){
             reservatie.setUser(userService.getUserByEmail(principal.getName()));
-           return "redirect:/reservatie/" + reservatie.getSlug() + "/step4";
+           return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step4";
         }
         model.addAttribute("user", new User());
         return "templatesReservatie/booking_step3";
@@ -151,7 +150,7 @@ public class ReservatieController {
 
     @PostMapping(value = "/step3", params = "previous")
     public String processWidgetStep3Previous() {
-        return "redirect:/reservatie/" + reservatie.getSlug() + "/step2";
+        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step2";
     }
 
     @PostMapping(value = "/step3", params = "next")
@@ -177,13 +176,13 @@ public class ReservatieController {
             }
             notificationService.sendAccountRegistrationUser(user);
         }
-        return "redirect:/reservatie/" + reservatie.getSlug() + "/step4";
+        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step4";
     }
 
 
     @GetMapping("/{slug}/step4")
     public String showWidgetStep4(@PathVariable String slug, Model model) {
-        if (reservatie == null || reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
+        if (reservatie == null || reservatie.getOrganisatie() == null || !reservatie.getOrganisatie().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
         model.addAttribute("reservatie", reservatie);

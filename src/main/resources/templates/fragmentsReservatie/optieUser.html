@@ -30,9 +30,9 @@
                 <br>
                 <select id="select-dienst" class="form-control">
                     <option value="-1">Kies een dienst</option>
-                    <option th:each="optie : ${opties}"
-                            th:value="${optie}"
-                            th:text="${optie}"
+                    <option th:each="optie, iStat : ${opties}"
+                            th:value="${iStat.index}"
+                            th:text="${optie}">
                     </option>
                 </select>
             </div>
@@ -52,9 +52,9 @@
                             <br>
                             <select id="select-medewerker" class="form-control">
                                 <option value="-1">Kies een medewerker</option>
-                                <option th:each="medewerker : ${medewerkers}"
-                                        th:value="${medewerker.id}"
-                                        th:text="${medewerker.naam}"
+                                <option th:each="medewerker, iStat : ${medewerkers}"
+                                        th:value="${iStat.index}"
+                                        th:text="${medewerker}"
                                 ></option>
                             </select>
                         </div>

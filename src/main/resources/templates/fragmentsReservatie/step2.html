@@ -45,14 +45,20 @@
         </div>
     </form>
 </div>
-<script>
+<script th:inline="javascript">
     $(function () {
+        let service = [[${stepOneData.service}]];
+        let employee = [[${stepOneData.employee}]];
+        let request = "getschedule?service=" + service + "&employee=" + employee +"&date=";
         $("#select-date").datepicker({
             onSelect: function(date) {
-                let request = "getschedule?date="+ encodeURIComponent(date);
+                request += encodeURIComponent(date);
                 $("#select-time").load(request);
             }
         });
+        //load the schedule on initial page load
+        request += encodeURIComponent($("#select-date").val());
+        $("#select-time").load(request);
     });
 </script>
 </body>

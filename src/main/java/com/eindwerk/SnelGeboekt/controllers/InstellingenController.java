@@ -65,7 +65,7 @@ public class InstellingenController {
         }
         return "redirect:/login";
     }
-
+    @PostMapping(value = "/instellingen", params = "safeOrg")
     public String organisatieForm(@Valid @ModelAttribute Organisatie organisatie, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/templatesInstellingen/instellingenOrg";
@@ -87,7 +87,7 @@ public class InstellingenController {
         notificationService.sendAccountUpdateOrganisatie(organisatie);
         return "redirect:/instellingen";
     }
-
+    @PostMapping(value = "/instellingen", params = "safeUser")
     public String userForm(@Valid @ModelAttribute User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/templatesInstellingen/instellingenUser";

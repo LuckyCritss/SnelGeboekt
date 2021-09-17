@@ -208,8 +208,12 @@ public class ReservatieController {
     }
 
     @GetMapping("/{slug}/getschedule")
-    public String ajaxDates(@PathVariable String slug, @RequestParam String date, Model model) {
-        return "fragmentsReservatie/hours";
+    public String ajaxDates(@PathVariable String slug,
+                            @RequestParam String date,
+                            @RequestParam String medewerker,
+                            @RequestParam String optie,
+                            Model model) {
+        return "fragmentsReservatie/hours :: hours";
     }
 
     @InitBinder

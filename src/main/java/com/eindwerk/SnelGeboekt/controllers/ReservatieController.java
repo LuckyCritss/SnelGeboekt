@@ -135,6 +135,12 @@ public class ReservatieController {
         return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step3";
     }
 
+    @PostMapping(value = "/step2", params = "next")
+    public String processWidgetStep2(@ModelAttribute Tijdslot tijdslot, BindingResult bindingResult) {
+        reservatie.setTijdslot(tijdslot);
+        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step3";
+    }
+
     @GetMapping("/{slug}/step3")
     public String showWidgetStep3(@PathVariable String slug, Model model, Principal principal) {
         if (reservatie == null || reservatie.getOrganisatie() == null || !reservatie.getOrganisatie().equals(slug)) {
@@ -189,10 +195,12 @@ public class ReservatieController {
         return "templatesReservatie/booking_step4";
     }
 
-    @PostMapping(value = "/{slug}/step4", params = "previous")
-    public String processStep4Previous(@PathVariable String slug,Principal principal) {
+
+    @PostMapping(value = "/step4", params = "previous")
+    public String processWidgetStep4Previous() {
         return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step3";
     }
+
 
     @PostMapping(value = "/{slug}/step4", params = "annuleer")
     public String processStep4Anuleer(@PathVariable String slug,Principal principal) {

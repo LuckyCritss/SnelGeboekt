@@ -58,6 +58,6 @@ public class Organisatie {
     @Column(name = "street")
     private String straat;
 
-    @OneToMany(mappedBy = "organisatie" , orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "organisatie" , cascade = CascadeType.ALL)
     private List<Medewerker> medewerker;
 }

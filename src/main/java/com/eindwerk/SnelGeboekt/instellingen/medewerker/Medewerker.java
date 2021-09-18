@@ -5,6 +5,7 @@ import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Parent;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -27,13 +28,13 @@ public class Medewerker {
         
         //  @MapsId
         @JoinColumn(name = "organisatie_id")
-        @ManyToOne()
+        @ManyToOne
         private Organisatie organisatie;
 
-        @OneToMany(mappedBy = "medewerker" , orphanRemoval = true, cascade = CascadeType.ALL)
+        @OneToMany(mappedBy = "medewerker" , cascade = CascadeType.ALL)
         private List<Tijdslot> tijdslot;
 
-        @OneToMany(mappedBy = "medewerker" , orphanRemoval = true, cascade = CascadeType.ALL)
+        @OneToMany(mappedBy = "medewerker" , cascade = CascadeType.ALL)
         private List<Optie> opties;
 
 

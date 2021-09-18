@@ -164,8 +164,8 @@ public class ReservatieController {
     }
 
     @PostMapping(value = "/step3", params = "next")
-    public String processWidgetStep3Next(@ModelAttribute User user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+    public String processWidgetStep3Next(Principal principal, @ModelAttribute User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors() || userService.getUserByEmail(user.getEmail())!= null || organisatieService.getOrganisatieByEmail(user.getEmail())!= null) {
             return "templatesReservatie/booking_step3";
         }
         reservatie.setUser(user);

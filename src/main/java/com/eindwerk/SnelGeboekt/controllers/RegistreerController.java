@@ -66,8 +66,8 @@ public class RegistreerController {
     }
 
     @PostMapping("/registreer/organisatie")
-    public String processForm(@Valid @ModelAttribute Organisatie organisatie, BindingResult bindingResult, HttpServletRequest request) {
-        if (bindingResult.hasErrors()) {
+    public String processForm(Principal principal, @Valid @ModelAttribute Organisatie organisatie, BindingResult bindingResult, HttpServletRequest request) {
+        if (bindingResult.hasErrors() || userService.getUserByEmail(organisatie.getEmail())!= null || organisatieService.getOrganisatieByEmail(organisatie.getEmail())!= null) {
             return "registreerOrganisatie";
         }
         try {
@@ -99,8 +99,8 @@ public class RegistreerController {
     }
 
     @PostMapping("/registreer/gebruiker")
-    public String processForm(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpServletRequest request) {
-        if (bindingResult.hasErrors()) {
+    public String processForm(Principal principal, @Valid @ModelAttribute User user, BindingResult bindingResult, HttpServletRequest request) {
+        if (bindingResult.hasErrors() || userService.getUserByEmail(user.getEmail())!= null || organisatieService.getOrganisatieByEmail(user.getEmail())!= null) {
             return "registreerGebruiker";
         }
         try {

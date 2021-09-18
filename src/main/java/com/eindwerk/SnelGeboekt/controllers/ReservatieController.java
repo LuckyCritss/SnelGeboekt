@@ -198,14 +198,10 @@ public class ReservatieController {
 
     @PostMapping(value = "/step4", params = "previous")
     public String processWidgetStep4Previous() {
-        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step3";
+        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step1";
     }
 
 
-    @PostMapping(value = "/{slug}/step4", params = "annuleer")
-    public String processStep4Anuleer(@PathVariable String slug,Principal principal) {
-            return "redirect:/reservatielijst";
-    }
 
     @PostMapping(value = "/{slug}/step4", params = "bevestig")
     public String processStep4(@PathVariable String slug,Principal principal) {

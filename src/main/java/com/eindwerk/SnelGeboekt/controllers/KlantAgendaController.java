@@ -34,8 +34,8 @@ public class KlantAgendaController {
     @GetMapping("/instellingen/klantagenda")
     public String agendaHandler(Principal principal, Model model) {
         if(userService.getUserByEmail(principal.getName()) != null){
-            List<Reservatie> reservaties = reservatieService.getReservatiesByUser(userService.getUserByEmail(principal.getName());
-            model.addAttribute("reservaties", reservatie);
+            //List<Reservatie> reservaties = reservatieService.getReservatiesByUser(userService.getUserByEmail(principal.getName()));
+            //model.addAttribute("reservaties", reservaties);
             return ("/templatesInstellingen/lopendereservaties");
         }
         return "redirect:/instellingen";

@@ -19,8 +19,8 @@ public class ReservatieServiceImpl implements ReservatieService {
     }
 
 
-    @Override
-    public List<Reservatie> getReservatiesByUser(User user) {
-        return ReservatieRepository.getReservatiesByUser(user);
-    }
+   // @Override
+   // public List<Reservatie> getReservatiesByUser(User user) {
+  //      return reservatieRepository.getReservatiesByUser(user);
+   // }
 }

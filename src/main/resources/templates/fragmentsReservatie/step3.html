@@ -5,7 +5,7 @@
 </head>
 <body>
 <div th:fragment="frame1" id="wizard-frame-1" class="wizard-frame" style="">
-    <form action="#" th:action="@{/reservatie/} + ${slug} + @{/step3}" th:object="${user}" method="post">
+    <form action="#" th:action="@{/reservatie/step3}" th:object="${user}" method="post">
 
         <div class="command-buttons">
             <button type="submit" id="button-back-2" class="btn button-back btn-outline-secondary" data-step_index="2"

@@ -38,7 +38,7 @@
                               <th scope="col">Dienst</th>
                           </tr>
                           </thead>
-                          <<tbody>
+                          <tbody>
                             <tr th:object="${reservatie}">
                             <td th:text="${reservatie.optie}"></td>
                             </tr>
@@ -63,7 +63,7 @@
                   <button class="w-60 btn btn-lg btn-success" name="bevestig" type="submit" style="width: 400px;">Bevestig u afspraak</button>
                   <br>
                   <br>
-                  <button class="w-60 btn btn-lg btn-success" name="anuleer" type="submit" style="width: 400px;">Annuleren</button>
+                  <button class="w-60 btn btn-lg btn-success" type="submit" th:name="annuleer" style="width: 400px;">Annuleren</button>
               </div>
               <div style="text-align:left;">
               <div class="command-buttons">

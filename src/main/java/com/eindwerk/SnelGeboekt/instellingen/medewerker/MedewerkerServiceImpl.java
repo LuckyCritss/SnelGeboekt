@@ -1,9 +1,6 @@
 package com.eindwerk.SnelGeboekt.instellingen.medewerker;
 
-import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
-import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.TijdslotService;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
-import com.eindwerk.SnelGeboekt.organisatie.OrganisatieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +15,6 @@ public class MedewerkerServiceImpl implements MedewerkerService {
     public void setMedewerkerRepository(MedewerkerRepository medewerkerRepository){
         this.medewerkerRepository = medewerkerRepository;
     }
-
 
     @Override
     public List<Medewerker> getAll() {

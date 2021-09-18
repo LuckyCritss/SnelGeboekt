@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ReservatieService {
 
- //List<Reservatie> getReservatiesByUser (User user);
+ List<Reservatie> getReservatiesByUser (User user);
 
 
 

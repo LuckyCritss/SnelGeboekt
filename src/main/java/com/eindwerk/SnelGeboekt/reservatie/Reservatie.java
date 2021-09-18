@@ -40,7 +40,7 @@ public class Reservatie {
     @OneToOne(cascade = CascadeType.ALL)
     private Tijdslot tijdslot;
 
-    @Transient
-    @OneToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 }

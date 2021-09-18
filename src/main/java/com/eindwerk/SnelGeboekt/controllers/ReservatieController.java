@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -95,7 +96,10 @@ public class ReservatieController {
         }
         List<String> medewerkers = medewerkerService.getMedewerkersNaamByOrganisation(organisatieService.getOrganisatieByName(slug));
         List<Integer> medewerkersId = medewerkerService.getMedewerkersIdByOrganisation(organisatieService.getOrganisatieByName(slug));
-        List<String> opties = optieService.getOptiesByMedewerkersId(medewerkersId);
+        List<String> opties = new ArrayList<>();
+        for (Integer integer : medewerkersId) {
+            opties.add(optieService.getOptieTitelsByMedewerkersId(integer));
+        }
         model.addAttribute("slug", slug);
         model.addAttribute("medewerkers", medewerkers);
         model.addAttribute("opties", opties);

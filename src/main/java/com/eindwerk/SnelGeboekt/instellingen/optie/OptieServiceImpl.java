@@ -42,8 +42,8 @@ public class OptieServiceImpl implements OptieService {
     }
 
     @Override
-    public List<String> getOptiesByMedewerkersId(List<Integer> medewerkersId) {
-        return optieRepository.getOptiesByMedewerkersId(medewerkersId);
+    public String getOptieTitelsByMedewerkersId(int medewerkersId) {
+        return optieRepository.getOptieTitelsByMedewerkersId(medewerkersId);
     }
 
     @Override

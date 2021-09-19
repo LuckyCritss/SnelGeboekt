@@ -42,7 +42,7 @@ public class OptieServiceImpl implements OptieService {
     }
 
     @Override
-    public String getOptieTitelsByMedewerkersId(int medewerkersId) {
+    public List<String> getOptieTitelsByMedewerkersId(int medewerkersId) {
         return optieRepository.getOptieTitelsByMedewerkersId(medewerkersId);
     }
 

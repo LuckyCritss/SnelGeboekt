@@ -44,13 +44,13 @@ public class UserServiceImpl implements  UserService{
         if (user.getWachtWoord() == null && user.getId() == 0) {
             throw new UserService.PasswordException("password malformed");
         }
-        if (user.getWachtWoord().length() > 4 && !user.getWachtWoord().equals(user.getCheckWachtWoord()) ) {
+        if (user.getWachtWoord().length() > 4 && !user.getWachtWoord().equals(user.getCheckWachtWoord())) {
             throw new UserService.PasswordMisMatchException("password mismatch");
         }
-
         if (user.getWachtWoord() == null && user.getId() > 0) {
             user.setWachtWoord(userRepository.findById(user.getId()).get().getWachtWoord());
-        } else {
+        }
+        else {
             user.setWachtWoord(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(user.getWachtWoord()));
         }
         userRepository.save(user);

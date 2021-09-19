@@ -25,6 +25,7 @@
                                 <th scope="col">Familienaam</th>
                                 <th scope="col">Gsm-nummer</th>
                                 <th scope="col">Optie</th>
+                                <th scope="col">Medewerker</th>
                                 <th scope="col">Datum</th>
                                 <th scope="col">Startuur</th>
                             </tr>
@@ -38,6 +39,7 @@
 
                                 <tr th:each="reservatie : ${reservaties}">
                                     <td th:text="${reservatie.optie}"></td>
+                                    <td th:text="${reservatie.medewerker}"></td>
                                     <td th:text="${reservatie.date}"></td>
                                     <td th:text="${reservatie.uur}"></td>
                                 </tr>

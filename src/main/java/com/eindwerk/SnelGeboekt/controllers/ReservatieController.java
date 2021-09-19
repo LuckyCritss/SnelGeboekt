@@ -136,7 +136,7 @@ public class ReservatieController {
     @PostMapping(value = "/step2", params = "select")
     public String processWidgetStep2Next(@ModelAttribute Tijdslot tijdslot, @RequestParam("select") String select) {
         reservatie.setTijdslot(tijdslot);
-        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step3";
+        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step2";
     }
 
     @PostMapping(value = "/step2", params = "next")

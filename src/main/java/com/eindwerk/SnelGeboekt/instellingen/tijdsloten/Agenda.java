@@ -20,7 +20,7 @@ public class Agenda {
 
     private String agendaNaam;
 
-    /*
+/*
     @ManyToOne
     @JoinColumn(name = "organisatie_id")
     Organisatie organisatie;

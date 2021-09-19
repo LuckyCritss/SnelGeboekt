@@ -24,6 +24,7 @@ public class Organisatie {
 
     @NotBlank(message = "{org.blank}")
     @Email(message = "{org.email}")
+    @Email(message = "{org.email-unique}")
     @Column(name = "email")
     private String email;
 

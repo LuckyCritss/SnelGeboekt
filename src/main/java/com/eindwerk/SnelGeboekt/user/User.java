@@ -18,6 +18,7 @@ public class User {
 
     @NotBlank(message = "{user.blank}")
     @Email(message = "{user.email}")
+    @Email(message = "{user.email-unique}")
     @Column(name = "email")
     private String email;
 

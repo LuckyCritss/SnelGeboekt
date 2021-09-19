@@ -1,5 +1,6 @@
 package com.eindwerk.SnelGeboekt.controllers;
 
+import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.TijdslotRepository;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,13 @@ import java.security.Principal;
 public class AgendaController {
 
     private OrganisatieService organisatieService;
+
+    private final TijdslotRepository tijdslotRepository;
+
+    public AgendaController(TijdslotRepository tijdslotRepository){
+        this.tijdslotRepository = tijdslotRepository;
+    }
+
 
     @Autowired
     public void setOrganisatieService(OrganisatieService organisatieService){

@@ -49,7 +49,7 @@
     $(function () {
         let optie = [[${optie}]];
         let medewerker = [[${medewerker}]];
-        let request = "getschedule?optie=" + optie + "&medewerker=" + medewerker +"&date=";
+        let request = "getagenda?optie=" + optie + "&medewerker=" + medewerker +"&date=";
         $("#select-date").datepicker({
             onSelect: function(date) {
                 request += encodeURIComponent(date);

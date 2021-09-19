@@ -17,7 +17,7 @@ public interface OptieService {
 
     List<Optie> getOptiesByMedewerker(Medewerker medewerker);
 
-    String getOptieTitelsByMedewerkersId(int medewerkersId);
+    List<String> getOptieTitelsByMedewerkersId(int medewerkersId);
 
     Optie getOptieByMedewerkerAndString(Medewerker medewerker, String titel);
 

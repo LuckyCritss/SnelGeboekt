@@ -30,7 +30,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/reservatie/")
@@ -98,11 +100,13 @@ public class ReservatieController {
         List<Integer> medewerkersId = medewerkerService.getMedewerkersIdByOrganisation(organisatieService.getOrganisatieByName(slug));
         List<String> opties = new ArrayList<>();
         for (Integer integer : medewerkersId) {
-            opties.add(optieService.getOptieTitelsByMedewerkersId(integer));
+            List<String> test =optieService.getOptieTitelsByMedewerkersId(integer);
+            opties.addAll(test);
         }
+        Set<String> uniqueOpties = new HashSet<String>(opties);
         model.addAttribute("slug", slug);
         model.addAttribute("medewerkers", medewerkers);
-        model.addAttribute("opties", opties);
+        model.addAttribute("opties", uniqueOpties);
         return "templatesReservatie/booking_step1";
     }
 

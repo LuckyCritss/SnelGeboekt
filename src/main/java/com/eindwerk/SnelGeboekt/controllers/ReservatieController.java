@@ -104,7 +104,9 @@ public class ReservatieController {
     }
 
     @PostMapping(value = "/step1", params = "next")
-    public String processWidgetStep1() {
+    public String processWidgetStep1(@ModelAttribute String optie, @ModelAttribute Medewerker medewerker) {
+        reservatie.setMedewerker(medewerker);
+        reservatie.setOptie(optie);
         //reservatie.setDuration(optieService.getDuurOptie(medewerker, optie));
         return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step2";
     }
@@ -191,7 +193,7 @@ public class ReservatieController {
 
     @PostMapping(value = "/step4", params = "previous")
     public String processWidgetStep4Previous() {
-        return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step3";
+        return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step1";
     }
 
     @PostMapping(value = "/{slug}/step4", params = "bevestig")
@@ -222,12 +224,6 @@ public class ReservatieController {
         List<Medewerker> medewerkers = optieService.getMedewerkerByOptie(optie ,organisatieService.getOrganisatieByName(slug));
         model.addAttribute("medewerkers", medewerkers);
         return "fragmentsReservatie/employees :: employees";
-    }
-
-    @GetMapping("/{slug}/getemployee")
-    public void ajaxMedewerkers(@PathVariable String slug,
-                                  @RequestParam Medewerker medewerker) {
-        reservatie.setMedewerker(medewerker);
     }
     @InitBinder
     public void initBinder(WebDataBinder binder) {

@@ -51,19 +51,6 @@
                 }
             });
         });
-
-        $(function () {
-            $("#select-medewerker").change(function () {
-                let request1 = "getemployees?medewerker=";
-                //debugger;
-                if (this.value!== "null") {
-                    request1 = request1 + encodeURIComponent(this.value);
-                    $("#select-medewerker").load(request1);
-                } else {
-                    $("#select-medewerker").val("null");
-                }
-            });
-        });
     </script>
 </div>
 </body>

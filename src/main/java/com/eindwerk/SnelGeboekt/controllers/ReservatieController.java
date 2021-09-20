@@ -29,10 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping("/reservatie/")
@@ -87,26 +84,22 @@ public class ReservatieController {
             return "redirect:/templatesUser/boeking";
         }
         reservatie = new Reservatie();
-        reservatie.setOrganisatie(slug);
-        return "redirect:/reservatie/" + slug + "/step1";
+        reservatie.setOrganisatie(organisatieService.getOrganisatieByName(slug));
+        return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step1";
     }
 
     @GetMapping("/{slug}/step1")
     public String showWidgetStep1(@PathVariable String slug, Model model) {
-        if (reservatie == null || reservatie.getOrganisatie() == null || !reservatie.getOrganisatie().equals(slug)) {
-            return "redirect:/reservatie/" + slug;
+        if (reservatie == null || reservatie.getOrganisatie().getBedrijfsNaam() == null || !reservatie.getOrganisatie().getBedrijfsNaam().equals(slug)) {
+            return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam();
         }
-        List<String> medewerkers = medewerkerService.getMedewerkersNaamByOrganisation(organisatieService.getOrganisatieByName(slug));
         List<Integer> medewerkersId = medewerkerService.getMedewerkersIdByOrganisation(organisatieService.getOrganisatieByName(slug));
-        List<String> opties = new ArrayList<>();
+        Set<String> opties = new HashSet<String>();
         for (Integer integer : medewerkersId) {
-            List<String> test =optieService.getOptieTitelsByMedewerkersId(integer);
-            opties.addAll(test);
+            opties.addAll(optieService.getOptieTitelsByMedewerkersId(integer));
         }
-        Set<String> uniqueOpties = new HashSet<String>(opties);
         model.addAttribute("slug", slug);
-        model.addAttribute("medewerkers", medewerkers);
-        model.addAttribute("opties", uniqueOpties);
+        model.addAttribute("opties", opties);
         return "templatesReservatie/booking_step1";
     }
 
@@ -116,16 +109,16 @@ public class ReservatieController {
     }
 
     @PostMapping(value = "/step1", params = "next")
-    public String processWidgetStep1(@ModelAttribute String optie, @ModelAttribute String medewerker) {
+    public String processWidgetStep1(@ModelAttribute String optie, @ModelAttribute Medewerker medewerker) {
         reservatie.setMedewerker(medewerker);
         reservatie.setOptie(optie);
         //reservatie.setDuration(optieService.getDuurOptie(medewerker, optie));
-        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step2";
+        return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step2";
     }
 
     @GetMapping("/{slug}/step2")
     public String showWidgetStep2(@PathVariable String slug, Model model) {
-        if (reservatie == null || reservatie.getOrganisatie() == null || !reservatie.getOrganisatie().equals(slug)) {
+        if (reservatie == null || reservatie.getOrganisatie().getBedrijfsNaam() == null || !reservatie.getOrganisatie().getBedrijfsNaam().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
        //model.addAttribute("tijdslot", tijdslot);
@@ -134,29 +127,29 @@ public class ReservatieController {
 
     @PostMapping(value = "/step2", params = "previous")
     public String processWidgetStep2Previous() {
-        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step1";
+        return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step1";
     }
 
     @PostMapping(value = "/step2", params = "select")
     public String processWidgetStep2Next(@ModelAttribute Tijdslot tijdslot, @RequestParam("select") String select) {
         reservatie.setTijdslot(tijdslot);
-        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step2";
+        return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step2";
     }
 
     @PostMapping(value = "/step2", params = "next")
     public String processWidgetStep2(@ModelAttribute Tijdslot tijdslot, BindingResult bindingResult) {
         reservatie.setTijdslot(tijdslot);
-        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step3";
+        return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step3";
     }
 
     @GetMapping("/{slug}/step3")
     public String showWidgetStep3(@PathVariable String slug, Model model, Principal principal) {
-        if (reservatie == null || reservatie.getOrganisatie() == null || !reservatie.getOrganisatie().equals(slug)) {
+        if (reservatie == null || reservatie.getOrganisatie().getBedrijfsNaam() == null || !reservatie.getOrganisatie().getBedrijfsNaam().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
         if(principal != null){
             reservatie.setUser(userService.getUserByEmail(principal.getName()));
-           return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step4";
+           return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step4";
         }
         model.addAttribute("user", new User());
         return "templatesReservatie/booking_step3";
@@ -164,7 +157,7 @@ public class ReservatieController {
 
     @PostMapping(value = "/step3", params = "previous")
     public String processWidgetStep3Previous() {
-        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step2";
+        return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step2";
     }
 
     @PostMapping(value = "/step3", params = "next")
@@ -190,13 +183,13 @@ public class ReservatieController {
             }
             notificationService.sendAccountRegistrationUser(user);
         }
-        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step4";
+        return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step4";
     }
 
 
     @GetMapping("/{slug}/step4")
     public String showWidgetStep4(@PathVariable String slug, Model model) {
-        if (reservatie == null || reservatie.getOrganisatie() == null || !reservatie.getOrganisatie().equals(slug)) {
+        if (reservatie == null || reservatie.getOrganisatie().getBedrijfsNaam() == null || !reservatie.getOrganisatie().getBedrijfsNaam().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
         model.addAttribute("reservatie", reservatie);
@@ -206,7 +199,7 @@ public class ReservatieController {
 
     @PostMapping(value = "/step4", params = "previous")
     public String processWidgetStep4Previous() {
-        return "redirect:/reservatie/" + reservatie.getOrganisatie() + "/step1";
+        return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step1";
     }
 
 
@@ -222,7 +215,7 @@ public class ReservatieController {
         }
     }
 
-    @GetMapping("/{slug}/getschedule")
+    @GetMapping("/{slug}/getagenda")
     public String ajaxDates(@PathVariable String slug,
                             @RequestParam String date,
                             @RequestParam String medewerker,
@@ -231,6 +224,14 @@ public class ReservatieController {
         return "fragmentsReservatie/hours :: hours";
     }
 
+    @GetMapping("/{slug}/getemployees")
+    public String ajaxMedewerkers(@PathVariable String slug,
+                            @RequestParam String optie,
+                            Model model) {
+        List<String> medewerkers = medewerkerService.getMedewerkersNaamByOrganisation(organisatieService.getOrganisatieByName(slug));
+        model.addAttribute("medewerkers", medewerkers);
+        return "fragmentsReservatie/employees :: employees";
+    }
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));

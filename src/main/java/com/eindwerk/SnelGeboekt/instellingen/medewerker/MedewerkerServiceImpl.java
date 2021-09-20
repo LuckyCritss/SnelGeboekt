@@ -51,6 +51,9 @@ public class MedewerkerServiceImpl implements MedewerkerService {
         return medewerkerRepository.getMedewerkerById(id);
     }
 
+
+
+
     @Override
         public void delete(int id) {
             try {

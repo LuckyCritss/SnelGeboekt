@@ -18,7 +18,7 @@
                           </thead>
                           <tbody>
                           <tr th:object="${reservatie}">
-                              <td th:text="${reservatie.organisatie}"></td>
+                              <td th:text="${reservatie.organisatie.bedrijfsNaam}"></td>
                           </tr>
                           </tbody>
                           <thead>
@@ -29,7 +29,7 @@
                           </thead>
                           <tbody>
                           <tr th:object="${reservatie}">
-                              <td th:text="${reservatie.medewerker}"></td>
+                              <td th:text="${reservatie.medewerker.naam}"></td>
                           </tr>
                           </tbody>
                           <thead>

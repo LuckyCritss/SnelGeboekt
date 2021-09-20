@@ -24,4 +24,6 @@ public interface MedewerkerRepository extends JpaRepository<Medewerker, Integer>
     Medewerker getMedewerkerById(@Param("id")int id);
 
 
+
+
 }

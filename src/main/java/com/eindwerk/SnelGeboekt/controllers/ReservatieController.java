@@ -186,6 +186,7 @@ public class ReservatieController {
         return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step4";
     }
 
+
     @GetMapping("/{slug}/step4")
     public String showWidgetStep4(@PathVariable String slug, Model model) {
         if (reservatie == null || reservatie.getOrganisatie().getBedrijfsNaam() == null || !reservatie.getOrganisatie().getBedrijfsNaam().equals(slug)) {
@@ -195,18 +196,18 @@ public class ReservatieController {
         return "templatesReservatie/booking_step4";
     }
 
+
     @PostMapping(value = "/step4", params = "previous")
     public String processWidgetStep4Previous() {
         return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step1";
     }
 
+
+
     @PostMapping(value = "/{slug}/step4", params = "bevestig")
     public String processStep4(@PathVariable String slug,Principal principal) {
         if(principal != null){
             reservatie.setUser(userService.getUserByEmail(principal.getName()));
-            reservatieService.save(reservatie);
-            notificationService.sendSuccesfullReservateieUser(reservatie);
-            notificationService.sendSuccesfullReservateieOrganisatie(reservatie);
             return "redirect:/instellingen";
         }
         else{
@@ -227,7 +228,7 @@ public class ReservatieController {
     public String ajaxMedewerkers(@PathVariable String slug,
                             @RequestParam String optie,
                             Model model) {
-        List<Medewerker> medewerkers = optieService.getMedewerkerByOptie(optie, reservatie.getOrganisatie());
+        List<Medewerker> medewerkers = optieService.getMedewerkerByOptie(optie ,organisatieService.getOrganisatieByName(slug));
         model.addAttribute("medewerkers", medewerkers);
         return "fragmentsReservatie/employees :: employees";
     }

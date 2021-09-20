@@ -1,23 +1,7 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head th:fragment = "optieUser (title)">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Optie</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link href="/css/static.css" rel="stylesheet">
-</head>
-<style>
-    .form-signin {
-        width: 100%;
-        max-width: 700px;
-        padding: 20px;
-        margin: auto;
-    }
-</style>
 <body  class="text-center">
 <div class="registreer" th:fragment="optieUser">
-
     <main class="form-signin">
         <br>
         <br>
@@ -29,9 +13,9 @@
                 <br>
                 <br>
                 <select name = "service" id="select-dienst" class="form-control">
-                    <option value="-1">Kies een dienst</option>
+                    <option value="null">Kies een dienst</option>
                     <option th:each="optie, iStat : ${opties}"
-                            th:value="${iStat.index}"
+                            th:value="${optie}"
                             th:text="${optie}">
                     </option>
                 </select>
@@ -51,23 +35,24 @@
             <span>&nbsp;</span>
         </div>
     </main>
-</div>
-<script th:inline="javascript">
-    $(function () {
-        $("#select-dienst").change(function () {
-        let request = "getemployees?service=";
-            //debugger;
-            if (this.value >-1) {
-                request = request + this.value;
-                $("#select-medewerker").load(request);
-                $("#select-medewerker").removeAttr("disabled");
-            } else {
+    <script th:inline="javascript">
+        $(function () {
+            $("#select-dienst").change(function () {
+                let request = "getemployees?optie=";
+                //debugger;
+                if (this.value!== "null") {
+                    request = request + encodeURIComponent(this.value);
+                    $("#select-medewerker").load(request);
+                    $("#select-medewerker").removeAttr("disabled");
+                } else {
 
-                $("#select-medewerker").val(-1);
-                $("#select-medewerker").attr("disabled",true);
-            }
+                    $("#select-medewerker").val("null");
+                    $("#select-medewerker").attr("disabled",true);
+                }
+            });
         });
-    });
-</script>
+    </script>
+</div>
+
 </body>
 </html>

@@ -2,6 +2,20 @@ body {
     background-color: #f5f8fa;
 }
 
+.header {
+    text-align: center;
+    color: white;
+    padding: 45px;
+    background: rgb(240, 9, 9);
+}
+
+.footer {
+    text-align: center;
+    color: white;
+    padding: 40px;
+    background: rgb(46, 45, 45);
+}
+
 #book-appointment-wizard .wizard-frame .frame-container {
     height: auto;
     min-height: 500px;

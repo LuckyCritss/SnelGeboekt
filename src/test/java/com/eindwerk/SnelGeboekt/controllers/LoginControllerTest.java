@@ -41,6 +41,10 @@ class LoginControllerTest {
         this.mockMvc = mockMvc;
     }
 
+    /**
+     * Test login
+     * @throws Exception
+     */
     @Test
     void shouldRedirectToSettingsPage() throws Exception {
         SecurityMockMvcRequestBuilders.FormLoginRequestBuilder formLogin = formLogin()

@@ -91,7 +91,7 @@ public class ReservatieController {
     @GetMapping("/{slug}/step1")
     public String showWidgetStep1(@PathVariable String slug, Model model) {
         if (reservatie == null || reservatie.getOrganisatie().getBedrijfsNaam() == null || !reservatie.getOrganisatie().getBedrijfsNaam().equals(slug)) {
-            return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam();
+            return "redirect:/reservatie/" + slug;
         }
         List<Integer> medewerkersId = medewerkerService.getMedewerkersIdByOrganisation(organisatieService.getOrganisatieByName(slug));
         Set<String> opties = new HashSet<String>();

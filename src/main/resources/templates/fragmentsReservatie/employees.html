@@ -4,7 +4,7 @@
 <head>
 </head>
 <body>
-    <select th:fragment = "employees" name = "employee" id="select-medewerker" class="form-control">
+    <select th:fragment = "employees" name = "employees" id="select-medewerker" class="form-control">
       <option value="-1">Kies een medewerker</option>
       <option th:each="medewerker, iStat : ${medewerkers}"
               th:value="${iStat.index}"

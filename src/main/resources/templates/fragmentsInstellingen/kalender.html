@@ -32,12 +32,10 @@
                             </thead>
                             <div class="row" th:if="${reservaties !=null && !reservaties.empty}">
                                 <tbody>
-                                <tr th:each="user : ${users}">
-                                    <td th:text="${user.naam}"></td>
-                                    <td th:text="${user.familyNaam}"></td>
-                                    <td th:text="${user.gsmNummer}"></td>
-
                                 <tr th:each="reservatie : ${reservaties}">
+                                    <td th:text="${reservatie.user.naam}"></td>
+                                    <td th:text="${reservatie.user.familyNaam}"></td>
+                                    <td th:text="${reservatie.user.gsmNummer}"></td>
                                     <td th:text="${reservatie.optie}"></td>
                                     <td th:text="${reservatie.medewerker}"></td>
                                     <td th:text="${reservatie.date}"></td>

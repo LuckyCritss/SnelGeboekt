@@ -47,8 +47,8 @@ public class OptieServiceImpl implements OptieService {
     }
 
     @Override
-    public Optie getOptieByMedewerkerAndString(Medewerker medewerker, String titel) {
-        return optieRepository.getOptieByMedewerkerAndString(medewerker, titel);
+    public List<Medewerker> getMedewerkerByOptie(String optie, Organisatie organisatie) {
+        return optieRepository.getMedewerkerByOptie(optie, organisatie);
     }
 
     @Override

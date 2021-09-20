@@ -20,4 +20,9 @@ public class ReservatieServiceImpl implements ReservatieService {
     public List<Reservatie> getReservatiesByUser(User user) {
         return reservatieRepository.getReservatiesByUser(user);
     }
+
+    @Override
+    public void save(Reservatie reservatie) {
+        reservatieRepository.save(reservatie);
+    }
 }

@@ -2,6 +2,7 @@ package com.eindwerk.SnelGeboekt.instellingen.optie;
 
 import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface OptieService {
 
     List<String> getOptieTitelsByMedewerkersId(int medewerkersId);
 
-    Optie getOptieByMedewerkerAndString(Medewerker medewerker, String titel);
+    List<Medewerker> getMedewerkerByOptie(String optie, Organisatie organisatie);
 
     int getDuurOptie(String titel, String medewerkerNaam);
 

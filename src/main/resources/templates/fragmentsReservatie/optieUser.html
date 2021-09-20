@@ -50,12 +50,8 @@
                             </label>
                             <br>
                             <br>
-                            <select th:fragment = "employees" name = "employee" id="select-medewerker" class="form-control">
+                            <select name = "employee" id="select-medewerker" class="form-control" disabled>
                                 <option value="-1">Kies een medewerker</option>
-                                <option th:each="medewerker, iStat : ${medewerkers}"
-                                        th:value="${iStat.index}"
-                                        th:text="${medewerker}"
-                                ></option>
                             </select>
                         </div>
                     </div>
@@ -67,9 +63,8 @@
         </div>
         <script th:inline="javascript">
             $(function () {
-                let request = "getemployees?service=";
                 $("#select-dienst").change(function () {
-                    //debugger;
+                    let request = "getemployees?service=";
                     if (this.value >-1) {
                         request = request + this.value;
                         $("#select-medewerker").load(request);

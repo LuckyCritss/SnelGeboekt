@@ -2,14 +2,14 @@ body {
     background-color: #f5f8fa;
 }
 
-.header {
+.headerSnelgeboekt{
     text-align: center;
     color: white;
     padding: 45px;
     background: rgb(240, 9, 9);
 }
 
-.footer {
+.footer{
     text-align: center;
     color: white;
     padding: 40px;

@@ -91,7 +91,7 @@ public class ReservatieController {
     @GetMapping("/{slug}/step1")
     public String showWidgetStep1(@PathVariable String slug, Model model) {
         if (reservatie == null || reservatie.getOrganisatie().getBedrijfsNaam() == null || !reservatie.getOrganisatie().getBedrijfsNaam().equals(slug)) {
-            return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam();
+            return "redirect:/reservatie/" + slug;
         }
         List<Integer> medewerkersId = medewerkerService.getMedewerkersIdByOrganisation(organisatieService.getOrganisatieByName(slug));
         Set<String> opties = new HashSet<String>();
@@ -186,7 +186,6 @@ public class ReservatieController {
         return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step4";
     }
 
-
     @GetMapping("/{slug}/step4")
     public String showWidgetStep4(@PathVariable String slug, Model model) {
         if (reservatie == null || reservatie.getOrganisatie().getBedrijfsNaam() == null || !reservatie.getOrganisatie().getBedrijfsNaam().equals(slug)) {
@@ -196,18 +195,18 @@ public class ReservatieController {
         return "templatesReservatie/booking_step4";
     }
 
-
     @PostMapping(value = "/step4", params = "previous")
     public String processWidgetStep4Previous() {
         return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step1";
     }
 
-
-
     @PostMapping(value = "/{slug}/step4", params = "bevestig")
     public String processStep4(@PathVariable String slug,Principal principal) {
         if(principal != null){
             reservatie.setUser(userService.getUserByEmail(principal.getName()));
+            reservatieService.save(reservatie);
+            notificationService.sendSuccesfullReservateieUser(reservatie);
+            notificationService.sendSuccesfullReservateieOrganisatie(reservatie);
             return "redirect:/instellingen";
         }
         else{
@@ -228,7 +227,7 @@ public class ReservatieController {
     public String ajaxMedewerkers(@PathVariable String slug,
                             @RequestParam String optie,
                             Model model) {
-        List<String> medewerkers = medewerkerService.getMedewerkersNaamByOrganisation(organisatieService.getOrganisatieByName(slug));
+        List<Medewerker> medewerkers = optieService.getMedewerkerByOptie(optie, reservatie.getOrganisatie());
         model.addAttribute("medewerkers", medewerkers);
         return "fragmentsReservatie/employees :: employees";
     }
@@ -236,13 +235,4 @@ public class ReservatieController {
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
-
-    public void authWithAuthManager(HttpServletRequest request, String email, String password) {
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password);
-        authToken.setDetails(new WebAuthenticationDetails(request));
-        Authentication authentication = authenticationManager.authenticate(authToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-    }
-
-
 }

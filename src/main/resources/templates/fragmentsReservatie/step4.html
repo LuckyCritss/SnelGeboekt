@@ -19,6 +19,9 @@
                           <tbody>
                           <tr th:object="${reservatie}">
                               <td th:text="${reservatie.organisatie.bedrijfsNaam}"></td>
+                              <td th:text="${reservatie.organisatie.straat}"></td>
+                              <td th:text="${reservatie.organisatie.postCode}"></td>
+                              <td th:text="${reservatie.organisatie.gemeente}"></td>
                           </tr>
                           </tbody>
                           <thead>

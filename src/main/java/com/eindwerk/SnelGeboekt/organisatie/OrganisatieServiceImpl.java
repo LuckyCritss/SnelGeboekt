@@ -56,6 +56,7 @@ public class OrganisatieServiceImpl implements OrganisatieService{
         organisatieRepository.save(organisatie);
     }
 
+    @Override
     public Organisatie getById(int id){
         return organisatieRepository.getById(id);
     }

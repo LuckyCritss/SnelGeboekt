@@ -21,14 +21,14 @@
     <main class="form-signin">
         <br>
         <br>
-        <form action="#" th:action="@{/reservatie/step1}" th:object="${opties}" method="post">
+        <form action="#" th:action="@{/reservatie/step1}"  method="post">
             <div class="form-group">
                 <label for="select-dienst">
                     <strong>Dienst</strong>
                 </label>
                 <br>
                 <br>
-                <select id="select-dienst" class="form-control">
+                <select name = "service" id="select-dienst" class="form-control">
                     <option value="-1">Kies een dienst</option>
                     <option th:each="optie, iStat : ${opties}"
                             th:value="${iStat.index}"
@@ -36,48 +36,38 @@
                     </option>
                 </select>
             </div>
-        </form>
-        <br>
-        <br>
-        <form action="#" th:action="@{/reservatie/} + ${slug} + @{/step1}" th:object="${medewerkers}" method="post">
-            <div class="frame-container">
-                <div class="row frame-content">
-                    <div class="col">
-                        <div class="form-group">
 
-                            <label for="select-dienst">
-                                <strong>Medewerker</strong>
-                            </label>
-                            <br>
-                            <br>
-                            <select name = "employee" id="select-medewerker" class="form-control" disabled>
-                                <option value="-1">Kies een medewerker</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label for="select-medewerker">
+                    <strong>Medewerker</strong>
+                </label>
+
+                <select name = "employee" id="select-medewerker" class="form-control" disabled>
+                    <option value="-1">Kies een medewerker</option>
+                </select>
             </div>
         </form>
         <div class="command-buttons">
             <span>&nbsp;</span>
         </div>
-        <script th:inline="javascript">
-            $(function () {
-                $("#select-dienst").change(function () {
-                    let request = "getemployees?service=";
-                    if (this.value >-1) {
-                        request = request + this.value;
-                        $("#select-medewerker").load(request);
-                        $("#select-medewerker").removeAttr("disabled");
-                    } else {
-
-                        $("#select-medewerker").val(-1);
-                        $("#select-medewerker").attr("disabled",true);
-                    }
-                });
-            });
-        </script>
     </main>
 </div>
+<script th:inline="javascript">
+    $(function () {
+        $("#select-dienst").change(function () {
+        let request = "getemployees?service=";
+            //debugger;
+            if (this.value >-1) {
+                request = request + this.value;
+                $("#select-medewerker").load(request);
+                $("#select-medewerker").removeAttr("disabled");
+            } else {
+
+                $("#select-medewerker").val(-1);
+                $("#select-medewerker").attr("disabled",true);
+            }
+        });
+    });
+</script>
 </body>
 </html>

@@ -199,7 +199,7 @@ public class ReservatieController {
 
     @PostMapping(value = "/step4", params = "previous")
     public String processWidgetStep4Previous() {
-        return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step1";
+        return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step3";
     }
 
 

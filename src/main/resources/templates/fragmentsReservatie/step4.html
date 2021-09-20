@@ -7,7 +7,7 @@
 <div th:fragment = "frame1" id="wizard-frame-1" class="wizard-frame" style="">
       <div class="frame-container">
         <h2 class="frame-title">Bevestiging</h2>
-          <form class="card p-3 bg-light"  th:object="${reservatie}" method="post">
+          <form class="card p-3 bg-light"   th:object="${reservatie}" method="post">
               <fieldset>
                   <div class="row">
                       <table class="table table-hover">
@@ -70,7 +70,7 @@
               </div>
               <div style="text-align:left;">
                       <div class="command-buttons">
-                          <button type="submit" id="button-back-2" class="btn button-back btn-outline-secondary"
+                          <button type="submit" value="submit" th:method="post" id="button-back-2" class="btn button-back btn-outline-secondary"
                                   data-step_index="2" name="previous">
                               <svg class="svg-inline--fa fa-chevron-left fa-w-10 mr-2" aria-hidden="true" focusable="false"
                                    data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg"
@@ -85,5 +85,6 @@
           </form>
   </div>
 </div>
+
 </body>
 </html>

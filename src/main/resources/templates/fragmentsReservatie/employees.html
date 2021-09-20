@@ -10,14 +10,6 @@
               th:value="${iStat.index}"
               th:text="${medewerker.naam}"
       ></option>
-
-        <select th:fragment = "employees" name = "medewerker" id="select-dienst" class="form-control">
-            <option value="null">Kies een dienst</option>
-            <option th:each="optie, iStat : ${opties}"
-                    th:value="${optie}"
-                    th:text="${optie}">
-            </option>
-        </select>
     </select>
 </body>
 </html>

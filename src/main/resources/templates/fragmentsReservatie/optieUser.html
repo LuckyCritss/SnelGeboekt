@@ -5,7 +5,7 @@
     <main class="form-signin">
         <br>
         <br>
-        <form  th:action="@{/reservatie/step1}"  method="post">
+        <form  th:action="@{/reservatie/step1}"  method="post" >
             <div class="form-group">
                 <label for="select-dienst">
                     <strong>Dienst</strong>
@@ -30,10 +30,11 @@
                     <option value="-1">Kies een medewerker</option>
                 </select>
             </div>
-        </form>
+
         <div class="command-buttons">
             <span>&nbsp;</span>
         </div>
+        </form>
     </main>
     <script th:inline="javascript">
         $(function () {

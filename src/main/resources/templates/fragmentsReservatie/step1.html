@@ -10,7 +10,7 @@
 
         <div class="command-buttons" type="submit">
 
-            <button type="submit"  id="button-back-2" class="btn button-back btn-outline-secondary" data-step_index="2"
+            <button type="submit"  value="submit" th:method="post" id="button-back-2" class="btn button-back btn-outline-secondary" data-step_index="2"
                     name="cancel">
                 <svg class="svg-inline--fa fa-chevron-left fa-w-10 mr-2" aria-hidden="true" focusable="false"
                      data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg"
@@ -20,8 +20,8 @@
                 </svg><!-- <i class="fas fa-chevron-left mr-2"></i> Font Awesome fontawesome.com -->Annuleren
             </button>
 
-            <button type="submit"  value="submit" id="button-next-1" class="btn button-next btn-dark" th:method="post" name="next" >Volgende
-                <svg class="svg-inline--fa fa-chevron-right fa-w-10 ml-2" aria-hidden="true" focusable="false"
+            <button type="submit"  value="submit" th:method="post" id="button-next-1" class="btn button-next btn-dark" name="next" >Volgende
+                <svg class="svg-inline--fa fa-chevron-right fa-w-10 ml-2"  focusable="false"
                      data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 320 512" data-fa-i2svg="">
                     <path fill="currentColor"

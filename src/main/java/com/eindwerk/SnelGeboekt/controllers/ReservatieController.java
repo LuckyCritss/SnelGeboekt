@@ -41,7 +41,6 @@ public class ReservatieController {
     private UserService userService;
     private NotificationService notificationService;
     private Reservatie reservatie;
-    private AuthenticationManager authenticationManager;
     private OptieService optieService;
     private TijdslotService tijdslotService;
 
@@ -60,10 +59,6 @@ public class ReservatieController {
     @Autowired
     public void setNotificationService(NotificationService notificationService) {
         this.notificationService = notificationService;
-    }
-    @Autowired
-    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
     }
     @Autowired
     public void setOptieService(OptieService optieService) {
@@ -109,9 +104,7 @@ public class ReservatieController {
     }
 
     @PostMapping(value = "/step1", params = "next")
-    public String processWidgetStep1(@ModelAttribute String optie, @ModelAttribute Medewerker medewerker) {
-        reservatie.setMedewerker(medewerker);
-        reservatie.setOptie(optie);
+    public String processWidgetStep1() {
         //reservatie.setDuration(optieService.getDuurOptie(medewerker, optie));
         return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step2";
     }
@@ -196,13 +189,10 @@ public class ReservatieController {
         return "templatesReservatie/booking_step4";
     }
 
-
     @PostMapping(value = "/step4", params = "previous")
     public String processWidgetStep4Previous() {
         return "redirect:/reservatie/" + reservatie.getOrganisatie().getBedrijfsNaam() + "/step1";
     }
-
-
 
     @PostMapping(value = "/{slug}/step4", params = "bevestig")
     public String processStep4(@PathVariable String slug,Principal principal) {
@@ -226,11 +216,18 @@ public class ReservatieController {
 
     @GetMapping("/{slug}/getemployees")
     public String ajaxMedewerkers(@PathVariable String slug,
-                            @RequestParam String optie,
-                            Model model) {
+                                  @RequestParam String optie,
+                                  Model model) {
+        reservatie.setOptie(optie);
         List<Medewerker> medewerkers = optieService.getMedewerkerByOptie(optie ,organisatieService.getOrganisatieByName(slug));
         model.addAttribute("medewerkers", medewerkers);
         return "fragmentsReservatie/employees :: employees";
+    }
+
+    @GetMapping("/{slug}/getemployee")
+    public void ajaxMedewerkers(@PathVariable String slug,
+                                  @RequestParam Medewerker medewerker) {
+        reservatie.setMedewerker(medewerker);
     }
     @InitBinder
     public void initBinder(WebDataBinder binder) {

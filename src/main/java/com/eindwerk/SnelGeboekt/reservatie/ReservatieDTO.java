@@ -14,16 +14,12 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.persistence.*;
 
-@Entity
+
 @Setter
 @Getter
 @Component
-@Table(name="reservaties")
-public class Reservatie {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+@Scope(proxyMode= ScopedProxyMode.TARGET_CLASS, value = WebApplicationContext.SCOPE_SESSION)
+public class ReservatieDTO {
 
     private String optie;
 
@@ -33,18 +29,11 @@ public class Reservatie {
 
     private String uur;
 
-    @Transient
-    @OneToOne(cascade = CascadeType.ALL)
     private Organisatie organisatie;
 
-    @Transient
-    @OneToOne(cascade = CascadeType.ALL)
     private Medewerker medewerker;
 
-    @Transient
-    @OneToOne(cascade = CascadeType.ALL)
     private Tijdslot tijdslot;
 
-    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 }

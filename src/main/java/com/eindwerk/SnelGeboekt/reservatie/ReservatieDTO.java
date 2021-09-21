@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Setter
@@ -25,7 +26,7 @@ public class ReservatieDTO {
 
     private int duration;
 
-    private String date;
+    private Date date;
 
     private String uur;
 

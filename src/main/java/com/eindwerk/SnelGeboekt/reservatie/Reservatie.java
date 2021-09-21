@@ -1,6 +1,5 @@
 package com.eindwerk.SnelGeboekt.reservatie;
 
-
 import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Setter
@@ -29,7 +29,9 @@ public class Reservatie {
 
     private int duration;
 
-    private String date;
+    private String day;
+
+    private Date date;
 
     private String uur;
 

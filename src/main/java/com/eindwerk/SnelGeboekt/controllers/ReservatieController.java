@@ -2,12 +2,10 @@ package com.eindwerk.SnelGeboekt.controllers;
 
 import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
 import com.eindwerk.SnelGeboekt.instellingen.medewerker.MedewerkerService;
-import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
 import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot;
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.TijdslotService;
 import com.eindwerk.SnelGeboekt.notification.NotificationService;
-import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
 import com.eindwerk.SnelGeboekt.reservatie.ReservatieDTO;
 import com.eindwerk.SnelGeboekt.reservatie.ReservatieService;
@@ -17,18 +15,11 @@ import com.eindwerk.SnelGeboekt.reservatie.Reservatie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.security.Principal;
 import java.util.*;
 
@@ -114,6 +105,7 @@ public class ReservatieController {
     public String processWidgetStep1(@ModelAttribute String optie, @ModelAttribute Medewerker medewerker) {
         reservatieDTO.setOptie(optie);
         reservatieDTO.setMedewerker(medewerker);
+        //reservatieDTO.setDuration(optieService.getDuurOptie(optie, medewerker.getNaam()));
         return "redirect:/reservatie/" + reservatieDTO.getOrganisatie().getBedrijfsNaam() + "/step2";
     }
 
@@ -122,7 +114,10 @@ public class ReservatieController {
         if (reservatieDTO == null || reservatieDTO.getOrganisatie().getBedrijfsNaam() == null || !reservatieDTO.getOrganisatie().getBedrijfsNaam().equals(slug)) {
             return "redirect:/reservatie/" + slug;
         }
-       //model.addAttribute("tijdslot", tijdslot);
+        //List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByMedewerker(reservatieDTO.getMedewerker());
+        List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByMedewerker(medewerkerService.getMedewerkerById(13));
+        List<Tijdslot> openTijdsloten = null;
+        model.addAttribute("tijdslot", tijdsloten);
         return "templatesReservatie/booking_step2";
     }
 
@@ -214,9 +209,7 @@ public class ReservatieController {
 
     @GetMapping("/{slug}/getagenda")
     public String ajaxDates(@PathVariable String slug,
-                            @RequestParam String date,
-                            @RequestParam String medewerker,
-                            @RequestParam String optie,
+                            @RequestParam Date date,
                             Model model) {
         return "fragmentsReservatie/hours :: hours";
     }

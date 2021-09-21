@@ -44,6 +44,11 @@ public class TijdslotServiceImpl implements TijdslotService {
     }
 
     @Override
+    public List<Tijdslot> getTijdslotenByMedewerkerAndDay(Medewerker medewerker, String day) {
+        return tijdslotRepository.getTijdslotenByMedewerkerAndDay(medewerker, day);
+    }
+
+    @Override
     public List<Tijdslot> getTijdslotenByMedewerkers(List<Medewerker> medewerkers) {
         return tijdslotRepository.getTijdslotenByMedewerkers(medewerkers);
     }

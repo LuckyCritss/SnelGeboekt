@@ -42,7 +42,7 @@
                     <div class="row" th:if="${tijdsloten !=null && !tijdsloten.empty}">
                       <tbody>
                       <tr th:each="tijdslot : ${tijdsloten}">
-                        <td th:text="${tijdslot.Dag.displayName}"></td>
+                        <td th:text="${tijdslot.dag}"></td>
                         <td th:text="${tijdslot.start}"></td>
                         <td th:text="${tijdslot.einde}"></td>
                         <td>

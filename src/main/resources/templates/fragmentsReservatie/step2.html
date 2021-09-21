@@ -47,16 +47,16 @@
 </div>
 <script th:inline="javascript">
     $(function () {
-        let optie = [[${optie}]];
-        let medewerker = [[${medewerker}]];
-        let request = "getagenda?optie=" + optie + "&medewerker=" + medewerker +"&date=";
+        let request = "getagenda?date=";
         $("#select-date").datepicker({
             onSelect: function(date) {
+                request = "getagenda?date=";
                 request += encodeURIComponent(date);
                 $("#select-time").load(request);
             }
         });
         //load the schedule on initial page load
+
         request += encodeURIComponent($("#select-date").val());
         $("#select-time").load(request);
     });

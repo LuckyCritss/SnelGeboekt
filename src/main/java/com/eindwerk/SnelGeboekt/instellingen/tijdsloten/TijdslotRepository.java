@@ -14,6 +14,9 @@ public interface TijdslotRepository extends JpaRepository<Tijdslot, Integer> {
     @Query("select t from Tijdslot t where t.medewerker = :medewerker")
     List<Tijdslot> getTijdslotenByMedewerker(@Param("medewerker") Medewerker medewerker);
 
+    @Query("select t from Tijdslot t where t.medewerker = :medewerker and t.dag =:day")
+    List<Tijdslot> getTijdslotenByMedewerkerAndDay(@Param("medewerker") Medewerker medewerker, @Param("day") String day);
+
     @Query("select t from Tijdslot t where t.medewerker = :medewerkers")
     List<Tijdslot> getTijdslotenByMedewerkers(@Param("medewerkers") List<Medewerker> medewerkers);
 

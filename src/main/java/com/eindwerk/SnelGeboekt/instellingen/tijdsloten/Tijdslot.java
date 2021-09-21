@@ -17,7 +17,7 @@ import java.time.LocalTime;
 public class Tijdslot {
 
     public enum Dag {
-        ZON("Zondag"), Maa("Maandag"), Din("Dinsdag"), WOE("Woensdag"), DON("Donderdag"), VRI("Vrijdag"), ZAT("Zaterdag");
+        Maandag("Maandag"), Dinsdag("Dinsdag"), Woensdag("Woensdag"), Donderdag("Donderdag"), Vrijdag("Vrijdag"), Zaterdag("Zaterdag"), Zondag("Zondag");
 
         private final String displayName;
 
@@ -35,7 +35,7 @@ public class Tijdslot {
     private int id;
 
     @NotNull(message = "value mismatch")
-    private Dag dag = Dag.ZON;
+    private String dag = Dag.Maandag.getDisplayName();
 
     private LocalTime start;
 

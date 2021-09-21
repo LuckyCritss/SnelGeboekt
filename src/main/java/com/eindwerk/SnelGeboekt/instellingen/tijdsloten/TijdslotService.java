@@ -14,6 +14,8 @@ public interface TijdslotService {
 
     List<Tijdslot> getTijdslotenByMedewerker(Medewerker medewerker);
 
+    List<Tijdslot> getTijdslotenByMedewerkerAndDay(Medewerker medewerker, String day);
+
     List<Tijdslot> getTijdslotenByMedewerkers(List<Medewerker> medewerkers);
 
     void delete(int id);

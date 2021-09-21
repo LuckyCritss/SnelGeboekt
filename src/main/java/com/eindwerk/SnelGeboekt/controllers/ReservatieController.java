@@ -112,6 +112,8 @@ public class ReservatieController {
 
     @PostMapping(value = "/step1", params = "next")
     public String processWidgetStep1(@ModelAttribute String optie, @ModelAttribute Medewerker medewerker) {
+        reservatieDTO.setOptie(optie);
+        reservatieDTO.setMedewerker(medewerker);
         return "redirect:/reservatie/" + reservatieDTO.getOrganisatie().getBedrijfsNaam() + "/step2";
     }
 

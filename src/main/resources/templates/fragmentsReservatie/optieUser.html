@@ -5,14 +5,14 @@
     <main class="form-signin">
         <br>
         <br>
-        <form  th:action="@{/reservatie/step1}"  method="post" >
+        <form  th:action="@{/reservatie/step1}" method="post">
             <div class="form-group">
                 <label for="select-dienst">
                     <strong>Dienst</strong>
                 </label>
                 <br>
                 <br>
-                <select name = "service" id="select-dienst" class="form-control">
+                <select name="service" id="select-dienst" class="form-control">
                     <option value="null">Kies een dienst</option>
                     <option th:each="optie, iStat : ${opties}"
                             th:value="${optie}"
@@ -31,9 +31,8 @@
                 </select>
             </div>
 
-        <div class="command-buttons">
-            <span>&nbsp;</span>
-        </div>
+            <div th:replace="fragmentsReservatie/step1"></div>
+
         </form>
     </main>
     <script th:inline="javascript">

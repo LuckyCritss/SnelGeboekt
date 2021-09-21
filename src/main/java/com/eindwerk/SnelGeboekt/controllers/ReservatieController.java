@@ -112,6 +112,8 @@ public class ReservatieController {
 
     @PostMapping(value = "/step1", params = "next")
     public String processWidgetStep1(@ModelAttribute String optie, @ModelAttribute Medewerker medewerker) {
+        reservatieDTO.setOptie(optie);
+        reservatieDTO.setMedewerker(medewerker);
         return "redirect:/reservatie/" + reservatieDTO.getOrganisatie().getBedrijfsNaam() + "/step2";
     }
 
@@ -223,7 +225,6 @@ public class ReservatieController {
     public String ajaxMedewerkers(@PathVariable String slug,
                                   @RequestParam String optie,
                                   Model model) {
-        reservatieDTO.setOptie(optie);
         List<Medewerker> medewerkers = optieService.getMedewerkerByOptie(optie ,organisatieService.getOrganisatieByName(slug));
         model.addAttribute("medewerkers", medewerkers);
         return "fragmentsReservatie/employees :: employees";

@@ -1,5 +1,4 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
 <body  class="text-center">
 <div class="registreer" th:fragment="optieUser">
     <main class="form-signin">
@@ -33,8 +32,8 @@
 
             <div th:replace="fragmentsReservatie/step1"></div>
 
-        </form>
-    </main>
+
+
     <script th:inline="javascript">
         $(function () {
             $("#select-dienst").change(function () {
@@ -52,6 +51,7 @@
             });
         });
     </script>
+        </form>
+    </main>
 </div>
-</body>
-</html>
+

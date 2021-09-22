@@ -5,7 +5,7 @@
 </head>
 <body>
 <div th:fragment = "header" id="header">
-  <span id="company-name">Company Name</span>
+  <span id="company-name" th:text="${slug}"></span>>
 
   <div id="steps">
     <div id="step-1" class="book-step ">

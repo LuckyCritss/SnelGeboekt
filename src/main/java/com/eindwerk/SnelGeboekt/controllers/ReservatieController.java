@@ -66,8 +66,13 @@ public class ReservatieController {
         return "templatesReservatie/booking_step1";
     }
 
-    @PostMapping("/step1")
-    public String processWidgetStep1(@ModelAttribute StepOneData stepOneData) {
+    @PostMapping(value = "/step1" , params = "cancel")
+    public String processWidgetStep1Previous() {
+        return "redirect:/reservatielijst";
+    }
+
+    @PostMapping(value = "/step1" , params = "next")
+    public String processWidgetStep1Next(@ModelAttribute StepOneData stepOneData) {
         if (reservatie.getSlug() == null) {
             return "redirect:/reservatie/" + reservatie.getSlug() + "/step1";
         }

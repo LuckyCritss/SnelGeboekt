@@ -4,7 +4,7 @@
 <head>
 </head>
 <div th:fragment="frame1" id="wizard-frame-1" class="wizard-frame" style="">
-    <form action="#" th:action="@{/reservatie/step3}" th:object="${stepThreeData}" onsubmit="return validateForm()" method="post" name="myForm" >
+    <form action="#" th:action="@{/reservatie/step3}" th:object="${stepThreeData}" th:onsubmit="runvalidateForm()" method="post" name="myForm" >
         <div class="frame-container">
             <h2 class="frame-title">Vul je gegevens in</h2>
             <div class="mb-3">
@@ -39,7 +39,7 @@
                 </svg><!-- <i class="fas fa-chevron-left mr-2"></i> Font Awesome fontawesome.com -->
                 Vorige
             </button>
-            <button type="submit" id="button-next-1" class="btn button-next btn-dark" name="next" onsubmit="return validateForm()">
+            <button type="submit" id="button-next-1" class="btn button-next btn-dark" name="next" onclick="runvalidateForm()">
                 Volgende
                 <svg class="svg-inline--fa fa-chevron-right fa-w-10 ml-2" aria-hidden="true" focusable="false"
                      data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg"

@@ -4,7 +4,7 @@
 <head>
 </head>
 <body>
-  <div th:fragment = "hours" id="available-hours">
+  <div th:fragment = "hours" id="available-hours" th:object="${tijdsloten}">
     <button  name="time" value="1:00 pm" class="btn btn-outline-secondary btn-block shadow-none available-hour">1:00 pm</button>
     <button  name="time" value="1:15 pm" class="btn btn-outline-secondary btn-block shadow-none available-hour">1:15 pm</button>
     <button  name="time" value="2:15 pm" class="btn btn-outline-secondary btn-block shadow-none available-hour">2:15 pm</button>

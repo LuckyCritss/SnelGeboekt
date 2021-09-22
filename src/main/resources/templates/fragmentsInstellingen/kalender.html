@@ -3,7 +3,7 @@
 <head th:fragment = "kalender">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kalender</title>
+    <title>agenda</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 <body class="text-center">
@@ -20,9 +20,9 @@
                             <thead>
                             <tr>
                                 <th scope="col">Naam</th>
-                                <th scope="col">Familienaam</th>
+                                <th scope="col">email</th>
                                 <th scope="col">Gsm-nummer</th>
-                                <th scope="col">Optie</th>
+                                <th scope="col">Dienst</th>
                                 <th scope="col">Medewerker</th>
                                 <th scope="col">Datum</th>
                                 <th scope="col">Startuur</th>
@@ -31,13 +31,13 @@
                             <div class="row" th:if="${reservaties !=null && !reservaties.empty}">
                                 <tbody>
                                 <tr th:each="reservatie : ${reservaties}">
-                                    <td th:text="${reservatie.user.naam}"></td>
-                                    <td th:text="${reservatie.user.familyNaam}"></td>
-                                    <td th:text="${reservatie.user.gsmNummer}"></td>
-                                    <td th:text="${reservatie.optie}"></td>
-                                    <td th:text="${reservatie.medewerker}"></td>
+                                    <td th:text="${reservatie.name}"></td>
+                                    <td th:text="${reservatie.email}"></td>
+                                    <td th:text="${reservatie.tel}"></td>
+                                    <td th:text="${reservatie.dienst}"></td>
+                                    <td th:text="${reservatie.medewerker.naam}"></td>
                                     <td th:text="${reservatie.date}"></td>
-                                    <td th:text="${reservatie.uur}"></td>
+                                    <td th:text="${reservatie.time}"></td>
                                 </tr>
                                 </tbody>
                             </div>

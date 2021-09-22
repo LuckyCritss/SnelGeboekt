@@ -20,9 +20,8 @@ public class ReservatieDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    private int id;
+    @ManyToOne
     private Organisatie organisatie;
     private String dienst;
     @ManyToOne(cascade = CascadeType.ALL)

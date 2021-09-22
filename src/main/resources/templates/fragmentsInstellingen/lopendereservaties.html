@@ -44,7 +44,7 @@
                   <td th:text="${reservatie.organisatie.gemeente}"></td>
                   <td th:text="${reservatie.organisatie.postCode}"></td>
                   <td th:text="${reservatie.organisatie.straat}"></td>
-                  <td><a class="btn btn-sm btn-secondary">Annuleer</a></td>
+                  <td><a class="btn btn-sm btn-secondary"  th:href="@{/instellingen/klantagenda/delete/} + ${reservatie.id}">Delete</a>
                 </tr>
                 </tbody>
               </div>

@@ -4,6 +4,7 @@ import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
 import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Agenda;
 import com.eindwerk.SnelGeboekt.reservatie.Reservatie;
+import com.eindwerk.SnelGeboekt.reservatie.ReservatieDTO;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
@@ -61,4 +62,7 @@ public class Organisatie {
 
     @OneToMany(mappedBy = "organisatie" , cascade = CascadeType.ALL)
     private List<Medewerker> medewerker;
+
+    @OneToMany(mappedBy = "organisatie" , cascade = CascadeType.ALL)
+    private List<ReservatieDTO> reservaties;
 }

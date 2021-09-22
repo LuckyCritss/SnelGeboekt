@@ -22,22 +22,17 @@ import java.util.Set;
 public class ReservatieController {
 
     private final Reservatie reservatie;
-
     private final MedewerkerService medewerkerService;
-
     private final OptieService optieService;
-
     private final OrganisatieService organisatieService;
-
     private final UserService userService;
-
     private final ReservatieService reservatieService;
-
     private final NotificationService notificationService;
+    private final ReservatieDTO reservatieDTO;
 
     public ReservatieController(Reservatie reservatie, MedewerkerService medewerkerService, OptieService optieService,
                                 OrganisatieService organisatieService, ReservatieService reservatieService,
-                                NotificationService notificationService, UserService userService) {
+                                NotificationService notificationService, UserService userService, ReservatieDTO reservatieDTO) {
         this.reservatie = reservatie;
         this.medewerkerService = medewerkerService;
         this.optieService = optieService;
@@ -45,6 +40,7 @@ public class ReservatieController {
         this.reservatieService = reservatieService;
         this.notificationService = notificationService;
         this.userService = userService;
+        this.reservatieDTO = reservatieDTO;
     }
 
     @GetMapping("/{slug}")
@@ -101,6 +97,12 @@ public class ReservatieController {
         }
         reservatie.setStepTwoData(stepTwoData);
         if (principal != null){
+            User user = userService.getUserByEmail(principal.getName());
+            StepThreeData loggedUser = new StepThreeData();
+            loggedUser.setEmail(user.getEmail());
+            loggedUser.setName(user.getNaam());
+            loggedUser.setTel(user.getGsmNummer());
+            reservatie.setStepThreeData(loggedUser);
             return "redirect:/reservatie/" + reservatie.getSlug() + "/step4";
         }
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step3";
@@ -147,24 +149,14 @@ public class ReservatieController {
         if (reservatie.getSlug() == null) {
             return "redirect:/reservatie/" + reservatie.getSlug() + "/step1";
         }
-        ReservatieDTO reservatieDTO = new ReservatieDTO();
         reservatieDTO.setOrganisatie(organisatieService.getOrganisatieByName(reservatie.getSlug()));
         reservatieDTO.setDienst(reservatie.getStepOneData().getService());
         reservatieDTO.setMedewerker(medewerkerService.getMedewerkerByOrganisatieAndName(reservatieDTO.getOrganisatie() ,reservatie.getStepOneData().getEmployee()));
         reservatieDTO.setDate(reservatie.getStepTwoData().getDate());
         reservatieDTO.setTime(reservatie.getStepTwoData().getTime());
-        if(principal == null){
-            reservatieDTO.setEmail(reservatie.getStepThreeData().email);
-            reservatieDTO.setName(reservatie.getStepThreeData().name);
-            reservatieDTO.setTel(reservatie.getStepThreeData().tel);
-        }
-        else {
-            User user = userService.getUserByEmail(principal.getName());
-            reservatieDTO.setEmail(user.getEmail());
-            reservatieDTO.setName(user.getNaam() + " " + user.getFamilyNaam());
-            reservatieDTO.setTel(user.getGsmNummer());
-        }
-
+        reservatieDTO.setEmail(reservatie.getStepThreeData().email);
+        reservatieDTO.setName(reservatie.getStepThreeData().name);
+        reservatieDTO.setTel(reservatie.getStepThreeData().tel);
         reservatieService.save(reservatieDTO);
         notificationService.sendSuccesfullReservateie(reservatieDTO);
         return "redirect:/";

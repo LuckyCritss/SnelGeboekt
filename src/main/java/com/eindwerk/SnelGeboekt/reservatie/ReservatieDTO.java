@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Entity
 @Setter
 @Getter
+@Component
 @Table(name = "reservaties")
 public class ReservatieDTO {
 

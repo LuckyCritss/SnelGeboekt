@@ -208,15 +208,19 @@ public class ReservatieController {
         List<String> openTijdsloten = new ArrayList<>();
         List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByMedewerkerAndDay(medewerker , dayOfWeek);
         for (Tijdslot tijdslot : tijdsloten){
-            openTijdsloten.add(String.valueOf(tijdslot.getStart()));
-            LocalTime volgende = tijdslot.getStart().plusMinutes(duration);
-            for (int i = 0; i < 1000;i++){
-                if (!Objects.equals(volgende, tijdslot.getEinde())) {
+            LocalTime start = tijdslot.getStart();
+            LocalTime volgende = start;
+            LocalTime einde = tijdslot.getEinde();
+            for (int i = 0; i < 40;i++) {
+                if(i == 0){
+                    volgende = start.plusMinutes(duration);
+                    openTijdsloten.add(String.valueOf(start));
+                    openTijdsloten.add(String.valueOf(volgende));
+                }else if (volgende.plusMinutes(duration).isBefore(einde) && volgende.plusMinutes(duration).compareTo(einde) <= 0){
                     volgende = volgende.plusMinutes(duration);
                     openTijdsloten.add(String.valueOf(volgende));
                 }
             }
-            openTijdsloten.add(String.valueOf(tijdslot.getEinde()));
         }
         model.addAttribute("tijdsloten" , openTijdsloten);
         return "fragmentsReservatie/hours :: hours";
@@ -230,8 +234,4 @@ public class ReservatieController {
         model.addAttribute("medewerkers", medewerkers);
         return "fragmentsReservatie/employees :: employees";
     }
-
-
-
-
 }

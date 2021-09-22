@@ -4,10 +4,10 @@
 <head>
 </head>
 <body>
-  <div th:fragment = "hours"  th:object="${tijdslot}" id="available-hours">
-    <button  name="time" th:object="${tijdslot}" class="btn btn-outline-secondary btn-block shadow-none available-hour"></button>
+  <div th:fragment = "hours"  th:object="${tijdsloten}" id="available-hours">
+    <button  name = "time" th:object="${tijdslot}" class="btn btn-outline-secondary btn-block shadow-none available-hour"></button>
 
-    <select name = "employee" id="select-tijdslot" class="form-control">
+    <select name = "time" id="select-tijdslot" class="form-control">
       <option value="-1">Kies een tijdslot</option>
     </select>
 

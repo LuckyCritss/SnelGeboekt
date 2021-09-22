@@ -4,11 +4,31 @@
 <head>
 </head>
 <div th:fragment="frame1" id="wizard-frame-1" class="wizard-frame" style="">
-    <form action="#" th:action="@{/booking/step3}" method="post">
+    <form action="#" th:action="@{/booking/step3}" th:object="${stepThreeData}" method="post">
         <div class="frame-container">
             <h2 class="frame-title">Vul je gegevens in</h2>
+            <div class="mb-3">
+                <label>Name</label>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                <input type="text" class="form-control" th:field="*{name}">
+            </div>
+            <div class="mb-3">
+                <label>Email</label>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                <input type="text" class="form-control" th:field="*{email}">
+            </div>
+            <div class="mb-3">
+                <label>Telephone</label>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}"></div>
+                <input type="text" class="form-control" th:field="*{tel}">
+            </div>
         </div>
-        <div class="command-buttons">
+
+
+
+
+
+            <div class="command-buttons">
             <button type="submit" id="button-back-2" class="btn button-back btn-outline-secondary" data-step_index="2"
                     name="previous">
                 <svg class="svg-inline--fa fa-chevron-left fa-w-10 mr-2" aria-hidden="true" focusable="false"

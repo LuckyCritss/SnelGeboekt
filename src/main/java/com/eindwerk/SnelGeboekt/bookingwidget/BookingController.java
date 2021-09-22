@@ -109,10 +109,11 @@ public class BookingController {
 
 
     @PostMapping(value = "/step3", params = "next")
-    public String processWidgetStep3Next(@ModelAttribute StepTwoData stepTwoData) {
+    public String processWidgetStep3Next(@ModelAttribute StepThreeData stepThreeData) {
         if (booking.getSlug() == null) {
             return "redirect:/booking/" + booking.getSlug() + "/step1";
         }
+        booking.setStepThreeData(stepThreeData);
         return "redirect:/booking/" + booking.getSlug() + "/step4";
     }
 

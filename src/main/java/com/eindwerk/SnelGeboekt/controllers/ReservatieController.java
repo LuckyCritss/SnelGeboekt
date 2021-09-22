@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.*;
 
 @Controller
@@ -208,10 +209,11 @@ public class ReservatieController {
         List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByMedewerkerAndDay(medewerker , dayOfWeek);
         for (Tijdslot tijdslot : tijdsloten){
             openTijdsloten.add(String.valueOf(tijdslot.getStart()));
-            String volgende = String.valueOf(tijdslot.getStart().plusMinutes(duration));
+            LocalTime volgende = tijdslot.getStart().plusMinutes(duration);
             for (int i = 0; i < 1000;i++){
-                if (!Objects.equals(volgende, String.valueOf(tijdslot.getEinde()))) {
-                    openTijdsloten.add(String.valueOf(tijdslot.getStart().plusMinutes(duration)));
+                if (!Objects.equals(volgende, tijdslot.getEinde())) {
+                    volgende = volgende.plusMinutes(duration);
+                    openTijdsloten.add(String.valueOf(volgende));
                 }
             }
             openTijdsloten.add(String.valueOf(tijdslot.getEinde()));

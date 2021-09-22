@@ -4,23 +4,23 @@
 <head>
 </head>
 <div th:fragment="frame1" id="wizard-frame-1" class="wizard-frame" style="">
-    <form action="#" th:action="@{/reservatie/step3}" th:object="${stepThreeData}" method="post">
+    <form action="#" th:action="@{/reservatie/step3}" th:object="${stepThreeData}" th:onsubmit="runvalidateForm()" method="post" name="myForm" >
         <div class="frame-container">
             <h2 class="frame-title">Vul je gegevens in</h2>
             <div class="mb-3">
                 <label>Name</label>
                 <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-                <input type="text" class="form-control" th:field="*{name}">
+                <input type="text" class="form-control" th:field="*{name}" name="fname" required>
             </div>
             <div class="mb-3">
                 <label>Email</label>
                 <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-                <input type="text" class="form-control" th:field="*{email}">
+                <input type="text" class="form-control" th:field="*{email}" name="femail" required>
             </div>
             <div class="mb-3">
                 <label>Telephone</label>
                 <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}"></div>
-                <input type="text" class="form-control" th:field="*{tel}">
+                <input type="text" class="form-control" th:field="*{tel}" name="ftelephone" required>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
                 </svg><!-- <i class="fas fa-chevron-left mr-2"></i> Font Awesome fontawesome.com -->
                 Vorige
             </button>
-            <button type="submit" id="button-next-1" class="btn button-next btn-dark" name="next">
+            <button type="submit" id="button-next-1" class="btn button-next btn-dark" name="next" onclick="runvalidateForm()">
                 Volgende
                 <svg class="svg-inline--fa fa-chevron-right fa-w-10 ml-2" aria-hidden="true" focusable="false"
                      data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +49,26 @@
                 </svg><!-- <i class="fas fa-chevron-right ml-2"></i> Font Awesome fontawesome.com -->
             </button>
         </div>
-</div>
 </form>
+</div>
+<script th:inline="javascript">
+    $(function validateForm() {
+        let x = document.forms["myForm"]["fname"].value;
+        if (x == "") {
+            alert("Gelieve u naam in te geven");
+            return false;
+        }
+        let y = document.forms["myForm"]["femail"].value;
+        if (y == "") {
+            alert("Gelieve u email-adres in te vullen");
+            return false;
+        }
+        let z = document.forms["myForm"]["ftelephone"].value;
+        if (z == "") {
+            alert("gelieve u telefoonnummer in te vullen");
+            return false;
+        }
+    });
+</script>
 </body>
 </html>

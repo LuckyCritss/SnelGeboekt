@@ -1,6 +1,7 @@
 package com.eindwerk.SnelGeboekt.controllers;
 
 import com.eindwerk.SnelGeboekt.reservatie.Reservatie;
+import com.eindwerk.SnelGeboekt.reservatie.ReservatieDTO;
 import com.eindwerk.SnelGeboekt.reservatie.ReservatieService;
 import com.eindwerk.SnelGeboekt.user.User;
 import com.eindwerk.SnelGeboekt.user.UserService;
@@ -34,7 +35,7 @@ public class KlantAgendaController {
     public String agendaHandler(Principal principal, Model model) {
         if(userService.getUserByEmail(principal.getName()) != null){
             User user = userService.getUserByEmail(principal.getName());
-            List<Reservatie> reservaties = reservatieService.getReservatiesByUser(user);
+            List<ReservatieDTO> reservaties = reservatieService.getReservatiesByUser(user);
             model.addAttribute("reservaties", reservaties);
             return ("/templatesInstellingen/lopendereservaties");
         }

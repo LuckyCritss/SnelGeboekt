@@ -1,8 +1,7 @@
 package com.eindwerk.SnelGeboekt.notification;
 
-
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
-import com.eindwerk.SnelGeboekt.reservatie.Reservatie;
+import com.eindwerk.SnelGeboekt.reservatie.ReservatieDTO;
 import com.eindwerk.SnelGeboekt.user.User;
 
 public interface NotificationService {
@@ -15,7 +14,8 @@ public interface NotificationService {
 
     void sendAccountUpdateUser(User user);
 
-    void sendSuccesfullReservateieUser(Reservatie reservatie);
+    void sendSuccesfullReservateieUser(ReservatieDTO reservatieDTO);
 
-    void sendSuccesfullReservateieOrganisatie(Reservatie reservatie);
+    void sendSuccesfullReservateieOrganisatie(ReservatieDTO reservatieDTO);
+
 }

@@ -2,6 +2,7 @@ package com.eindwerk.SnelGeboekt.notification;
 
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.reservatie.Reservatie;
+import com.eindwerk.SnelGeboekt.reservatie.ReservatieDTO;
 import com.eindwerk.SnelGeboekt.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -39,15 +40,15 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void sendSuccesfullReservateieUser(Reservatie reservatie) {
-        sendSimpleMessage(reservatie.getUser().getEmail(),"Succesfull Reservatie",
+    public void sendSuccesfullReservateieUser(ReservatieDTO reservatieDTO) {
+        sendSimpleMessage(reservatieDTO.getUser().getEmail(),"Succesfull Reservatie",
                 "Thank you for your reservatie" );
     }
 
     @Override
-    public void sendSuccesfullReservateieOrganisatie(Reservatie reservatie) {
-        sendSimpleMessage(reservatie.getOrganisatie().getEmail(),"Succesfull Reservatie",
-                  reservatie.getUser().getNaam() + " " + reservatie.getUser().getFamilyNaam() + "heeft gereserveerd.");
+    public void sendSuccesfullReservateieOrganisatie(ReservatieDTO reservatieDTO) {
+        sendSimpleMessage(reservatieDTO.getOrganisatie().getEmail(),"Succesfull Reservatie",
+                reservatieDTO.getUser().getNaam() + " " + reservatieDTO.getUser().getFamilyNaam() + "heeft gereserveerd.");
     }
 
 

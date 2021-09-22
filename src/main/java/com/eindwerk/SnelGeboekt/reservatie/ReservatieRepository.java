@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ReservatieRepository extends JpaRepository<Reservatie, Integer> {
+public interface ReservatieRepository extends JpaRepository<ReservatieDTO, Integer> {
 
-    @Query("SELECT r from Reservatie r Where r.user = :user")
-    List<Reservatie> getReservatiesByUser(@Param("user") User user);
+    @Query("SELECT r from ReservatieDTO r Where r.user = :user")
+    List<ReservatieDTO> getReservatiesByUser(@Param("user") User user);
 }

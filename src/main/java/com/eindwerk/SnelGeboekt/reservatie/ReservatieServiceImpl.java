@@ -17,12 +17,12 @@ public class ReservatieServiceImpl implements ReservatieService {
   }
 
     @Override
-    public List<Reservatie> getReservatiesByUser(User user) {
+    public List<ReservatieDTO> getReservatiesByUser(User user) {
         return reservatieRepository.getReservatiesByUser(user);
     }
 
     @Override
-    public void save(Reservatie reservatie) {
-        reservatieRepository.save(reservatie);
+    public void save(ReservatieDTO reservatieDTO) {
+        reservatieRepository.save(reservatieDTO);
     }
 }

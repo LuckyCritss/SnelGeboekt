@@ -1,9 +1,10 @@
-package com.eindwerk.SnelGeboekt.bookingwidget;
+package com.eindwerk.SnelGeboekt.reservatie;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 public class StepOneData {
     public String service;
     public String employee;

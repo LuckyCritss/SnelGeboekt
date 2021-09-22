@@ -1,8 +1,6 @@
 package com.eindwerk.SnelGeboekt.reservatie;
 
-
 import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
-import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.user.User;
 import lombok.Getter;
@@ -13,28 +11,24 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.persistence.*;
-import java.util.Date;
 
-
+@Entity
 @Setter
 @Getter
-@Component
-@Scope(proxyMode= ScopedProxyMode.TARGET_CLASS, value = WebApplicationContext.SCOPE_SESSION)
+@Table(name = "reservaties")
 public class ReservatieDTO {
 
-    private String optie;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    private int duration;
-
-    private Date date;
-
-    private String uur;
-
+    @ManyToOne(cascade = CascadeType.ALL)
     private Organisatie organisatie;
-
+    private String dienst;
+    @ManyToOne(cascade = CascadeType.ALL)
     private Medewerker medewerker;
-
-    private Tijdslot tijdslot;
-
+    private String date;
+    private String time;
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 }

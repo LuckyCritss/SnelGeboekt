@@ -3,6 +3,8 @@ package com.eindwerk.SnelGeboekt.controllers;
 import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
 import com.eindwerk.SnelGeboekt.instellingen.medewerker.MedewerkerService;
 import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
+import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot;
+import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.TijdslotService;
 import com.eindwerk.SnelGeboekt.notification.NotificationService;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
 import com.eindwerk.SnelGeboekt.reservatie.*;
@@ -13,9 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.*;
 
 @Controller
 @RequestMapping("/reservatie/")
@@ -29,10 +32,12 @@ public class ReservatieController {
     private final ReservatieService reservatieService;
     private final NotificationService notificationService;
     private final ReservatieDTO reservatieDTO;
+    private final TijdslotService tijdslotService;
 
     public ReservatieController(Reservatie reservatie, MedewerkerService medewerkerService, OptieService optieService,
                                 OrganisatieService organisatieService, ReservatieService reservatieService,
-                                NotificationService notificationService, UserService userService, ReservatieDTO reservatieDTO) {
+                                NotificationService notificationService, UserService userService, ReservatieDTO reservatieDTO,
+                                TijdslotService tijdslotService) {
         this.reservatie = reservatie;
         this.medewerkerService = medewerkerService;
         this.optieService = optieService;
@@ -41,6 +46,7 @@ public class ReservatieController {
         this.notificationService = notificationService;
         this.userService = userService;
         this.reservatieDTO = reservatieDTO;
+        this.tijdslotService = tijdslotService;
     }
 
     @GetMapping("/{slug}")
@@ -130,7 +136,6 @@ public class ReservatieController {
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step2";
     }
 
-
     @PostMapping(value = "/step3", params = "next")
     public String processWidgetStep3Next(@ModelAttribute StepThreeData stepThreeData) {
         if (reservatie.getSlug() == null) {
@@ -175,7 +180,45 @@ public class ReservatieController {
                             @RequestParam String service,
                             @RequestParam String employee,
                             @RequestParam String date,
-                            Model model) {
+                            Model model) throws ParseException {
+        Medewerker medewerker = medewerkerService.getMedewerkerByOrganisatieAndName(organisatieService.getOrganisatieByName(slug),employee);
+        int duration = optieService.getDuurOptie(medewerker.getNaam(), service);
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+        Date dateday = formatter.parse(date);
+        String dayOfWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(dateday);
+        if (dayOfWeek.equals("Monday")){
+            dayOfWeek = "Maandag";
+        }if (dayOfWeek.equals("Tuesday")){
+            dayOfWeek = "Dinsdag";
+        }
+        if (dayOfWeek.equals("Wednesday")){
+            dayOfWeek = "Woensdag";
+        }if (dayOfWeek.equals("Thursday")){
+            dayOfWeek = "Donderdag";
+        }
+        if (dayOfWeek.equals("Friday")){
+            dayOfWeek = "Vrijdag";
+        }if (dayOfWeek.equals("Saturday")){
+            dayOfWeek = "Zaterdag";
+        }
+        if (dayOfWeek.equals("Sunday")){
+            dayOfWeek = "Zondag";
+        }
+
+        List<String> openTijdsloten = new ArrayList<>();
+        List<Tijdslot> tijdsloten = tijdslotService.getTijdslotenByMedewerkerAndDay(medewerker , dayOfWeek);
+        for (Tijdslot tijdslot : tijdsloten){
+            openTijdsloten.add(String.valueOf(tijdslot.getStart()));
+            LocalTime volgende = tijdslot.getStart().plusMinutes(duration);
+            for (int i = 0; i < 1000;i++){
+                if (!Objects.equals(volgende, tijdslot.getEinde())) {
+                    volgende = volgende.plusMinutes(duration);
+                    openTijdsloten.add(String.valueOf(volgende));
+                }
+            }
+            openTijdsloten.add(String.valueOf(tijdslot.getEinde()));
+        }
+        model.addAttribute("tijdsloten" , openTijdsloten);
         return "fragmentsReservatie/hours :: hours";
     }
 

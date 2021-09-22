@@ -24,7 +24,7 @@ import java.security.Principal;
 import java.util.*;
 
 @Controller
-@RequestMapping("/reservatie/")
+@RequestMapping("/reservatiev1/")
 @SessionAttributes("reservatieDTO")
 public class ReservatieController {
 

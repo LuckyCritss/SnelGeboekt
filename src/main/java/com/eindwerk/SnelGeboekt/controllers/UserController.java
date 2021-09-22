@@ -14,6 +14,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @Controller
 public class UserController {
@@ -26,8 +27,12 @@ public class UserController {
     }
 
     @GetMapping("/reservatielijst")
-    public String onlineReservatie(Model model) {
-        model.addAttribute("organisaties" ,organisatieService.getAll());
+    public String onlineReservatie(Model model, Principal principal) {
+        if (principal != null) {
+            model.addAttribute("organisaties", organisatieService.getAll());
+            return ("/templatesUser/boekingL");
+        }
+        model.addAttribute("organisaties", organisatieService.getAll());
         return ("/templatesUser/boeking");
     }
 

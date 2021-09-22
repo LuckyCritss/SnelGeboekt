@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:text-align="http://www.w3.org/1999/xhtml">
+<head th:fragment = "headUserL">
+  <meta charset="UTF-8">
+  <title>header</title>
+  <style>
+    .header {
+      text-align: center;
+      color: white;
+      padding: 45px;
+      background: rgb(240, 9, 9);
+    }
+  </style>
+
+
+
+<body class="text-center">
+<div class="headUser" th:fragment="headUserL">
+
+  <div class ="header">
+    <h1>
+      <a href="/" style="text-decoration: none; color:#FFFFFF;">SnelGeboekt</a>
+    </h1>
+    <div style="text-align:right;">
+      <form action="/instellingen">
+        <button type="submit">instellingen</button>
+      </form>
+
+
+
+
+        <form th:action="@{/logout}" method="post" name="logoutForm">
+          <a href="javascript: document.logoutForm.submit()"></a>
+          <button type="submit" value="afmelden">afmelden</button>
+        </form>
+        </div>
+      </div>
+  </div>
+
+</body>
+</html>

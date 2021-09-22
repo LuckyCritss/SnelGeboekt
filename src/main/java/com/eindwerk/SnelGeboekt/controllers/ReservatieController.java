@@ -164,6 +164,9 @@ public class ReservatieController {
         reservatieDTO.setTel(reservatie.getStepThreeData().tel);
         reservatieService.save(reservatieDTO);
         notificationService.sendSuccesfullReservateie(reservatieDTO);
+        if (principal != null){
+            return "redirect:/instellingen/klantagenda";
+        }
         return "redirect:/";
     }
 

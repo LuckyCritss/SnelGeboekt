@@ -51,7 +51,10 @@ public class MedewerkerServiceImpl implements MedewerkerService {
         return medewerkerRepository.getMedewerkerById(id);
     }
 
-
+    @Override
+    public Medewerker getMedewerkerByOrganisatieAndName(Organisatie organisatie, String naam) {
+        return medewerkerRepository.getMedewerkerByOrganisatieAndName(organisatie, naam);
+    }
 
 
     @Override

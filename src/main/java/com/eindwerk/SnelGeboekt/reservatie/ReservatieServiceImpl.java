@@ -17,8 +17,8 @@ public class ReservatieServiceImpl implements ReservatieService {
   }
 
     @Override
-    public List<ReservatieDTO> getReservatiesByUser(User user) {
-        return reservatieRepository.getReservatiesByUser(user);
+    public List<ReservatieDTO> getReservatiesByEmail(String email) {
+        return reservatieRepository.getReservatiesByEmail(email);
     }
 
     @Override

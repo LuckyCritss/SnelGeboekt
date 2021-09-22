@@ -29,6 +29,7 @@ public class ReservatieDTO {
     private Medewerker medewerker;
     private String date;
     private String time;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private User user;
+    public String name;
+    public String email;
+    public String tel;
 }

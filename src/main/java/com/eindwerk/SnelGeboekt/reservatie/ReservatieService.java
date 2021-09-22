@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ReservatieService {
 
- List<ReservatieDTO> getReservatiesByUser (User user);
+ List<ReservatieDTO> getReservatiesByEmail (String email);
 
  void save(ReservatieDTO reservatieDTO);
 

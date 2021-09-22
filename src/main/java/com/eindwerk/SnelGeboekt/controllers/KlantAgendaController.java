@@ -35,7 +35,7 @@ public class KlantAgendaController {
     public String agendaHandler(Principal principal, Model model) {
         if(userService.getUserByEmail(principal.getName()) != null){
             User user = userService.getUserByEmail(principal.getName());
-            List<ReservatieDTO> reservaties = reservatieService.getReservatiesByUser(user);
+            List<ReservatieDTO> reservaties = reservatieService.getReservatiesByEmail(user.getEmail());
             model.addAttribute("reservaties", reservaties);
             return ("/templatesInstellingen/lopendereservaties");
         }

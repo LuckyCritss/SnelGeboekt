@@ -41,16 +41,15 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void sendSuccesfullReservateieUser(ReservatieDTO reservatieDTO) {
-        sendSimpleMessage(reservatieDTO.getUser().getEmail(),"Succesfull Reservatie",
+        sendSimpleMessage(reservatieDTO.getEmail(),"Succesfull Reservatie",
                 "Thank you for your reservatie" );
     }
 
     @Override
     public void sendSuccesfullReservateieOrganisatie(ReservatieDTO reservatieDTO) {
         sendSimpleMessage(reservatieDTO.getOrganisatie().getEmail(),"Succesfull Reservatie",
-                reservatieDTO.getUser().getNaam() + " " + reservatieDTO.getUser().getFamilyNaam() + "heeft gereserveerd.");
+                reservatieDTO.getName() + " " + "heeft gereserveerd.");
     }
-
 
     private void sendSimpleMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();

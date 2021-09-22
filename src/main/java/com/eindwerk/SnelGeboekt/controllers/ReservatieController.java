@@ -4,13 +4,13 @@ import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
 import com.eindwerk.SnelGeboekt.instellingen.medewerker.MedewerkerService;
 import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
-import com.eindwerk.SnelGeboekt.reservatie.Reservatie;
-import com.eindwerk.SnelGeboekt.reservatie.StepOneData;
-import com.eindwerk.SnelGeboekt.reservatie.StepThreeData;
-import com.eindwerk.SnelGeboekt.reservatie.StepTwoData;
+import com.eindwerk.SnelGeboekt.reservatie.*;
+import com.eindwerk.SnelGeboekt.user.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,11 +27,14 @@ public class ReservatieController {
 
     private final OrganisatieService organisatieService;
 
-    public ReservatieController(Reservatie reservatie, MedewerkerService medewerkerService, OptieService optieService, OrganisatieService organisatieService) {
+    private final ReservatieService reservatieService;
+
+    public ReservatieController(Reservatie reservatie, MedewerkerService medewerkerService, OptieService optieService, OrganisatieService organisatieService, ReservatieService reservatieService) {
         this.reservatie = reservatie;
         this.medewerkerService = medewerkerService;
         this.optieService = optieService;
         this.organisatieService = organisatieService;
+        this.reservatieService = reservatieService;
     }
 
     @GetMapping("/{slug}")
@@ -114,6 +117,16 @@ public class ReservatieController {
             return "redirect:/reservatie/" + reservatie.getSlug() + "/step1";
         }
         reservatie.setStepThreeData(stepThreeData);
+        ReservatieDTO reservatieDTO = new ReservatieDTO();
+        reservatieDTO.setOrganisatie(organisatieService.getOrganisatieByName(reservatie.getSlug()));
+        reservatieDTO.setDienst(reservatie.getStepOneData().getService());
+        reservatieDTO.setMedewerker(medewerkerService.getMedewerkerByOrganisatieAndName(reservatieDTO.getOrganisatie() ,reservatie.getStepOneData().getEmployee()));
+        reservatieDTO.setDate(reservatie.getStepTwoData().getDate());
+        reservatieDTO.setTime(reservatie.getStepTwoData().getTime());
+        reservatieDTO.setEmail(reservatie.getStepThreeData().email);
+        reservatieDTO.setName(reservatie.getStepThreeData().name);
+        reservatieDTO.setTel(reservatie.getStepThreeData().tel);
+        reservatieService.save(reservatieDTO);
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step4";
     }
 

@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface ReservatieRepository extends JpaRepository<ReservatieDTO, Integer> {
 
-    @Query("SELECT r from ReservatieDTO r Where r.user = :user")
-    List<ReservatieDTO> getReservatiesByUser(@Param("user") User user);
+    @Query("SELECT r from ReservatieDTO r Where r.email = :email")
+    List<ReservatieDTO> getReservatiesByEmail(@Param("email") String email);
 }

@@ -21,6 +21,8 @@ public interface MedewerkerService {
 
     Medewerker getMedewerkerById(int id);
 
+    Medewerker getMedewerkerByOrganisatieAndName(Organisatie organisatie, String naam);
+
     void delete(int id);
 }
 

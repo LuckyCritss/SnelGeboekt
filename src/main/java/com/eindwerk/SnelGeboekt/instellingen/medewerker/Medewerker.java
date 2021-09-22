@@ -3,6 +3,7 @@ package com.eindwerk.SnelGeboekt.instellingen.medewerker;
 import com.eindwerk.SnelGeboekt.instellingen.optie.Optie;
 import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.Tijdslot;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
+import com.eindwerk.SnelGeboekt.reservatie.ReservatieDTO;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Parent;
@@ -36,6 +37,9 @@ public class Medewerker {
 
         @OneToMany(mappedBy = "medewerker" , cascade = CascadeType.ALL)
         private List<Optie> opties;
+
+        @OneToMany(mappedBy = "medewerker" , cascade = CascadeType.ALL)
+        private List<ReservatieDTO> reservaties;
 
 
 

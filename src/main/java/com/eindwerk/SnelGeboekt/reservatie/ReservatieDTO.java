@@ -24,7 +24,7 @@ public class ReservatieDTO {
     @ManyToOne
     private Organisatie organisatie;
     private String dienst;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Medewerker medewerker;
     private String date;
     private String time;

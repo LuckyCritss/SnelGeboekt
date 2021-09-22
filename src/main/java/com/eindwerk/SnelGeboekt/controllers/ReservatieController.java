@@ -164,7 +164,8 @@ public class ReservatieController {
         }
         reservatieDTO.setOrganisatie(organisatieService.getOrganisatieByName(reservatie.getSlug()));
         reservatieDTO.setDienst(reservatie.getStepOneData().getService());
-        reservatieDTO.setMedewerker(medewerkerService.getMedewerkerByOrganisatieAndName(reservatieDTO.getOrganisatie() ,reservatie.getStepOneData().getEmployee()));
+        reservatieDTO.setMedewerker
+                (medewerkerService.getMedewerkerByOrganisatieAndName(reservatieDTO.getOrganisatie(),reservatie.getStepOneData().getEmployee()).getNaam());
         reservatieDTO.setDate(reservatie.getStepTwoData().getDate());
         reservatieDTO.setTime(reservatie.getStepTwoData().getTime());
         reservatieDTO.setEmail(reservatie.getStepThreeData().email);

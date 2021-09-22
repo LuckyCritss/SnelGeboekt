@@ -21,7 +21,8 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void sendAccountRegistrationOrganisatie(Organisatie organisatie) {
-        sendSimpleMessage(organisatie.getEmail(), "Account registration successfully!","this is an automatic mail to Verify that you successfully created your account on www.SnelGeboekt.be");
+        sendSimpleMessage(organisatie.getEmail(), "Account registration successfully!","this is an automatic mail to Verify that you successfully created your account on www.SnelGeboekt.be" +
+                " <a href=\"www.SnelGeboekt.com/reservatie/" + organisatie.getBedrijfsNaam() + "\">Reserveer hier</a>  deze link kan je op je site zetten en kunnen jullie klanten bij ons een reservatie maken voor jullie.");
     }
 
     @Override

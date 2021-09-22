@@ -38,8 +38,6 @@ public class Medewerker {
         @OneToMany(mappedBy = "medewerker" , cascade = CascadeType.ALL)
         private List<Optie> opties;
 
-        @OneToMany(mappedBy = "medewerker" , cascade = CascadeType.ALL)
-        private List<ReservatieDTO> reservaties;
 
 
 

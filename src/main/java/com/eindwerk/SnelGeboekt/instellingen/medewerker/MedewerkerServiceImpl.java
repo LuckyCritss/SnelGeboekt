@@ -56,7 +56,6 @@ public class MedewerkerServiceImpl implements MedewerkerService {
         return medewerkerRepository.getMedewerkerByOrganisatieAndName(organisatie, naam);
     }
 
-
     @Override
         public void delete(int id) {
             try {

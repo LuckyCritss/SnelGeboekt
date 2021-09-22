@@ -27,16 +27,16 @@ public class ReservatieDTO {
     private Organisatie organisatie;
     @NotNull
     private String dienst;
-    @ManyToOne
-    private Medewerker medewerker;
+    @NotNull
+    private String medewerker;
     @NotNull
     private String date;
     @NotNull
     private String time;
     @NotNull
-    public String name;
+    private String name;
     @NotNull
-    public String email;
+    private String email;
     @NotNull
-    public String tel;
+    private String tel;
 }

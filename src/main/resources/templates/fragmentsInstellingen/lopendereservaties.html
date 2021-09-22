@@ -37,7 +37,7 @@
                 <tbody>
                 <tr th:each="reservatie : ${reservaties}">
                   <td th:text="${reservatie.organisatie.bedrijfsNaam}"></td>
-                  <td th:text="${reservatie.medewerker.naam}"></td>
+                  <td th:text="${reservatie.medewerker}"></td>
                   <td th:text="${reservatie.dienst}"></td>
                   <td th:text="${reservatie.date}"></td>
                   <td th:text="${reservatie.time}"></td>

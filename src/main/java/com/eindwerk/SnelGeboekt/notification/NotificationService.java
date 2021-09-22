@@ -14,8 +14,7 @@ public interface NotificationService {
 
     void sendAccountUpdateUser(User user);
 
-    void sendSuccesfullReservateieUser(ReservatieDTO reservatieDTO);
+    void sendSuccesfullReservateie(ReservatieDTO reservatieDTO);
 
-    void sendSuccesfullReservateieOrganisatie(ReservatieDTO reservatieDTO);
 
 }

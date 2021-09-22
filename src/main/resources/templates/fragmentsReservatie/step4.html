@@ -3,14 +3,16 @@
       xmlns:https="http://www.w3.org/1999/xhtml">
 <head>
 </head>
+<body>
 <div th:fragment = "frame1" id="wizard-frame-1" class="wizard-frame" style="">
+  <form action="#" th:action="@{/reservatie/step4}" th:object="${reservatie}" method="post">
       <div class="frame-container">
         <h2 class="frame-title">Bevestiging</h2>
-          <p>Dienst: <span th:text="${booking.stepOneData.service}"></span></p>
-          <p>Medewerker: <span th:text="${booking.stepOneData.employee}"></span></p>
-          <p>Datum: <span th:text="${booking.stepTwoData.date}"></span></p>
-          <p>Tijdstip: <span th:text="${booking.stepTwoData.time}"></span></p>
-          <p>Naam: <span th:text="${booking.stepThreeData.name}"></span></p>
+          <p>Dienst: <span th:text="${reservatie.stepOneData.service}"></span></p>
+          <p>Medewerker: <span th:text="${reservatie.stepOneData.employee}"></span></p>
+          <p>Datum: <span th:text="${reservatie.stepTwoData.date}"></span></p>
+          <p>Tijdstip: <span th:text="${reservatie.stepTwoData.time}"></span></p>
+          <p>Naam: <span th:text="${reservatie.stepThreeData.name}"></span></p>
 
 
 <div style="text-align:center;">
@@ -20,6 +22,7 @@
   <a class="w-60 btn btn-lg btn-danger"  style="width: 400px" th:href="@{/reservatielijst}">Annuleer</button></a>
 </div>
 </div>
+  </form>
 </div>
 </body>
 </html>

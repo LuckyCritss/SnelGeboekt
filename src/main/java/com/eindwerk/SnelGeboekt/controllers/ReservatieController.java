@@ -3,9 +3,11 @@ package com.eindwerk.SnelGeboekt.controllers;
 import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
 import com.eindwerk.SnelGeboekt.instellingen.medewerker.MedewerkerService;
 import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
+import com.eindwerk.SnelGeboekt.notification.NotificationService;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
 import com.eindwerk.SnelGeboekt.reservatie.*;
 import com.eindwerk.SnelGeboekt.user.User;
+import com.eindwerk.SnelGeboekt.user.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,14 +29,22 @@ public class ReservatieController {
 
     private final OrganisatieService organisatieService;
 
+    private final UserService userService;
+
     private final ReservatieService reservatieService;
 
-    public ReservatieController(Reservatie reservatie, MedewerkerService medewerkerService, OptieService optieService, OrganisatieService organisatieService, ReservatieService reservatieService) {
+    private final NotificationService notificationService;
+
+    public ReservatieController(Reservatie reservatie, MedewerkerService medewerkerService, OptieService optieService,
+                                OrganisatieService organisatieService, ReservatieService reservatieService,
+                                NotificationService notificationService, UserService userService) {
         this.reservatie = reservatie;
         this.medewerkerService = medewerkerService;
         this.optieService = optieService;
         this.organisatieService = organisatieService;
         this.reservatieService = reservatieService;
+        this.notificationService = notificationService;
+        this.userService = userService;
     }
 
     @GetMapping("/{slug}")
@@ -85,11 +95,14 @@ public class ReservatieController {
     }
 
     @PostMapping(value = "/step2", params = "time")
-    public String processWidgetStep2Next(@ModelAttribute StepTwoData stepTwoData) {
+    public String processWidgetStep2Next(@ModelAttribute StepTwoData stepTwoData, Principal principal) {
         if (reservatie.getSlug() == null) {
             return "redirect:/reservatie/" + reservatie.getSlug() + "/step1";
         }
         reservatie.setStepTwoData(stepTwoData);
+        if (principal != null){
+            return "redirect:/reservatie/" + reservatie.getSlug() + "/step4";
+        }
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step3";
     }
 
@@ -117,16 +130,6 @@ public class ReservatieController {
             return "redirect:/reservatie/" + reservatie.getSlug() + "/step1";
         }
         reservatie.setStepThreeData(stepThreeData);
-        ReservatieDTO reservatieDTO = new ReservatieDTO();
-        reservatieDTO.setOrganisatie(organisatieService.getOrganisatieByName(reservatie.getSlug()));
-        reservatieDTO.setDienst(reservatie.getStepOneData().getService());
-        reservatieDTO.setMedewerker(medewerkerService.getMedewerkerByOrganisatieAndName(reservatieDTO.getOrganisatie() ,reservatie.getStepOneData().getEmployee()));
-        reservatieDTO.setDate(reservatie.getStepTwoData().getDate());
-        reservatieDTO.setTime(reservatie.getStepTwoData().getTime());
-        reservatieDTO.setEmail(reservatie.getStepThreeData().email);
-        reservatieDTO.setName(reservatie.getStepThreeData().name);
-        reservatieDTO.setTel(reservatie.getStepThreeData().tel);
-        reservatieService.save(reservatieDTO);
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step4";
     }
 
@@ -135,8 +138,36 @@ public class ReservatieController {
         if (reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug + "/step1";
         }
-        model.addAttribute("booking", reservatie);
+        model.addAttribute("reservatie", reservatie);
         return "templatesReservatie/booking_step4";
+    }
+
+    @PostMapping(value = "/step4" , params = "bevestig")
+    public String processWidgetStep4(Principal principal) {
+        if (reservatie.getSlug() == null) {
+            return "redirect:/reservatie/" + reservatie.getSlug() + "/step1";
+        }
+        ReservatieDTO reservatieDTO = new ReservatieDTO();
+        reservatieDTO.setOrganisatie(organisatieService.getOrganisatieByName(reservatie.getSlug()));
+        reservatieDTO.setDienst(reservatie.getStepOneData().getService());
+        reservatieDTO.setMedewerker(medewerkerService.getMedewerkerByOrganisatieAndName(reservatieDTO.getOrganisatie() ,reservatie.getStepOneData().getEmployee()));
+        reservatieDTO.setDate(reservatie.getStepTwoData().getDate());
+        reservatieDTO.setTime(reservatie.getStepTwoData().getTime());
+        if(principal == null){
+            reservatieDTO.setEmail(reservatie.getStepThreeData().email);
+            reservatieDTO.setName(reservatie.getStepThreeData().name);
+            reservatieDTO.setTel(reservatie.getStepThreeData().tel);
+        }
+        else {
+            User user = userService.getUserByEmail(principal.getName());
+            reservatieDTO.setEmail(user.getEmail());
+            reservatieDTO.setName(user.getNaam() + " " + user.getFamilyNaam());
+            reservatieDTO.setTel(user.getGsmNummer());
+        }
+
+        reservatieService.save(reservatieDTO);
+        notificationService.sendSuccesfullReservateie(reservatieDTO);
+        return "redirect:/";
     }
 
     @GetMapping("/{slug}/getschedule")

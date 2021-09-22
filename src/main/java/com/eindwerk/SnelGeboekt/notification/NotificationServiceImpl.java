@@ -40,13 +40,9 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void sendSuccesfullReservateieUser(ReservatieDTO reservatieDTO) {
+    public void sendSuccesfullReservateie(ReservatieDTO reservatieDTO) {
         sendSimpleMessage(reservatieDTO.getEmail(),"Succesfull Reservatie",
                 "Thank you for your reservatie" );
-    }
-
-    @Override
-    public void sendSuccesfullReservateieOrganisatie(ReservatieDTO reservatieDTO) {
         sendSimpleMessage(reservatieDTO.getOrganisatie().getEmail(),"Succesfull Reservatie",
                 reservatieDTO.getName() + " " + "heeft gereserveerd.");
     }

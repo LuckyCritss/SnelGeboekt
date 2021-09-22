@@ -4,23 +4,12 @@
 <head>
 </head>
 <body>
-  <div th:fragment = "hours"  th:object="${tijdsloten}" id="available-hours">
-    <button  name = "time" th:object="${tijdslot}" class="btn btn-outline-secondary btn-block shadow-none available-hour"></button>
-
-    <select name = "time" id="select-tijdslot" class="form-control">
-      <option value="-1">Kies een tijdslot</option>
-    </select>
-
-  </form>
-  <script th:inline="javascript">
-    var tijd = reservatiecontroller.opentijdsloten
-    $(function () {
-      $("#select-tijdslot").change(function () {
-        var tijdslot = document.createElement("button");
-        tijd.setAttribute("id", 'btn_' + i);
-      });
-    });
-  </script>
-  </div>
+<select th:fragment = "hours" name = "time" id="select-tijdslot" class="form-control">
+  <option value="-1">Kies een tijdslot</option>
+  <option th:each="tijdslot, iStat : ${tijdsloten}"
+          th:value="${tijdslot}"
+          th:text="${tijdslot}"
+  ></option>
+</select>
 </body>
 </html>

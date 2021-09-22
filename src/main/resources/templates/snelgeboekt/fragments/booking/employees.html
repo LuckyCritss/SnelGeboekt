@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:https="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+    <select th:fragment = "employees" name = "employee" id="select-medewerker" class="form-control">
+      <option value="-1">Kies een medewerker</option>
+      <option th:each="medewerker, iStat : ${medewerkers}"
+              th:value="${iStat.index}"
+              th:text="${medewerker}"
+      ></option>
+    </select>
+</body>
+</html>

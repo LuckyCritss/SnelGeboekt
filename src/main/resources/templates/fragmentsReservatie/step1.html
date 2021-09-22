@@ -14,7 +14,7 @@
                             <strong>Dienst</strong>
                         </label>
 
-                        <select name = "service" id="select-dienst" class="form-control">
+                        <select name = "service" id="select-dienst" class="form-control" th:required="true">
                             <option value="-1">Kies een dienst</option>
                             <option th:each="optie, iStat : ${opties}"
                                     th:value="${optie}"
@@ -28,7 +28,7 @@
                             <strong>Medewerker</strong>
                         </label>
 
-                        <select name = "employee" id="select-medewerker" class="form-control" disabled>
+                        <select name = "employee" id="select-medewerker" class="form-control" th:required="true" disabled>
                             <option value="-1">Kies een medewerker</option>
                         </select>
                     </div>

@@ -106,6 +106,14 @@ public class ReservatieController {
         if (reservatie.getSlug() == null) {
             return "redirect:/reservatie/" + reservatie.getSlug() + "/step1";
         }
+        if(stepTwoData.getTime().startsWith(",")){
+            String newTime =  stepTwoData.getTime().substring(1);
+            stepTwoData.setTime(newTime);
+        }
+        else if (stepTwoData.getTime().endsWith(",")){
+            String newTime =  stepTwoData.getTime().substring(0,stepTwoData.getTime().length()-1);
+            stepTwoData.setTime(newTime);
+        }
         reservatie.setStepTwoData(stepTwoData);
         if (principal != null){
             User user = userService.getUserByEmail(principal.getName());

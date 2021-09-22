@@ -68,6 +68,7 @@ public class ReservatieController {
         for (Integer integer : medewerkersId) {
             opties.addAll(optieService.getOptieTitelsByMedewerkersId(integer));
         }
+        model.addAttribute("slug", slug);
         model.addAttribute("opties", opties);
         return "templatesReservatie/booking_step1";
     }
@@ -92,13 +93,8 @@ public class ReservatieController {
             return "redirect:/reservatie/" + slug + "/step1";
         }
         model.addAttribute("stepOneData", reservatie.getStepOneData());
-        model.addAttribute("slug", reservatie.getSlug());
+        model.addAttribute("slug", slug);
         return "templatesReservatie/booking_step2";
-    }
-
-    @PostMapping(value = "/step2", params = "previous")
-    public String processWidgetStep2Previous() {
-        return "redirect:/reservatie/" + reservatie.getSlug() + "/step1";
     }
 
     @PostMapping(value = "/step2", params = "time")
@@ -132,15 +128,13 @@ public class ReservatieController {
         if (reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug + "/step1";
         }
+        model.addAttribute("slug", slug);
         model.addAttribute("stepThreeData", reservatie.getStepThreeData());
         return "templatesReservatie/booking_step3";
     }
 
     @PostMapping(value = "/step3", params = "previous")
     public String processWidgetStep3Previous() {
-        if (reservatie.getSlug() == null) {
-            return "redirect:/reservatie/" + reservatie.getSlug() + "/step1";
-        }
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step2";
     }
 
@@ -158,6 +152,7 @@ public class ReservatieController {
         if (reservatie.getSlug() == null || !reservatie.getSlug().equals(slug)) {
             return "redirect:/reservatie/" + slug + "/step1";
         }
+        model.addAttribute("slug", slug);
         model.addAttribute("reservatie", reservatie);
         return "templatesReservatie/booking_step4";
     }

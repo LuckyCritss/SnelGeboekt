@@ -1,12 +1,19 @@
 package com.eindwerk.SnelGeboekt.bookingwidget;
 
 
+import com.eindwerk.SnelGeboekt.instellingen.medewerker.Medewerker;
+import com.eindwerk.SnelGeboekt.instellingen.medewerker.MedewerkerService;
+import com.eindwerk.SnelGeboekt.instellingen.optie.OptieService;
+import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/booking/")
@@ -14,8 +21,17 @@ public class BookingController {
 
     private final Booking booking;
 
-    public BookingController(Booking booking) {
+    private final MedewerkerService medewerkerService;
+
+    private final OptieService optieService;
+
+    private final OrganisatieService organisatieService;
+
+    public BookingController(Booking booking, MedewerkerService medewerkerService, OptieService optieService, OrganisatieService organisatieService) {
         this.booking = booking;
+        this.medewerkerService = medewerkerService;
+        this.optieService = optieService;
+        this.organisatieService = organisatieService;
     }
 
     @GetMapping("/{slug}")
@@ -32,7 +48,11 @@ public class BookingController {
             booking.setStepThreeData(new StepThreeData());
         }
 
-        List<String> opties = Arrays.asList("Knippen", "Knippen + kleuren");
+        List<Integer> medewerkersId = medewerkerService.getMedewerkersIdByOrganisation(organisatieService.getOrganisatieByName(slug));
+        Set<String> opties = new HashSet<String>();
+        for (Integer integer : medewerkersId) {
+            opties.addAll(optieService.getOptieTitelsByMedewerkersId(integer));
+        }
         model.addAttribute("opties", opties);
         return "snelgeboekt/booking_step1";
     }
@@ -61,11 +81,12 @@ public class BookingController {
         return "redirect:/booking/" + booking.getSlug() + "/step1";
     }
 
-    @PostMapping(value = "/step2", params = "select")
-    public String processWidgetStep2Next(@ModelAttribute StepTwoData stepTwoData, @RequestParam("select") String select) {
+    @PostMapping(value = "/step2", params = "time")
+    public String processWidgetStep2Next(@ModelAttribute StepTwoData stepTwoData) {
         if (booking.getSlug() == null) {
             return "redirect:/booking/" + booking.getSlug() + "/step1";
         }
+        booking.setStepTwoData(stepTwoData);
         return "redirect:/booking/" + booking.getSlug() + "/step3";
     }
 
@@ -115,12 +136,14 @@ public class BookingController {
 
     @GetMapping("/{slug}/getemployees")
     public String ajaxEmployees(@PathVariable String slug,
-                                @RequestParam String service,
+                                @RequestParam String optie,
                                 Model model) {
-        List<String> medewerkers = Arrays.asList("Sonya", "Tanya", "Marissa");
+        List<Medewerker> medewerkers = optieService.getMedewerkerByOptie(optie,organisatieService.getOrganisatieByName(slug));
         model.addAttribute("medewerkers", medewerkers);
         return "snelgeboekt/fragments/booking/employees :: employees";
     }
+
+
 
 
 }

@@ -222,6 +222,7 @@ public class ReservatieController {
         model.addAttribute("medewerkers", medewerkers);
         return "fragmentsReservatie/employees :: employees";
     }
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));

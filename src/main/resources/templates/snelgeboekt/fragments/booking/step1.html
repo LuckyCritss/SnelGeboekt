@@ -17,7 +17,7 @@
                         <select name = "service" id="select-dienst" class="form-control">
                             <option value="-1">Kies een dienst</option>
                             <option th:each="optie, iStat : ${opties}"
-                                    th:value="${iStat.index}"
+                                    th:value="${optie}"
                                     th:text="${optie}"
                             </option>
                         </select>
@@ -53,21 +53,24 @@
     </form>
     <script th:inline="javascript">
         $(function () {
-            let request = "getemployees?service=";
             $("#select-dienst").change(function () {
+                let request = "getemployees?optie=";
                 //debugger;
-                if (this.value >-1) {
-                    request = request + this.value;
+                if (this.value!== "null") {
+                    request = request + encodeURIComponent(this.value);
                     $("#select-medewerker").load(request);
                     $("#select-medewerker").removeAttr("disabled");
                 } else {
 
-                    $("#select-medewerker").val(-1);
+                    $("#select-medewerker").val("null");
                     $("#select-medewerker").attr("disabled",true);
                 }
             });
         });
     </script>
+
+
+
     </body>
 </div>
 </html>

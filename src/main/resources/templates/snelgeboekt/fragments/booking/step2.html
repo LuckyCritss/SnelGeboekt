@@ -5,8 +5,10 @@
 </head>
 <div th:fragment="frame1" id="wizard-frame-1" class="wizard-frame" style="">
     <form action="#" th:action="@{/booking/step2}" method="post">
+        <input type="hidden" id="date" name="date" value="">
         <div class="frame-container">
             <h2 class="frame-title">Kies een tijdstip</h2>
+
 
 
             <div class="row frame-content">
@@ -48,16 +50,18 @@
     $(function () {
         let service = [[${stepOneData.service}]];
         let employee = [[${stepOneData.employee}]];
-        let request = "getschedule?service=" + service + "&employee=" + employee +"&date=";
+        let request = "getschedule?service=" + encodeURIComponent(service) + "&employee=" + encodeURIComponent(employee) +"&date=";
         $("#select-date").datepicker({
             onSelect: function(date) {
                 request += encodeURIComponent(date);
                 $("#select-time").load(request);
+                $("#date").val(date)
             }
         });
         //load the schedule on initial page load
         request += encodeURIComponent($("#select-date").val());
         $("#select-time").load(request);
+        $("#date").val($("#select-date").val())
     });
 </script>
 </body>

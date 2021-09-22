@@ -7,7 +7,4 @@ import lombok.Setter;
 public class StepTwoData {
     String date;
     String time;
-    String duration;
-
-
 }

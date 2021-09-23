@@ -47,7 +47,7 @@ public class User {
     @Transient
     private String checkWachtWoord;
 
-    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ReservatieDTO> reservaties;
 
 }

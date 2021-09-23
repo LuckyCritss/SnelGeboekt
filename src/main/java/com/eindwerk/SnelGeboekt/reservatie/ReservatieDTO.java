@@ -25,7 +25,7 @@ public class ReservatieDTO {
     private int id;
     @ManyToOne
     private Organisatie organisatie;
-    @ManyToOne
+    @OneToOne
     private User user;
     private String dienst;
     private String medewerker;

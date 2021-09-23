@@ -24,9 +24,6 @@ public class LoginController {
 
     @GetMapping("/login")
     public String rootHandler(Principal principal ,HttpServletRequest request) {
-        if (principal == null ) {
-            //authWithAuthManager(request, "admin", "admin");
-        }
         if (principal != null) {
             return ("redirect:/instellingen");
         }

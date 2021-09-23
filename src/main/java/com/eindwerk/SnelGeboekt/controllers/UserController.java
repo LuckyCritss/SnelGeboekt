@@ -30,10 +30,10 @@ public class UserController {
     public String onlineReservatie(Model model, Principal principal) {
         if (principal != null) {
             model.addAttribute("organisaties", organisatieService.getAll());
-            return ("/templatesUser/boekingL");
+            return ("templatesUser/boekingL");
         }
         model.addAttribute("organisaties", organisatieService.getAll());
-        return ("/templatesUser/boeking");
+        return ("templatesUser/boeking");
     }
 
     @InitBinder

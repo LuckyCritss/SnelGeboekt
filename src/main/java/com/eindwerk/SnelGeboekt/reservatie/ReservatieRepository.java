@@ -13,10 +13,10 @@ import java.util.List;
 @Repository
 public interface ReservatieRepository extends JpaRepository<ReservatieDTO, Integer> {
 
-    @Query("SELECT r from ReservatieDTO r Where r.email = :email order by r.date asc ")
+    @Query("SELECT r from ReservatieDTO r Where r.email = :email order by r.date desc ")
     List<ReservatieDTO> getReservatiesByEmail(@Param("email") String email);
 
-    @Query("SELECT r from ReservatieDTO r Where r.organisatie = :organisatie order by r.date asc ")
+    @Query("SELECT r from ReservatieDTO r Where r.organisatie = :organisatie order by r.date desc ")
     List<ReservatieDTO> getReservatiesByOrganisatie(@Param("organisatie") Organisatie orgnisatie);
 
     @Query("select o from ReservatieDTO o where o.id = :id")

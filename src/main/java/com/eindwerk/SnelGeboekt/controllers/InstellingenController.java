@@ -74,10 +74,10 @@ public class InstellingenController {
             organisatieService.save(organisatie);
         } catch (OrganisatieService.PasswordException e) {
             bindingResult.rejectValue("wachtWoord","org.wachtWoord",e.getMessage());
-            return "/templatesInstellingen/instellingenOrg";
+            return "templatesInstellingen/instellingenOrg";
         } catch (OrganisatieService.PasswordMisMatchException e) {
             bindingResult.rejectValue("wachtWoord","password-mismatch",e.getMessage());
-            return "/templatesInstellingen/instellingenOrg";
+            return "templatesInstellingen/instellingenOrg";
         } catch (DataIntegrityViolationException e) {
             if (e.getMessage().contains("email_unique")) {
                 bindingResult.rejectValue("email","org.email-unique",e.getMessage());

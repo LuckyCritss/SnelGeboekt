@@ -54,7 +54,7 @@ public class KlantAgendaController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
         reservatieService.delete(id);
-        return "redirect:/instellingen/medewerker";
+        return "redirect:/instellingen/klantagenda";
     }
 
     @InitBinder

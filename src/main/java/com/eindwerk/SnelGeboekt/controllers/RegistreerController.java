@@ -66,7 +66,7 @@ public class RegistreerController {
     }
 
     @PostMapping("/registreer/organisatie")
-    public String processForm(Principal principal, @Valid @ModelAttribute Organisatie organisatie, BindingResult bindingResult, HttpServletRequest request) {
+    public String processForm( @Valid @ModelAttribute Organisatie organisatie, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors() || userService.getUserByEmail(organisatie.getEmail())!= null || organisatieService.getOrganisatieByEmail(organisatie.getEmail())!= null) {
             return "registreerOrganisatie";
         }
@@ -85,7 +85,6 @@ public class RegistreerController {
             return "registreerOrganisatie";
         }
         notificationService.sendAccountRegistrationOrganisatie(organisatie);
-        authWithAuthManager(request, organisatie.getEmail(),organisatie.getWachtWoord());
         return "redirect:/instellingen";
     }
 
@@ -118,7 +117,6 @@ public class RegistreerController {
             return "registreerGebruiker";
         }
         notificationService.sendAccountRegistrationUser(user);
-        authWithAuthManager(request, user.getEmail(),user.getWachtWoord());
         return "redirect:/instellingen";
     }
 

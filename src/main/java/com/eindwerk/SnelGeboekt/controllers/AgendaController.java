@@ -1,6 +1,5 @@
 package com.eindwerk.SnelGeboekt.controllers;
 
-import com.eindwerk.SnelGeboekt.instellingen.tijdsloten.TijdslotRepository;
 import com.eindwerk.SnelGeboekt.organisatie.Organisatie;
 import com.eindwerk.SnelGeboekt.organisatie.OrganisatieService;
 import com.eindwerk.SnelGeboekt.reservatie.ReservatieDTO;

@@ -25,18 +25,13 @@ public class ReservatieDTO {
     private int id;
     @ManyToOne
     private Organisatie organisatie;
-    @NotNull
+    @ManyToOne
+    private User user;
     private String dienst;
-    @NotNull
     private String medewerker;
-    @NotNull
     private String date;
-    @NotNull
     private String time;
-    @NotNull
     private String name;
-    @NotNull
     private String email;
-    @NotNull
     private String tel;
 }

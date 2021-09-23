@@ -80,9 +80,6 @@ public class ReservatieController {
 
     @PostMapping(value = "/step1" , params = "next")
     public String processWidgetStep1Next(@ModelAttribute StepOneData stepOneData) {
-        if (reservatie.getSlug() == null) {
-            return "redirect:/reservatie/" + reservatie.getSlug() + "/step1";
-        }
         reservatie.setStepOneData(stepOneData);
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step2";
     }
@@ -99,9 +96,6 @@ public class ReservatieController {
 
     @PostMapping(value = "/step2", params = "time")
     public String processWidgetStep2Next(@ModelAttribute StepTwoData stepTwoData, Principal principal) {
-        if (reservatie.getSlug() == null) {
-            return "redirect:/reservatie/" + reservatie.getSlug() + "/step1";
-        }
         if(stepTwoData.getTime().startsWith(",")){
             String newTime =  stepTwoData.getTime().substring(1);
             stepTwoData.setTime(newTime);
@@ -117,6 +111,7 @@ public class ReservatieController {
             loggedUser.setEmail(user.getEmail());
             loggedUser.setName(user.getNaam());
             loggedUser.setTel(user.getGsmNummer());
+            reservatieDTO.setUser(user);
             reservatie.setStepThreeData(loggedUser);
             return "redirect:/reservatie/" + reservatie.getSlug() + "/step4";
         }
@@ -140,8 +135,8 @@ public class ReservatieController {
 
     @PostMapping(value = "/step3", params = "next")
     public String processWidgetStep3Next(@ModelAttribute StepThreeData stepThreeData) {
-        if (reservatie.getSlug() == null) {
-            return "redirect:/reservatie/" + reservatie.getSlug() + "/step1";
+        if(userService.getUserByEmail(stepThreeData.getEmail()) != null){
+            reservatieDTO.setUser(userService.getUserByEmail(stepThreeData.getEmail()));
         }
         reservatie.setStepThreeData(stepThreeData);
         return "redirect:/reservatie/" + reservatie.getSlug() + "/step4";
@@ -159,9 +154,6 @@ public class ReservatieController {
 
     @PostMapping(value = "/step4" , params = "bevestig")
     public String processWidgetStep4(Principal principal) {
-        if (reservatie.getSlug() == null) {
-            return "redirect:/reservatie/" + reservatie.getSlug() + "/step1";
-        }
         reservatieDTO.setOrganisatie(organisatieService.getOrganisatieByName(reservatie.getSlug()));
         reservatieDTO.setDienst(reservatie.getStepOneData().getService());
         reservatieDTO.setMedewerker

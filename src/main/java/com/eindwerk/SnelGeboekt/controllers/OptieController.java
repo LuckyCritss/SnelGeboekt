@@ -46,7 +46,7 @@ public class OptieController {
             List<Optie> opties = optieService.getOptiesByMedewerker(medewerkerService.getMedewerkerById(id));
             model.addAttribute("idMedewerker", id);
             model.addAttribute("opties", opties);
-            return "/templatesInstellingen/keuzemogelijkheden";
+            return "templatesInstellingen/keuzemogelijkheden";
         }
         return "redirect:/instellingen";
     }
@@ -56,7 +56,7 @@ public class OptieController {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
             model.addAttribute("idMedewerker", id);
             model.addAttribute("optie", new Optie());
-            return "/templatesInstellingen/addkeuzemogelijkheden";
+            return "templatesInstellingen/addkeuzemogelijkheden";
         }
         return "redirect:/instellingen";
     }
@@ -64,7 +64,7 @@ public class OptieController {
     @PostMapping("/instellingen/medewerker/{id}/keuzemogelijkheden/add")
     public String addForm(@PathVariable int id, @Valid @ModelAttribute Optie optie, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
-            return "/templatesInstellingen/addkeuzemogelijkheden";
+            return "templatesInstellingen/addkeuzemogelijkheden";
         }
         try {
             optie.setMedewerker(medewerkerService.getMedewerkerById(id));
@@ -73,7 +73,7 @@ public class OptieController {
             if (e.getMessage().contains("optie_unique")) {
                 bindingResult.rejectValue("optie","optie-unique",e.getMessage());
             }
-            return "/templatesInstellingen/addkeuzemogelijkheden";
+            return "templatesInstellingen/addkeuzemogelijkheden";
         }
         return "redirect:/instellingen/medewerker/" + id + "/keuzemogelijkheden";
     }
@@ -88,13 +88,13 @@ public class OptieController {
         model.addAttribute("idMedewerker", id);
         model.addAttribute("idOptie", idOptie);
         model.addAttribute("optie", optie);
-        return "/templatesInstellingen/addkeuzemogelijkheden";
+        return "templatesInstellingen/addkeuzemogelijkheden";
     }
     
     @PostMapping("/instellingen/medewerker/{id}/keuzemogelijkheden/edit/{idOptie}")
     public String processForm(@PathVariable int id, @PathVariable int idOptie, @Valid @ModelAttribute Optie optie, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/fragmentsInstellingen/keuzemogelijkheden";
+            return "fragmentsInstellingen/keuzemogelijkheden";
         }
         optieService.saveOrUpdate(optie);
         return "redirect:/instellingen/medewerker/" + id + "/keuzemogelijkheden";

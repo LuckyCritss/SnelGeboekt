@@ -45,12 +45,12 @@ public class InstellingenController {
         if(userService.getUserByEmail(principal.getName()) != null){
             User user = userService.getUserByEmail(principal.getName());
             model.addAttribute("user", user);
-            return ("/templatesInstellingen/instellingenUser");
+            return ("templatesInstellingen/instellingenUser");
         }
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null ){
             Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
             model.addAttribute("organisatie", organisatie);
-            return ("/templatesInstellingen/instellingenOrg");
+            return ("templatesInstellingen/instellingenOrg");
         }
         return "redirect:/login";
     }
@@ -68,7 +68,7 @@ public class InstellingenController {
     @PostMapping(value = "/instellingen", params = "safeOrg")
     public String organisatieForm(@Valid @ModelAttribute Organisatie organisatie, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/templatesInstellingen/instellingenOrg";
+            return "templatesInstellingen/instellingenOrg";
         }
         try {
             organisatieService.save(organisatie);
@@ -82,7 +82,7 @@ public class InstellingenController {
             if (e.getMessage().contains("email_unique")) {
                 bindingResult.rejectValue("email","org.email-unique",e.getMessage());
             }
-            return "/templatesInstellingen/instellingenOrg";
+            return "templatesInstellingen/instellingenOrg";
         }
         notificationService.sendAccountUpdateOrganisatie(organisatie);
         return "redirect:/instellingen";
@@ -90,21 +90,21 @@ public class InstellingenController {
     @PostMapping(value = "/instellingen", params = "safeUser")
     public String userForm(@Valid @ModelAttribute User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/templatesInstellingen/instellingenUser";
+            return "templatesInstellingen/instellingenUser";
         }
         try {
             userService.save(user);
         } catch (UserService.PasswordException e) {
             bindingResult.rejectValue("wachtWoord","user.wachtWoord",e.getMessage());
-            return "/templatesInstellingen/instellingenUser";
+            return "templatesInstellingen/instellingenUser";
         } catch (UserService.PasswordMisMatchException e) {
             bindingResult.rejectValue("wachtWoord","password-mismatch",e.getMessage());
-            return "/templatesInstellingen/instellingenUser";
+            return "templatesInstellingen/instellingenUser";
         } catch (DataIntegrityViolationException e) {
             if (e.getMessage().contains("email_unique")) {
                 bindingResult.rejectValue("email","user.email-unique",e.getMessage());
             }
-            return "/templatesInstellingen/instellingenUser";
+            return "templatesInstellingen/instellingenUser";
         }
         notificationService.sendAccountUpdateUser(user);
         return "redirect:/instellingen";

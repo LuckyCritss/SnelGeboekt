@@ -51,7 +51,7 @@ public class MedewerkerController {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
             List<Medewerker> medewerkers = medewerkerService.getMedewerkersByOrganisation(organisatieService.getOrganisatieByEmail(principal.getName()));
             model.addAttribute("medewerkers", medewerkers);
-            return "/templatesInstellingen/medewerker";
+            return "templatesInstellingen/medewerker";
         }
         return "redirect:/instellingen";
     }
@@ -60,7 +60,7 @@ public class MedewerkerController {
     public String add(Model model,Principal principal) {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
             model.addAttribute("medewerker", new Medewerker());
-            return "/templatesInstellingen/addmedewerker";
+            return "templatesInstellingen/addmedewerker";
         }
         return "redirect:/instellingen";
     }
@@ -68,7 +68,7 @@ public class MedewerkerController {
     @PostMapping("/instellingen/medewerker/add")
     public String addForm(@Valid @ModelAttribute Medewerker medewerker, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
-            return "/templatesInstellingen/addmedewerker";
+            return "templatesInstellingen/addmedewerker";
         }
         try {
             medewerker.setOrganisatie(organisatieService.getOrganisatieByEmail(principal.getName()));
@@ -80,7 +80,7 @@ public class MedewerkerController {
             if (e.getMessage().contains("medewerker_unique")) {
                 bindingResult.rejectValue("medewerker","medewerker-unique",e.getMessage());
             }
-            return "/templatesInstellingen/addmedewerker";
+            return "templatesInstellingen/addmedewerker";
         }
         return "redirect:/instellingen/medewerker";
     }
@@ -92,13 +92,13 @@ public class MedewerkerController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
         model.addAttribute("medewerker", medewerker);
-        return "/templatesInstellingen/addmedewerker";
+        return "templatesInstellingen/addmedewerker";
     }
     
     @PostMapping("/instellingen/medewerker/edit/{id}")
     public String processForm(@PathVariable int id, @Valid @ModelAttribute Medewerker medewerker, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/fragmentsInstellingen/medewerker";
+            return "fragmentsInstellingen/medewerker";
         }
         medewerkerService.saveOrUpdate(medewerker);
         return "redirect:/instellingen/medewerker";

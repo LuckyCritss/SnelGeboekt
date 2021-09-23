@@ -42,7 +42,7 @@ public class KlantAgendaController {
             User user = userService.getUserByEmail(principal.getName());
             List<ReservatieDTO> reservaties = reservatieService.getReservatiesByEmail(user.getEmail());
             model.addAttribute("reservaties", reservaties);
-            return ("/templatesInstellingen/lopendereservaties");
+            return ("templatesInstellingen/lopendereservaties");
         }
         return "redirect:/instellingen";
     }

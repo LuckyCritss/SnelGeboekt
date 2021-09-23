@@ -37,7 +37,7 @@ public class AgendaController {
             Organisatie organisatie = organisatieService.getOrganisatieByEmail(principal.getName());
             List<ReservatieDTO> reservaties = reservatieService.getReservatiesByOrganisatie(organisatie);
             model.addAttribute("reservaties", reservaties);
-            return ("/templatesInstellingen/kalender");
+            return ("templatesInstellingen/kalender");
         }
         return "redirect:/instellingen";
     }

@@ -59,7 +59,7 @@ public class TijdslotController {
         if(organisatieService.getOrganisatieByEmail(principal.getName()) != null){
             model.addAttribute("idMedewerker", id);
             model.addAttribute("tijdslot", new Tijdslot());
-            return "/templatesInstellingen/addtijdsloten";
+            return "templatesInstellingen/addtijdsloten";
         }
         return "redirect:/instellingen";
     }
@@ -67,7 +67,7 @@ public class TijdslotController {
     @PostMapping("/instellingen/medewerker/{id}/tijdslot/add")
     public String addForm(@PathVariable int id, @Valid @ModelAttribute Tijdslot tijdslot, BindingResult bindingResult ) {
         if (bindingResult.hasErrors()) {
-            return "/templatesInstellingen/addtijdsloten";
+            return "templatesInstellingen/addtijdsloten";
         }
         try {
             tijdslot.setMedewerker(medewerkerService.getMedewerkerById(id));
@@ -76,7 +76,7 @@ public class TijdslotController {
             if (e.getMessage().contains("tijdslot_unique")) {
                 bindingResult.rejectValue("tijdslot","tijdslot-unique",e.getMessage());
             }
-            return "/templatesInstellingen/addtijdsloten";
+            return "templatesInstellingen/addtijdsloten";
         }
         return "redirect:/instellingen/medewerker/" + id + "/tijdslot";
     }
@@ -91,13 +91,13 @@ public class TijdslotController {
         model.addAttribute("idMedewerker", id);
         model.addAttribute("idTijdslot", idTijdslot);
         model.addAttribute("tijdslot", tijdslot);
-        return "/templatesInstellingen/addtijdsloten";
+        return "templatesInstellingen/addtijdsloten";
     }
 
     @PostMapping("/instellingen/medewerker/{id}/tijdslot/edit/{idTijdslot}")
     public String processForm(@PathVariable int id, @PathVariable int idTijdslot, @Valid @ModelAttribute Tijdslot tijdslot, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/fragmentsInstellingen/tijdslot";
+            return "fragmentsInstellingen/tijdslot";
         }
         tijdslotService.saveOrUpdate(tijdslot);
         return "redirect:/instellingen/medewerker/" + id + "/tijdslot";
